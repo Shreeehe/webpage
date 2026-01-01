@@ -126,4 +126,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 6. Scroll Progress Bar
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (scrollProgress) {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+    }
+
+    // 7. Animated Stats Counter
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const animateCounter = (el) => {
+        const target = parseInt(el.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                el.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                el.textContent = target;
+            }
+        };
+        updateCounter();
+    };
+    
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(num => statsObserver.observe(num));
+
+    // 8. Interactive FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question') || item.querySelector('h4');
+        if (question) {
+            question.style.cursor = 'pointer';
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        }
+    });
+
 });
