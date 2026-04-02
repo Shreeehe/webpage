@@ -1386,9 +1386,22 @@ footer {
 
 /* Why We Built This Section */
 .why-built-section {
-    background-color: #f8fafc;
+    background-color: #050505;
     position: relative;
-    padding: 100px 0;
+    padding: 80px 0;
+    overflow: hidden;
+    color: white;
+}
+
+.why-built-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/images/file_00000000bba472088ba834f093222d1f.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.15;
+    z-index: 1;
 }
 
 .why-title-col {
@@ -1409,50 +1422,50 @@ footer {
 }
 
 .why-subhead {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
+    color: #e2e8f0;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .why-quote {
     position: relative;
-    padding: 10px 0 10px 40px;
-    margin: 30px 0;
+    padding: 5px 0 5px 30px;
+    margin: 15px 0;
 }
 
 .quote-icon {
     position: absolute;
-    top: 5px;
-    left: 0;
+    top: -5px;
+    left: -10px;
     color: var(--secondary-color);
-    opacity: 0.2;
-    transform: scale(2);
+    opacity: 0.15;
+    transform: scale(1.5);
 }
 
 .quote-text {
-    font-size: 20px;
-    line-height: 1.7;
-    color: var(--primary-dark);
+    font-size: 16px;
+    line-height: 1.6;
+    color: #f1f5f9;
     font-style: italic;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .why-strong {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #ffffff;
     margin-bottom: 5px !important;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .why-promise {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: #cbd5e1;
 }
 
 @media (max-width: 768px) {
