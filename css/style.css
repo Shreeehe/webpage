@@ -49,6 +49,7 @@ body {
     font-size: 16px;
     background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
     background-size: 24px 24px;
+    min-width: 1280px;
     /* Subtle dot pattern */
 }
 
@@ -213,6 +214,7 @@ ul {
     top: 0;
     left: 0;
     width: 100%;
+    min-width: 1280px;
     z-index: 1000;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
@@ -712,105 +714,7 @@ footer {
     background: var(--text-main);
 }
 
-/* Responsive Media Queries */
-@media (max-width: 992px) {
-
-    .grid-3,
-    .steps-grid,
-    .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        background: white;
-    }
-
-    h1 {
-        font-size: 36px;
-    }
-
-    h2 {
-        font-size: 28px;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .mobile-menu-toggle {
-        display: flex;
-    }
-
-    .grid-2,
-    .contact-grid,
-    .footer-content,
-    .grid-3,
-    .steps-grid,
-    .pricing-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .pricing-card.featured {
-        transform: scale(1);
-    }
-
-    .hero {
-        padding-top: 100px;
-        padding-bottom: 60px;
-        height: auto;
-    }
-
-    .hero-wrapper {
-        max-width: 100%;
-    }
-
-    .hero-backdrop-overlay {
-        background: linear-gradient(0deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.8) 50%, rgba(30, 58, 138, 0.4) 100%);
-    }
-
-    .hero-content {
-        text-align: center;
-    }
-
-    .hero p.subtitle {
-        margin: 0 auto 48px auto;
-    }
-
-    .cta-group {
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .btn {
-        width: 100%;
-        display: flex;
-    }
-
-    .contact-box {
-        padding: 32px;
-    }
-
-    .section {
-        padding: 60px 0;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 32px;
-    }
-
-    .navbar-content {
-        padding: 0 16px;
-    }
-
-    .container {
-        padding: 0 20px;
-    }
-}
+/* Removed remaining mobile media queries */
 
 /* Animations */
 .fade-in-up {
@@ -1162,45 +1066,9 @@ footer {
 }
 
 /* Responsive adjustments for new elements */
-@media (max-width: 768px) {
-    .badges-grid {
-        gap: 20px;
-    }
+/* Removed mobile stats media queries */
 
-    .badge-item {
-        padding: 10px 16px;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-
-    .stat-number {
-        font-size: 40px;
-    }
-
-    .floating-cta span {
-        display: none;
-    }
-
-    .floating-cta {
-        padding: 16px;
-        border-radius: 50%;
-    }
-}
-
-@media (max-width: 480px) {
-    .badges-grid {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .badge-item {
-        width: 100%;
-        justify-content: center;
-    }
-}
+/* Removed footer and badge media queries */
 
 /* Floating WhatsApp Button */
 .floating-whatsapp {
@@ -1354,29 +1222,7 @@ footer {
     animation: pulse-whatsapp 2s infinite;
 }
 
-@media (max-width: 992px) {
-    .service-preview {
-        padding: 30px;
-        gap: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .service-preview {
-        grid-template-columns: 1fr;
-        margin-top: -30px;
-        padding: 24px;
-    }
-    
-    .hero-trust-badges {
-        gap: 15px;
-    }
-
-    .hero-badge {
-        font-size: 13px;
-        padding: 8px 16px;
-    }
-}
+/* Removed mobile service-preview media queries */
 
 /* Enhanced Testimonials Section */
 .testimonials-section {
@@ -1468,43 +1314,11 @@ footer {
     color: #cbd5e1;
 }
 
-@media (max-width: 768px) {
-    .why-title-col {
-        padding-right: 0;
-        margin-bottom: 30px;
-    }
-    .why-content-col {
-        border-left: none;
-        border-top: 4px solid var(--secondary-soft);
-        padding-left: 0;
-        padding-top: 30px;
-    }
-}
+/* Removed mobile media queries to force desktop view as requested */
 
 .testimonials-section .section-header h2 {
     color: var(--primary-dark);
     font-size: clamp(28px, 4vw, 42px);
 }
 
-@media (max-width: 768px) {
-    .testimonials-section {
-        padding: 60px 0;
-    }
-
-    .testimonial-card {
-        padding: 24px;
-        margin-bottom: 20px;
-        border-radius: var(--radius-md);
-    }
-
-    .testimonial-card p {
-        font-size: 16px;
-        line-height: 1.6;
-    }
-
-    .testimonial-card::before {
-        font-size: 70px;
-        top: 10px;
-        right: 15px;
-    }
-}
+/* Removed remaining mobile media queries to force desktop view */
