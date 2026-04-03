@@ -1,0 +1,312 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.site{font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-background-primary);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:2px solid #0C447C;background:#042C53;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-logo img{height:44px;}
+.nav-wordmark{color:#fff;font-size:15px;font-weight:500;letter-spacing:0.02em;line-height:1.3;}
+.nav-wordmark span{display:block;font-size:11px;font-weight:400;color:#85B7EB;letter-spacing:0.06em;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{color:#B5D4F4;font-size:13px;text-decoration:none;letter-spacing:0.03em;}
+.nav-cta{background:#1D9E75;color:#fff;font-size:13px;font-weight:500;padding:10px 22px;border-radius:6px;border:none;cursor:pointer;letter-spacing:0.03em;}
+
+.hero{background:#042C53;padding:72px 48px 0;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;}
+.hero-left{padding-bottom:64px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#0C447C;color:#85B7EB;font-size:11px;font-weight:500;padding:6px 14px;border-radius:4px;letter-spacing:0.06em;margin-bottom:24px;}
+.hero-badge-dot{width:7px;height:7px;background:#1D9E75;border-radius:50%;}
+.hero-h1{font-size:42px;font-weight:500;color:#fff;line-height:1.18;margin-bottom:20px;letter-spacing:-0.01em;}
+.hero-h1 em{color:#5DCAA5;font-style:normal;}
+.hero-sub{font-size:16px;color:#85B7EB;line-height:1.7;margin-bottom:36px;max-width:420px;}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.btn-primary{background:#1D9E75;color:#fff;font-size:14px;font-weight:500;padding:14px 28px;border-radius:6px;border:none;cursor:pointer;}
+.btn-secondary{background:transparent;color:#5DCAA5;font-size:14px;font-weight:500;padding:14px 28px;border-radius:6px;border:1.5px solid #185FA5;cursor:pointer;}
+.btn-ghost{background:transparent;color:#85B7EB;font-size:13px;padding:0;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;}
+.hero-right{background:#0C447C;border-radius:12px 12px 0 0;padding:32px 32px 0;overflow:hidden;min-height:320px;}
+.hero-card-label{font-size:10px;font-weight:500;letter-spacing:0.1em;color:#85B7EB;margin-bottom:16px;}
+.hero-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.hero-stat{background:#042C53;border-radius:8px;padding:16px;}
+.hero-stat-num{font-size:28px;font-weight:500;color:#5DCAA5;}
+.hero-stat-label{font-size:12px;color:#85B7EB;margin-top:2px;}
+.hero-activity{background:#042C53;border-radius:8px;padding:14px 16px;margin-bottom:12px;}
+.activity-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.activity-row:last-child{margin-bottom:0;}
+.activity-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dot-green{background:#1D9E75;}
+.dot-blue{background:#378ADD;}
+.dot-amber{background:#BA7517;}
+.activity-text{font-size:12px;color:#B5D4F4;flex:1;}
+.activity-time{font-size:11px;color:#378ADD;}
+
+.trust-bar{background:#0F6E56;padding:18px 48px;display:flex;gap:0;align-items:stretch;}
+.trust-item{display:flex;align-items:center;gap:12px;flex:1;padding:0 24px;border-right:1px solid #1D9E75;}
+.trust-item:first-child{padding-left:0;}
+.trust-item:last-child{border-right:none;}
+.trust-icon{width:36px;height:36px;background:#085041;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.trust-icon svg{width:18px;height:18px;}
+.trust-num{font-size:18px;font-weight:500;color:#fff;}
+.trust-desc{font-size:11px;color:#9FE1CB;margin-top:1px;}
+
+.services{padding:72px 48px;background:var(--color-background-primary);}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.1em;color:#185FA5;margin-bottom:10px;}
+.section-h2{font-size:30px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;line-height:1.25;}
+.section-sub{font-size:15px;color:var(--color-text-secondary);margin-bottom:40px;max-width:480px;line-height:1.6;}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--color-border-tertiary);border:1px solid var(--color-border-tertiary);border-radius:12px;overflow:hidden;}
+.service-card{background:var(--color-background-primary);padding:28px 24px;}
+.service-icon{width:44px;height:44px;background:#E6F1FB;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.service-icon svg{width:22px;height:22px;}
+.service-name{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;}
+.service-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.6;}
+.service-tag{display:inline-block;background:#E1F5EE;color:#085041;font-size:11px;padding:3px 10px;border-radius:4px;margin-top:12px;}
+
+.why{padding:72px 48px;background:#042C53;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.why-left{}
+.why-label{font-size:11px;font-weight:500;letter-spacing:0.1em;color:#5DCAA5;margin-bottom:12px;}
+.why-h2{font-size:30px;font-weight:500;color:#fff;margin-bottom:16px;line-height:1.25;}
+.why-story{font-size:15px;color:#85B7EB;line-height:1.8;margin-bottom:28px;}
+.why-story strong{color:#5DCAA5;font-weight:500;}
+.why-tagline{font-size:18px;font-weight:500;color:#fff;border-left:3px solid #1D9E75;padding-left:16px;line-height:1.5;}
+.why-right{display:flex;flex-direction:column;gap:16px;}
+.why-card{background:#0C447C;border-radius:10px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
+.why-card-icon{width:40px;height:40px;background:#185FA5;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.why-card-icon svg{width:20px;height:20px;}
+.why-card-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:4px;}
+.why-card-desc{font-size:12px;color:#85B7EB;line-height:1.6;}
+
+.process{padding:72px 48px;background:var(--color-background-secondary);}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;position:relative;}
+.step{padding:28px 24px;position:relative;}
+.step-num{font-size:11px;font-weight:500;color:#185FA5;letter-spacing:0.08em;margin-bottom:12px;}
+.step-connector{position:absolute;top:44px;left:calc(50% + 20px);right:calc(-50% + 20px);height:1px;background:#B5D4F4;}
+.step:last-child .step-connector{display:none;}
+.step-circle{width:40px;height:40px;background:#042C53;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.step-circle svg{width:18px;height:18px;}
+.step-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;}
+.step-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;}
+
+.cta-section{padding:72px 48px;background:#042C53;}
+.cta-inner{background:#0C447C;border-radius:16px;padding:56px 64px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;}
+.cta-h2{font-size:28px;font-weight:500;color:#fff;margin-bottom:10px;line-height:1.3;}
+.cta-sub{font-size:15px;color:#85B7EB;line-height:1.6;}
+.cta-buttons{display:flex;flex-direction:column;gap:10px;min-width:200px;}
+.cta-btn-main{background:#1D9E75;color:#fff;font-size:14px;font-weight:500;padding:14px 24px;border-radius:8px;border:none;cursor:pointer;text-align:center;white-space:nowrap;}
+.cta-btn-alt{background:transparent;color:#5DCAA5;font-size:13px;font-weight:500;padding:12px 24px;border-radius:8px;border:1.5px solid #185FA5;cursor:pointer;text-align:center;white-space:nowrap;}
+.cta-links{display:flex;gap:20px;margin-top:4px;justify-content:center;}
+.cta-link{font-size:12px;color:#85B7EB;text-decoration:none;}
+
+.footer{background:#021d38;padding:32px 48px;display:flex;align-items:center;justify-content:space-between;}
+.footer-brand{font-size:13px;color:#378ADD;font-weight:500;}
+.footer-copy{font-size:12px;color:#185FA5;}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:12px;color:#185FA5;text-decoration:none;}
+</style>
+
+<div class="site">
+
+<nav class="nav">
+  <div class="nav-logo">
+    <img src="/mnt/user-data/uploads/Logo.png" alt="Aksraya" onerror="this.style.display='none'"/>
+    <div class="nav-wordmark">Aksraya Health Care<span>care, built for home.</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Why us</a>
+    <a href="#">Pricing</a>
+    <button class="nav-cta">Book a caregiver</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Bengaluru's trusted home care</div>
+    <h1 class="hero-h1">Professional care,<br/><em>delivered to</em><br/>your doorstep.</h1>
+    <p class="hero-sub">Verified nurses and caregivers. Available 24/7. No long-term contracts. Care that shows up — on time, every time.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Book a caregiver</button>
+      <button class="btn-secondary">See our plans</button>
+      <button class="btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="16" height="16"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21L8.5 10.5S9.5 13 11 14.5s4 2.5 4 2.5l1.113-1.724a1 1 0 011.21-.502l4.493 1.498A1 1 0 0122 17.72V21a2 2 0 01-2 2C9.716 23 1 14.284 1 5a2 2 0 012-2z"/></svg>
+        WhatsApp us now
+      </button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-label">LIVE SERVICE DASHBOARD</div>
+    <div class="hero-stat-row">
+      <div class="hero-stat"><div class="hero-stat-num">247</div><div class="hero-stat-label">Active cases today</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">98%</div><div class="hero-stat-label">On-time arrival</div></div>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Verified staff</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">4.9★</div><div class="hero-stat-label">Average rating</div></div>
+    </div>
+    <div class="hero-activity">
+      <div class="activity-row"><div class="activity-dot dot-green"></div><div class="activity-text">Caregiver assigned — Jayanagar</div><div class="activity-time">2 min ago</div></div>
+      <div class="activity-row"><div class="activity-dot dot-blue"></div><div class="activity-text">Nurse shift started — Koramangala</div><div class="activity-time">8 min ago</div></div>
+      <div class="activity-row"><div class="activity-dot dot-green"></div><div class="activity-text">New booking confirmed — Whitefield</div><div class="activity-time">14 min ago</div></div>
+      <div class="activity-row"><div class="activity-dot dot-amber"></div><div class="activity-text">Shift handover completed — HSR Layout</div><div class="activity-time">21 min ago</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#9FE1CB" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    </div>
+    <div><div class="trust-num">100%</div><div class="trust-desc">Background verified staff</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#9FE1CB" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    </div>
+    <div><div class="trust-num">24/7</div><div class="trust-desc">Emergency support line</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#9FE1CB" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    </div>
+    <div><div class="trust-num">500+</div><div class="trust-desc">Trained caregivers & nurses</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#9FE1CB" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+    </div>
+    <div><div class="trust-num">4.9★</div><div class="trust-desc">Family satisfaction rating</div></div>
+  </div>
+</div>
+
+<section class="services">
+  <div class="section-label">WHAT WE OFFER</div>
+  <h2 class="section-h2">Every kind of care,<br/>under one roof.</h2>
+  <p class="section-sub">From post-surgery recovery to long-term elder care — our trained staff handle it all, exactly as your doctor prescribes.</p>
+  <div class="service-grid">
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0C447C" stroke-width="2" width="22" height="22"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <div class="service-name">Elder care</div>
+      <div class="service-desc">Round-the-clock companionship, hygiene support, and daily living assistance for senior family members.</div>
+      <span class="service-tag">Care assistant</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0C447C" stroke-width="2" width="22" height="22"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <div class="service-name">Post-surgery recovery</div>
+      <div class="service-desc">Skilled nursing care at home following hospitalisation, surgery, or intensive medical treatment.</div>
+      <span class="service-tag">Nursing</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0C447C" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <div class="service-name">Day & night nursing</div>
+      <div class="service-desc">Dedicated nursing shifts — day, night, or 24-hour stay — for patients needing continuous clinical oversight.</div>
+      <span class="service-tag">Stay nursing</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0C447C" stroke-width="2" width="22" height="22"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+      <div class="service-name">Palliative care</div>
+      <div class="service-desc">Compassionate end-of-life support focused on comfort, dignity, and quality of remaining time.</div>
+      <span class="service-tag">Specialised</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0C447C" stroke-width="2" width="22" height="22"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg></div>
+      <div class="service-name">Medication management</div>
+      <div class="service-desc">Accurate, timely administration of oral medications, IV infusions, and prescribed treatment protocols.</div>
+      <span class="service-tag">Clinical</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0C447C" stroke-width="2" width="22" height="22"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+      <div class="service-name">Rehabilitation support</div>
+      <div class="service-desc">Assisted physiotherapy exercises and mobility recovery at home, guided by your treating doctor's plan.</div>
+      <span class="service-tag">Recovery</span>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="why-left">
+    <div class="why-label">OUR STORY</div>
+    <h2 class="why-h2">Why we built Aksraya.</h2>
+    <p class="why-story">This didn't start as a business. It started with <strong>losing someone we loved</strong> — because help didn't come in time. We know what that helplessness feels like. We built Aksraya so no family ever has to.</p>
+    <div class="why-tagline">Care that shows up.<br/>On time. With heart. At your door.</div>
+  </div>
+  <div class="why-right">
+    <div class="why-card">
+      <div class="why-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="20" height="20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+      <div><div class="why-card-title">Every staff is verified</div><div class="why-card-desc">Police verification, credential checks, and in-person assessment before any placement. No exceptions.</div></div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="20" height="20"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+      <div><div class="why-card-title">No lock-in contracts</div><div class="why-card-desc">Start with 7 days. Extend when you're ready. Cancel with 24 hours notice. No penalties, no pressure.</div></div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="20" height="20"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21L8.5 10.5S9.5 13 11 14.5s4 2.5 4 2.5l1.113-1.724a1 1 0 011.21-.502l4.493 1.498A1 1 0 0122 17.72V21a2 2 0 01-2 2C9.716 23 1 14.284 1 5a2 2 0 012-2z"/></svg></div>
+      <div><div class="why-card-title">One call, we handle the rest</div><div class="why-card-desc">Your dedicated point of contact manages scheduling, replacements, and escalations — 8AM to 8PM daily.</div></div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="20" height="20"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+      <div><div class="why-card-title">Daily care logs, always</div><div class="why-card-desc">Every shift is documented — vitals, medications, observations. Full transparency, every single day.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="section-label">HOW IT WORKS</div>
+  <h2 class="section-h2">Up and running in 4 steps.</h2>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="18" height="18"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21L8.5 10.5S9.5 13 11 14.5s4 2.5 4 2.5l1.113-1.724a1 1 0 011.21-.502l4.493 1.498A1 1 0 0122 17.72V21a2 2 0 01-2 2C9.716 23 1 14.284 1 5a2 2 0 012-2z"/></svg></div>
+      <div class="step-title">Call or WhatsApp</div>
+      <div class="step-desc">Tell us your patient's condition, location, and what kind of care you need.</div>
+      <div class="step-connector"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="18" height="18"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="step-title">We match your caregiver</div>
+      <div class="step-desc">We shortlist verified staff matched to the patient's specific medical needs.</div>
+      <div class="step-connector"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="18" height="18"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+      <div class="step-title">Sign & confirm</div>
+      <div class="step-desc">Quick consent form and advance payment. Service confirmed within hours.</div>
+      <div class="step-connector"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2" width="18" height="18"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></div>
+      <div class="step-title">Care begins at your door</div>
+      <div class="step-desc">Your caregiver arrives on time. Daily care logs shared from day one.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <div>
+      <h2 class="cta-h2">Ready to get care started?<br/>We can have someone at your door today.</h2>
+      <p class="cta-sub">No long-term commitment. No uncertainty. Just reliable, professional care — exactly when you need it.</p>
+    </div>
+    <div class="cta-buttons">
+      <button class="cta-btn-main">Book a caregiver now</button>
+      <button class="cta-btn-alt">WhatsApp us instead</button>
+      <div class="cta-links">
+        <a class="cta-link" href="#">View pricing</a>
+        <a class="cta-link" href="#">See all services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand">Aksraya Health Care</div>
+  <div class="footer-copy">© 2025 Aksraya Health Care. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+</div>

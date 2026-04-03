@@ -1,0 +1,298 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); background: transparent; }
+  .doc { max-width: 860px; margin: 0 auto; padding: 2rem 2.5rem; color: var(--color-text-primary); }
+  .header { text-align: center; border-bottom: 2px solid var(--color-border-primary); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+  .header img { height: 70px; margin-bottom: 1rem; }
+  .header h1 { font-size: 15px; font-weight: 500; letter-spacing: 0.08em; color: var(--color-text-primary); }
+  .header h2 { font-size: 12px; font-weight: 400; color: var(--color-text-secondary); margin-top: 4px; letter-spacing: 0.05em; }
+  .section-title { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; color: var(--color-text-secondary); background: var(--color-background-secondary); padding: 6px 12px; margin: 2rem 0 1.2rem; border-left: 3px solid #1D9E75; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 0.5px solid var(--color-border-tertiary); margin-bottom: 1rem; }
+  .field-row { display: contents; }
+  .field { padding: 7px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); border-right: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
+  .field.full { grid-column: 1 / -1; border-right: none; }
+  .field label { display: block; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--color-text-secondary); margin-bottom: 3px; }
+  .field .line { border-bottom: 0.5px solid var(--color-border-secondary); min-height: 18px; }
+  .checkbox-group { font-size: 12px; color: var(--color-text-primary); padding: 8px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); grid-column: 1/-1; line-height: 2; }
+  .checkbox-group label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--color-text-secondary); display: block; margin-bottom: 4px; }
+  .cb { display: inline-block; width: 11px; height: 11px; border: 0.5px solid var(--color-border-primary); margin-right: 4px; vertical-align: middle; position: relative; top: -1px; }
+  .divider { border: none; border-top: 2px solid var(--color-border-primary); margin: 2.5rem 0; }
+  .terms-title { text-align: center; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; margin-bottom: 2rem; color: var(--color-text-primary); }
+  .clause { margin-bottom: 1.8rem; }
+  .clause-heading { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--color-text-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 5px; margin-bottom: 0.8rem; }
+  .sub { font-size: 13px; line-height: 1.75; text-align: justify; margin-bottom: 0.65rem; color: var(--color-text-primary); }
+  .sub strong { font-weight: 500; }
+  .sub-num { font-weight: 500; margin-right: 6px; color: var(--color-text-secondary); font-size: 12px; }
+  .intro-text { font-size: 13px; line-height: 1.75; text-align: justify; color: var(--color-text-secondary); margin-bottom: 2rem; border: 0.5px solid var(--color-border-tertiary); padding: 12px 16px; }
+  .sig-block { margin-top: 2.5rem; border-top: 2px solid var(--color-border-primary); padding-top: 1.5rem; }
+  .sig-declaration { font-size: 13px; line-height: 1.75; text-align: justify; margin-bottom: 1.5rem; color: var(--color-text-primary); }
+  .sig-declaration ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+  .sig-declaration li { margin-bottom: 4px; }
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+  .sig-box label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; color: var(--color-text-secondary); display: block; margin-bottom: 20px; }
+  .sig-line { border-bottom: 0.5px solid var(--color-border-primary); margin-bottom: 8px; }
+  .sig-name-line { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 8px; }
+  .sig-name-line span { font-size: 11px; color: var(--color-text-secondary); white-space: nowrap; }
+  .sig-name-line .line { flex: 1; border-bottom: 0.5px solid var(--color-border-secondary); }
+  .footer { text-align: center; font-size: 10px; color: var(--color-text-secondary); letter-spacing: 0.08em; margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid var(--color-border-tertiary); }
+  .highlight-box { background: var(--color-background-secondary); border-left: 3px solid #1D9E75; padding: 8px 14px; font-size: 12px; color: var(--color-text-secondary); margin: 0.5rem 0 1rem; line-height: 1.6; }
+</style>
+
+<div class="doc">
+  <div class="header">
+    <img src="/mnt/user-data/uploads/Logo.png" alt="Aksraya Health Care" onerror="this.style.display='none'" />
+    <h1>AKSRAYA HEALTH CARE</h1>
+    <h2>STAFF ENGAGEMENT & TERMS OF SERVICE AGREEMENT</h2>
+  </div>
+
+  <div class="section-title">SECTION A — STAFF INFORMATION</div>
+
+  <div class="field-grid">
+    <div class="field"><label>FORM REFERENCE NO.</label><div class="line"></div></div>
+    <div class="field"><label>DATE OF JOINING</label><div class="line"></div></div>
+
+    <div class="field full" style="padding: 4px 0 0 0; border-right: none;"><div class="section-title" style="margin: 0 0 0 0;">1. PERSONAL DETAILS</div></div>
+
+    <div class="field"><label>FULL NAME</label><div class="line"></div></div>
+    <div class="field"><label>GENDER</label><div class="line"></div></div>
+    <div class="field"><label>DATE OF BIRTH</label><div class="line"></div></div>
+    <div class="field"><label>AGE</label><div class="line"></div></div>
+    <div class="field full"><label>PERMANENT ADDRESS</label><div class="line" style="margin-bottom:8px"></div><div class="line"></div></div>
+    <div class="field full"><label>CURRENT ADDRESS (IF DIFFERENT)</label><div class="line" style="margin-bottom:8px"></div><div class="line"></div></div>
+    <div class="field"><label>CONTACT NUMBER</label><div class="line"></div></div>
+    <div class="field"><label>ALTERNATE NUMBER</label><div class="line"></div></div>
+    <div class="field full"><label>EMAIL ADDRESS</label><div class="line"></div></div>
+    <div class="field"><label>EMERGENCY CONTACT NAME</label><div class="line"></div></div>
+    <div class="field"><label>EMERGENCY CONTACT NO.</label><div class="line"></div></div>
+    <div class="field full"><label>EMERGENCY CONTACT RELATIONSHIP</label><div class="line"></div></div>
+
+    <div class="field full" style="padding: 4px 0 0 0; border-right: none;"><div class="section-title" style="margin: 0;">2. IDENTIFICATION & VERIFICATION DOCUMENTS</div></div>
+
+    <div class="field"><label>AADHAAR CARD NO.</label><div class="line"></div></div>
+    <div class="field"><label>PAN CARD NO.</label><div class="line"></div></div>
+    <div class="field"><label>ANY OTHER ID SUBMITTED</label><div class="line"></div></div>
+    <div class="field"><label>POLICE VERIFICATION CERTIFICATE</label>
+      <div style="display:flex;gap:12px;margin-top:4px;font-size:12px;"><span><span class="cb"></span>Yes</span><span><span class="cb"></span>No</span><span><span class="cb"></span>In Process</span></div>
+    </div>
+    <div class="field full"><label>CERTIFICATE REFERENCE NO.</label><div class="line"></div></div>
+
+    <div class="field full" style="padding: 4px 0 0 0; border-right: none;"><div class="section-title" style="margin: 0;">3. PROFESSIONAL DETAILS</div></div>
+
+    <div class="field"><label>HIGHEST QUALIFICATION</label><div class="line"></div></div>
+    <div class="field"><label>SPECIALISATION / TRADE</label><div class="line"></div></div>
+    <div class="field"><label>YEARS OF EXPERIENCE</label><div class="line"></div></div>
+    <div class="field"><label>PREVIOUS EMPLOYER</label><div class="line"></div></div>
+    <div class="field full"><label>CERTIFICATIONS HELD</label><div class="line" style="margin-bottom:8px"></div><div class="line"></div></div>
+
+    <div class="checkbox-group">
+      <label>SKILLS & COMPETENCIES (TICK ALL THAT APPLY)</label>
+      <span class="cb"></span>Basic Patient Care &nbsp;&nbsp;
+      <span class="cb"></span>Wound Dressing &nbsp;&nbsp;
+      <span class="cb"></span>Medication Administration &nbsp;&nbsp;
+      <span class="cb"></span>Catheter Care &nbsp;&nbsp;
+      <span class="cb"></span>Ryle's Tube / PEG Feeding &nbsp;&nbsp;
+      <span class="cb"></span>IV Drug Infusions &nbsp;&nbsp;
+      <span class="cb"></span>Ventilator Management &nbsp;&nbsp;
+      <span class="cb"></span>Tracheostomy Care &nbsp;&nbsp;
+      <span class="cb"></span>CPAP / BiPAP &nbsp;&nbsp;
+      <span class="cb"></span>Bedsore Management &nbsp;&nbsp;
+      <span class="cb"></span>Rehab & Exercise Assistance &nbsp;&nbsp;
+      <span class="cb"></span>Palliative Care &nbsp;&nbsp;
+      <span class="cb"></span>Central Line Management &nbsp;&nbsp;
+      <span class="cb"></span>Oxygen Flow Management
+      <br/><span style="font-size:12px;">Other: <span style="display:inline-block;width:300px;border-bottom:0.5px solid var(--color-border-secondary);"></span></span>
+    </div>
+
+    <div class="field full" style="padding: 4px 0 0 0; border-right: none;"><div class="section-title" style="margin: 0;">4. ENGAGEMENT TYPE</div></div>
+
+    <div class="field full">
+      <div style="display:flex;gap:20px;font-size:13px;margin-bottom:12px;"><span><span class="cb"></span>Full-Time Employee</span><span><span class="cb"></span>Contract / Assignment-Based</span></div>
+    </div>
+    <div class="field"><label>DESIGNATION / ASSIGNMENT TYPE</label><div class="line"></div></div>
+    <div class="field"><label>REPORTING SUPERVISOR</label><div class="line"></div></div>
+    <div class="field"><label>CONTRACT / PROBATION DURATION</label><div class="line"></div></div>
+    <div class="field"><label>CLIENT LOCATION (IF CONTRACT)</label><div class="line"></div></div>
+
+    <div class="field full" style="padding: 4px 0 0 0; border-right: none;"><div class="section-title" style="margin: 0;">5. COMPENSATION DETAILS</div></div>
+
+    <div class="field"><label>MONTHLY SALARY / PER DAY RATE</label><div class="line"></div></div>
+    <div class="field"><label>PAYMENT DATE / CYCLE</label><div class="line"></div></div>
+    <div class="field"><label>BANK NAME</label><div class="line"></div></div>
+    <div class="field"><label>ACCOUNT NUMBER</label><div class="line"></div></div>
+    <div class="field full"><label>IFSC CODE</label><div class="line"></div></div>
+    <div class="field full">
+      <label>PREFERRED PAYMENT MODE</label>
+      <div style="display:flex;gap:16px;font-size:12px;margin-top:4px;"><span><span class="cb"></span>Bank Transfer</span><span><span class="cb"></span>UPI</span><span><span class="cb"></span>Cash</span></div>
+    </div>
+
+    <div class="field full" style="padding: 4px 0 0 0; border-right: none;"><div class="section-title" style="margin: 0;">6. UNIFORM & EQUIPMENT ISSUED</div></div>
+
+    <div class="field"><label>UNIFORM ISSUED</label><div style="display:flex;gap:12px;font-size:12px;margin-top:4px;"><span><span class="cb"></span>Yes</span><span><span class="cb"></span>No</span></div></div>
+    <div class="field"><label>DATE OF ISSUE</label><div class="line"></div></div>
+    <div class="field full"><label>EQUIPMENT / ITEMS ISSUED</label><div class="line" style="margin-bottom:8px;"></div><div class="line"></div></div>
+    <div class="field full"><label>CONDITION AT TIME OF ISSUE</label><div class="line"></div></div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="terms-title">SECTION B — TERMS AND CONDITIONS OF ENGAGEMENT</div>
+
+  <div class="intro-text">
+    This document constitutes a binding Engagement Agreement between <strong>AKSRAYA HEALTH CARE</strong> (hereinafter "the Company") — First Party, and the Staff Member named in Section A of this form — Second Party. By signing this agreement, both parties agree to abide by all the terms and conditions set out below in full.
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 1 — NATURE OF ENGAGEMENT</div>
+    <p class="sub"><span class="sub-num">1.1</span>Aksraya Health Care engages the staff member to provide home-based patient care, nursing assistance, or nursing services to clients as assigned by the Company from time to time.</p>
+    <p class="sub"><span class="sub-num">1.2</span>The staff member acknowledges that they are engaged either as a full-time employee or as a contract staff member, as indicated in Section A of this form. The terms applicable to each engagement type are specified where they differ within this agreement.</p>
+    <p class="sub"><span class="sub-num">1.3</span>The staff member agrees that their primary obligation is to the patient's safety, comfort, and dignity at all times while on assignment, irrespective of any other instructions they may receive.</p>
+    <p class="sub"><span class="sub-num">1.4</span>The staff member confirms that all qualifications, certifications, and experience declared in Section A are accurate and verifiable. Any misrepresentation of credentials or personal information will result in the immediate termination of engagement and may attract legal action.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 2 — DUTIES & RESPONSIBILITIES</div>
+    <p class="sub"><span class="sub-num">2.1</span>The staff member will perform only the services agreed upon and listed in the Client's Service Agreement with Aksraya Health Care. No additional or undisclosed services will be rendered to the client without written authorisation from the Company.</p>
+    <p class="sub"><span class="sub-num">2.2</span>The staff member must report to the assigned location at the agreed time and must not leave the patient unattended without prior clearance from their supervisor or without first arranging a formal handover.</p>
+    <p class="sub"><span class="sub-num">2.3</span>The staff member is required to maintain a Daily Care Log that includes patient vitals, medications administered, observations, and any incidents occurring during the shift. This log must be submitted to the supervisor as and when directed.</p>
+    <p class="sub"><span class="sub-num">2.4</span>The staff member must conduct a formal handover briefing whenever their assignment is transferred to a replacement or substitute caregiver. No assignment may be abandoned without the completion of this handover.</p>
+    <p class="sub"><span class="sub-num">2.5</span>The staff member must follow standard infection control and hygiene protocols at all times while on duty and must comply with any additional health and safety guidelines communicated by the Company.</p>
+    <p class="sub"><span class="sub-num">2.6</span>The staff member must not perform any household tasks for the client that are unrelated to direct patient care, including but not limited to cooking, mopping, cleaning, or utensil washing.</p>
+    <p class="sub"><span class="sub-num">2.7</span>In the event of any medical emergency at the client's premises, the staff member must immediately alert the client or family, contact the Aksraya Health Care supervisor, and assist in facilitating emergency medical care. The staff member must not attempt any procedures that fall outside the scope of their training and certification.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 3 — CODE OF CONDUCT & PATIENT INTERACTION</div>
+    <p class="sub"><span class="sub-num">3.1</span>The staff member agrees to treat every patient with dignity, respect, and compassion at all times, regardless of the patient's age, gender, religion, ethnicity, or medical condition.</p>
+    <p class="sub"><span class="sub-num">3.2</span>The staff member must maintain a professional demeanor throughout the assignment. Rude, dismissive, impatient, or disrespectful behaviour toward the patient or their family is strictly prohibited and will be treated as a serious conduct violation.</p>
+    <p class="sub"><span class="sub-num">3.3</span>The staff member must dress in the assigned uniform or in clean and appropriate attire at all times while on duty. Personal appearance must reflect the professional standards of Aksraya Health Care.</p>
+    <p class="sub"><span class="sub-num">3.4</span>The use of personal mobile phones for non-emergency purposes during active patient care hours is prohibited. Mobile phones may be used only during scheduled break periods.</p>
+    <p class="sub"><span class="sub-num">3.5</span>The staff member must not consume alcohol, tobacco, or any intoxicating substance before or during their duty shift. Reporting to duty under the influence of any such substance will result in immediate termination of engagement without prior notice.</p>
+    <p class="sub"><span class="sub-num">3.6</span>The staff member must not engage in personal, financial, or service-related conversations with the client or family members regarding the Company's billing, pricing, or contractual terms. All such matters must be directed to Aksraya Health Care directly.</p>
+    <p class="sub"><span class="sub-num">3.7</span>The staff member must not accept gifts, money, loans, advance salary payments, or any form of financial favour from the client, patient, or their family members during the term of any assignment.</p>
+    <p class="sub"><span class="sub-num">3.8</span>The staff member must not share their personal contact details — including personal phone numbers, social media profiles, or personal email addresses — with the client or their family without explicit written permission from Aksraya Health Care.</p>
+    <p class="sub"><span class="sub-num">3.9</span>Any form of physical, verbal, sexual, emotional, or financial abuse of a patient by the staff member will result in immediate termination of engagement and may be reported to the appropriate legal authorities by the Company.</p>
+    <p class="sub"><span class="sub-num">3.10</span>The staff member must promptly report any concerning behaviour by the client or family — including harassment, violence, or inappropriate conduct — to their supervisor at Aksraya Health Care without delay.</p>
+    <p class="sub"><span class="sub-num">3.11</span>The staff member must not solicit personal reviews, direct referrals, or recommendations from clients on their own behalf. Any feedback or referral must be routed exclusively through Aksraya Health Care's official channels.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 4 — CONFIDENTIALITY & DATA PRIVACY</div>
+    <p class="sub"><span class="sub-num">4.1</span>The staff member acknowledges that in the course of their duties, they will have access to sensitive and private information about the patient, including medical history, diagnoses, treatment plans, financial circumstances, family matters, and personal details of all kinds.</p>
+    <p class="sub"><span class="sub-num">4.2</span>The staff member agrees to treat all such information as strictly confidential and must not disclose, discuss, or share it with any person outside the direct care team or Aksraya Health Care management, except where expressly required by law.</p>
+    <p class="sub"><span class="sub-num">4.3</span>Confidentiality obligations remain in full effect even after the conclusion of the staff member's engagement with Aksraya Health Care. There is no time limit on this obligation and it survives the termination of this agreement.</p>
+    <p class="sub"><span class="sub-num">4.4</span>The staff member must not photograph, record, or document the patient, the patient's home, or any care-related activities for personal use or for sharing on any platform, including social media. Documentation is permitted solely as part of the official Daily Care Log or as directed by the supervisor.</p>
+    <p class="sub"><span class="sub-num">4.5</span>In the event the staff member becomes aware of any data breach, accidental disclosure, or misuse of patient information, they must report it to their supervisor immediately and take no independent action.</p>
+    <p class="sub"><span class="sub-num">4.6</span>Any violation of this confidentiality clause will be treated as a serious breach of conduct and will result in disciplinary action up to and including termination of engagement, and may attract civil or criminal legal liability.</p>
+    <p class="sub"><span class="sub-num">4.7</span>The staff member consents to Aksraya Health Care recording service-related conversations or interactions for the purposes of quality assurance, staff training, or dispute resolution, where deemed necessary by the Company.</p>
+    <p class="sub"><span class="sub-num">4.8</span>The staff member consents to Aksraya Health Care retaining their personal and professional details provided during onboarding for the duration of their engagement and for a reasonable period thereafter for administrative, legal, and operational purposes.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 5 — ATTENDANCE, LEAVE & REPLACEMENT</div>
+    <p class="sub"><span class="sub-num">5.1</span>The staff member is expected to report to duty on time as per the schedule assigned by Aksraya Health Care. Repeated tardiness or unauthorised absence will be treated as a conduct issue and may be subject to disciplinary proceedings.</p>
+    <p class="sub"><span class="sub-num">5.2</span>Full-time staff are entitled to two days of leave per month after a continuous 30-day service period. Staff are additionally entitled to leave on all gazetted government public holidays as declared from time to time.</p>
+    <p class="sub"><span class="sub-num">5.3</span>Contract staff on active assignments are entitled to the same leave provisions as full-time staff for the duration of the assignment, subject to client agreement and supervisor coordination.</p>
+    <p class="sub"><span class="sub-num">5.4</span>All leave must be planned and communicated to the assigned supervisor at Aksraya Health Care at least 24 hours in advance. Unplanned or unannounced leave is not permitted except in cases of genuine personal emergency.</p>
+    <p class="sub"><span class="sub-num">5.5</span>In the event of a personal emergency such as a family bereavement or medical crisis, the staff member must notify the supervisor immediately so that a replacement caregiver can be arranged without interruption to the patient's care.</p>
+    <p class="sub"><span class="sub-num">5.6</span>The staff member must not independently arrange their own replacement or introduce a substitute caregiver without prior written approval from Aksraya Health Care.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 6 — COMPENSATION & PAYMENT</div>
+    <p class="sub"><span class="sub-num">6.1</span>Full-time staff will be compensated as per the salary agreed and documented in Section A of this form. Salary will be credited on the agreed date each month via the payment mode specified.</p>
+    <p class="sub"><span class="sub-num">6.2</span>Contract staff will be compensated on a per-day or per-month basis as agreed and documented in Section A. Payment will be processed as per the cycle agreed upon at the time of onboarding.</p>
+    <p class="sub"><span class="sub-num">6.3</span>The Company reserves the right to make deductions from salary or contract payments in cases of unauthorised absence, loss or damage to Company property, or outstanding dues owed by the staff member to the Company.</p>
+    <p class="sub"><span class="sub-num">6.4</span>Any disputes regarding salary or payment must be raised with the supervisor or HR representative through official channels within 7 days of the relevant payment date. Disputes raised after this window will not be entertained.</p>
+    <p class="sub"><span class="sub-num">6.5</span>Salary advance requests may be raised through the official process and will be considered at the sole discretion of Aksraya Health Care management. Accepting any salary advance or financial favour directly from clients, as stated in Clause 3.7, is strictly prohibited.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 7 — COMPANY PROPERTY & EQUIPMENT</div>
+    <p class="sub"><span class="sub-num">7.1</span>Any equipment, uniform, materials, or supplies issued by Aksraya Health Care to the staff member remain the exclusive property of the Company at all times and may not be retained, sold, or transferred.</p>
+    <p class="sub"><span class="sub-num">7.2</span>The staff member is solely responsible for the safe use, maintenance, and timely return of all Company property upon the conclusion of their engagement or assignment, in the same condition as issued.</p>
+    <p class="sub"><span class="sub-num">7.3</span>Any loss, damage, or misappropriation of Company property due to negligence or misconduct will result in the cost being recovered from the staff member's pending dues, salary, or final settlement.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 8 — DISCIPLINARY POLICY</div>
+    <p class="sub"><span class="sub-num">8.1</span>The following actions constitute misconduct and will be subject to formal disciplinary proceedings: unauthorised absence or repeated tardiness; negligent or unsafe patient care; breach of confidentiality; theft, fraud, or financial misconduct; substance abuse while on duty; physical, verbal, or sexual abuse of a patient; violation of the no-solicitation clause; misrepresentation of qualifications or identity; accepting gifts or financial favours from clients; abandoning a patient without proper handover; sharing patient information on social media; or any conduct that brings Aksraya Health Care into disrepute.</p>
+    <p class="sub"><span class="sub-num">8.2</span>Disciplinary proceedings will follow this standard escalation path unless the severity of the conduct warrants immediate action: <strong>Step 1</strong> — Verbal Warning (documented); <strong>Step 2</strong> — Written Warning; <strong>Step 3</strong> — Final Written Warning with corrective action plan; <strong>Step 4</strong> — Suspension pending investigation; <strong>Step 5</strong> — Termination of engagement.</p>
+    <p class="sub"><span class="sub-num">8.3</span>For serious offences including patient abuse, theft, substance abuse on duty, or breach of confidentiality, Aksraya Health Care reserves the right to proceed directly to immediate termination of engagement without prior warning steps, and to report the matter to the appropriate legal authorities.</p>
+    <p class="sub"><span class="sub-num">8.4</span>The staff member retains the right to present their account of any incident during the disciplinary process. A fair and impartial review will be conducted before any final decision is issued by the Company.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 9 — TERMINATION OF ENGAGEMENT</div>
+    <p class="sub"><span class="sub-num">9.1</span><strong>Termination by the Staff Member:</strong> The staff member must provide a minimum of 7 days' written notice before resigning from a full-time position, or a minimum of 24 hours' notice before withdrawing from a contract assignment. Failure to provide adequate notice may result in the forfeiture of pending dues at the discretion of the Company.</p>
+    <p class="sub"><span class="sub-num">9.2</span><strong>Termination by the Company:</strong> Aksraya Health Care may terminate the engagement of a full-time staff member by providing 7 days' written notice, or one day's compensation in lieu of notice. For contract staff, a minimum of 24 hours' notice will be provided prior to termination.</p>
+    <p class="sub"><span class="sub-num">9.3</span><strong>Immediate Termination:</strong> Aksraya Health Care reserves the right to terminate engagement with immediate effect and without notice or compensation in cases of gross misconduct as defined in Clause 8.1, misrepresentation of identity or credentials, abandonment of patient duty, or any conduct posing a direct risk to patient safety.</p>
+    <p class="sub"><span class="sub-num">9.4</span>Upon termination for any reason, the staff member must complete the formal Exit Clearance process, return all Company-issued property and uniforms in good condition, submit a complete handover of all patient records and care logs to the supervisor, and vacate the client's premises in an orderly manner between 8:00 AM and 6:00 PM only.</p>
+    <p class="sub"><span class="sub-num">9.5</span>Settlement of final dues will be processed within 7 working days of a clean exit clearance, subject to applicable deductions as defined under Clause 6.3 of this agreement.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 10 — NO SOLICITATION</div>
+    <p class="sub"><span class="sub-num">10.1</span>During the term of this engagement and for a period of two years following its conclusion — regardless of how the engagement ended — the staff member agrees not to directly approach or accept engagement from any client introduced to them through Aksraya Health Care, solicit or recommend themselves to any such client for services similar to those covered under this agreement, or assist or enable any third party in recruiting Aksraya Health Care clients or staff.</p>
+    <p class="sub"><span class="sub-num">10.2</span>This clause applies unconditionally, whether the engagement concluded voluntarily, through termination, or upon natural expiry of the contract term.</p>
+    <p class="sub"><span class="sub-num">10.3</span>Any violation of this clause constitutes a breach of contract. The staff member will be liable to compensate Aksraya Health Care for demonstrable revenue loss and loss of man-days caused as a direct result of the solicitation, in addition to any other legal remedies available to the Company.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 11 — GRIEVANCE MECHANISM</div>
+    <p class="sub"><span class="sub-num">11.1</span>The staff member has the right to raise concerns regarding their working conditions, client conduct, harassment, or any other work-related matter through the Aksraya Health Care Grievance Redressal process without fear of retaliation.</p>
+    <p class="sub"><span class="sub-num">11.2</span>Grievances must be reported to the assigned supervisor in the first instance. If the matter remains unresolved, it may be escalated in writing to Aksraya Health Care management for review and action.</p>
+    <p class="sub"><span class="sub-num">11.3</span>All grievances will be reviewed fairly and confidentially. Retaliation against a staff member for raising a legitimate grievance is strictly prohibited and will itself be treated as a conduct violation.</p>
+    <p class="sub"><span class="sub-num">11.4</span>The staff member is protected under the Karnataka Prohibition of Violence Against Medicare Service Personnel and Damage to Property in Medicare Service Institutions Act, 2009. Aksraya Health Care will extend full support in the event of a reported incident of violence or abuse by a client or their family members.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 12 — APPLICABLE LAW & JURISDICTION</div>
+    <p class="sub"><span class="sub-num">12.1</span>This agreement is governed by the laws of India and the State of Karnataka. Both parties agree to conduct themselves in accordance with all applicable statutes, regulations, and healthcare guidelines in force during the term of this agreement.</p>
+    <p class="sub"><span class="sub-num">12.2</span>Any disputes arising from or in connection with this agreement shall be subject to the exclusive jurisdiction of the competent courts in Bangalore, Karnataka, and both parties submit to this jurisdiction unconditionally.</p>
+    <p class="sub"><span class="sub-num">12.3</span>Non-compliance with any clause of this agreement may be pursued through appropriate legal or judicial forums as deemed necessary by Aksraya Health Care.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-heading">CLAUSE 13 — GENERAL CONDITIONS</div>
+    <p class="sub"><span class="sub-num">13.1</span>This agreement supersedes all prior verbal or informal understandings between the staff member and Aksraya Health Care and constitutes the complete and binding record of the terms of engagement.</p>
+    <p class="sub"><span class="sub-num">13.2</span>Any amendments to this agreement must be made in writing and signed by both parties before they take effect. Verbal amendments carry no legal weight.</p>
+    <p class="sub"><span class="sub-num">13.3</span>If any clause of this agreement is found to be unenforceable under applicable law, the remaining clauses shall continue to remain valid and in full effect without modification.</p>
+    <p class="sub"><span class="sub-num">13.4</span>The staff member confirms that they have read, understood, and agree to all terms outlined in this agreement, and that no clause has been misrepresented or withheld from them prior to signing.</p>
+  </div>
+
+  <div class="sig-block">
+    <div class="sig-declaration">
+      I, the undersigned staff member, confirm that I have read and fully understood all terms of this agreement (Clause 1 through Clause 13); that all information provided in Section A is true, complete, and verifiable to the best of my knowledge; that I agree to abide by all terms and conditions set out in this document; and that I understand my rights, responsibilities, and the consequences of any breach of this agreement.
+    </div>
+
+    <div class="field-grid" style="margin-bottom:1.5rem;">
+      <div class="field"><label>SIGNED ON (DATE)</label><div class="line"></div></div>
+      <div class="field"><label>PLACE</label><div class="line"></div></div>
+    </div>
+
+    <div class="sig-grid">
+      <div class="sig-box">
+        <label>STAFF MEMBER</label>
+        <div class="sig-line" style="margin-bottom: 24px;"></div>
+        <div class="sig-name-line"><span>Name</span><div class="line"></div></div>
+        <div class="sig-name-line"><span>Designation</span><div class="line"></div></div>
+        <div class="sig-name-line"><span>Date</span><div class="line"></div></div>
+      </div>
+      <div class="sig-box">
+        <label>AKSRAYA HEALTH CARE — AUTHORISED REPRESENTATIVE</label>
+        <div class="sig-line" style="margin-bottom: 24px;"></div>
+        <div class="sig-name-line"><span>Name</span><div class="line"></div></div>
+        <div class="sig-name-line"><span>Designation</span><div class="line"></div></div>
+        <div class="sig-name-line"><span>Date</span><div class="line"></div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem; border: 0.5px solid var(--color-border-tertiary); padding: 10px 14px;">
+      <div style="font-size:10px; font-weight:500; letter-spacing:0.06em; color:var(--color-text-secondary); margin-bottom:6px;">COMPANY SEAL / STAMP</div>
+      <div style="height: 60px;"></div>
+    </div>
+  </div>
+
+  <div class="footer">AKSRAYA HEALTH CARE &nbsp;|&nbsp; STAFF COPY &nbsp;|&nbsp; CONFIDENTIAL</div>
+</div>

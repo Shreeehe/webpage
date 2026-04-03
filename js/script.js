@@ -188,4 +188,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // 9. Sticky Navbar CTA - changes to "Call Now" after scrolling past hero
+    const navbarCta = document.getElementById('navbar-cta');
+    if (navbarCta) {
+        window.addEventListener('scroll', () => {
+            const heroHeight = document.querySelector('.hero')?.offsetHeight || 500;
+            if (window.scrollY > heroHeight * 0.6) {
+                navbarCta.href = 'tel:9976913615';
+                navbarCta.textContent = '📞 Call Now';
+                navbarCta.classList.add('scrolled');
+            } else {
+                navbarCta.href = '#contact';
+                navbarCta.textContent = 'Contact Us';
+                navbarCta.classList.remove('scrolled');
+            }
+        });
+    }
+
 });
