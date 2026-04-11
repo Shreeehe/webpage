@@ -1,0 +1,12 @@
+# Robots.txt for Aksraya Health Care
+# TODO: SEO — Replace YOUR_DOMAIN with your actual domain (e.g. https://aksrayahealthcare.com)
+
+User-agent: *
+Allow: /
+Disallow: /generate_terms.py
+Disallow: /remove_bg.py
+Disallow: /SERVICE CONSENT FORM.txt
+Disallow: /aksraya_staff_toc_justified.html
+Disallow: /aksraya_landing_redesign.html
+
+Sitemap: https://aksrayahealthcare.com/sitemap.xml

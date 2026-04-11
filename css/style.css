@@ -49,7 +49,6 @@ body {
     font-size: 16px;
     background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
     background-size: 24px 24px;
-    min-width: 1280px;
     /* Subtle dot pattern */
 }
 
@@ -225,7 +224,6 @@ ul {
     top: 0;
     left: 0;
     width: 100%;
-    min-width: 1280px;
     z-index: 1000;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
