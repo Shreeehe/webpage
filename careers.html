@@ -16,11 +16,14 @@
         content="Work that matters. Join our mission to provide compassionate, verified home nursing in Bangalore.">
     <meta property="og:image" content="https://aksrayahealthcare.com/assets/images/logo_icon.png">
     <meta property="og:url" content="https://aksrayahealthcare.com/careers.html">
+    <meta property="og:site_name" content="Aksraya Health Care">
+    <meta property="og:locale" content="en_IN">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Careers | Join Aksraya Health Care">
     <meta name="twitter:description" content="Help us build the future of home healthcare. Now hiring in Bangalore.">
+    <meta name="twitter:image" content="https://aksrayahealthcare.com/assets/images/logo_icon.png">
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -360,6 +363,99 @@
         .btn-call:hover {
             background: rgba(255, 255, 255, 0.18);
             transform: translateY(-2px);
+        }
+
+        /* Careers page responsive */
+        @media (max-width: 768px) {
+            .careers-hero {
+                padding: 110px 0 50px;
+            }
+
+            .careers-hero h1 {
+                font-size: clamp(28px, 6vw, 40px);
+            }
+
+            .careers-hero p {
+                font-size: 16px;
+            }
+
+            .why-join-section {
+                padding: 50px 0;
+            }
+
+            .why-join-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 32px;
+            }
+
+            .openings-section {
+                padding: 50px 0;
+            }
+
+            .job-card-header {
+                padding: 20px;
+                flex-wrap: wrap;
+            }
+
+            .job-card-header-left {
+                gap: 14px;
+            }
+
+            .job-card.open .job-card-body {
+                max-height: 800px;
+            }
+
+            .job-card-body-inner {
+                padding: 0 20px 24px;
+            }
+
+            .btn-apply {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 24px;
+            }
+
+            .careers-cta {
+                padding: 50px 0;
+            }
+
+            .careers-cta-inner {
+                padding: 40px 24px;
+                border-radius: 20px;
+            }
+
+            .careers-cta-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-wa, .careers-cta .btn-call {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .careers-hero {
+                padding: 90px 0 40px;
+            }
+
+            .careers-hero h1 {
+                font-size: clamp(24px, 7vw, 32px);
+            }
+
+            .job-title-wrap h3 {
+                font-size: 17px;
+            }
+
+            .job-tag {
+                font-size: 11px;
+            }
+
+            .careers-cta-inner {
+                padding: 32px 16px;
+            }
         }
     </style>
 </head>
