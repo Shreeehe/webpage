@@ -153,6 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const increment = target / (duration / 16); // 60fps
         let current = 0;
         
+        // Ensure starting from zero
+        el.textContent = '0';
+        
         const updateCounter = () => {
             current += increment;
             if (current < target) {
@@ -208,6 +211,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 navbarCta.href = '#contact';
                 navbarCta.textContent = 'Contact Us';
                 navbarCta.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // 10. App Launch Notify Form
+    const notifyBtn = document.getElementById('notify-btn');
+    const notifyResponse = document.getElementById('notify-response');
+    const notifyInput = document.querySelector('.notify-input');
+    const notifyInputGroup = document.querySelector('.notify-input-group');
+
+    if (notifyBtn && notifyResponse) {
+        notifyBtn.addEventListener('click', () => {
+            const val = notifyInput?.value.trim();
+            if (val) {
+                // Show processing indicator
+                const originalText = notifyBtn.innerHTML;
+                notifyBtn.disabled = true;
+                notifyBtn.classList.add('loading');
+                notifyBtn.innerHTML = '<div class="spinner"></div> Processing...';
+                notifyResponse.classList.remove('visible');
+
+                // Simulate processing delay
+                setTimeout(() => {
+                    notifyBtn.disabled = false;
+                    notifyBtn.classList.remove('loading');
+                    notifyBtn.innerHTML = originalText;
+                    
+                    // Fade out the input group
+                    if (notifyInputGroup) {
+                        notifyInputGroup.classList.add('success-hide');
+                        // Optional: completely remove from layout after animation
+                        setTimeout(() => {
+                            notifyInputGroup.style.display = 'none';
+                        }, 500);
+                    }
+
+                    notifyResponse.textContent = "Thanks! We'll keep you updated.";
+                    notifyResponse.classList.add('visible');
+                    if (notifyInput) notifyInput.value = '';
+                }, 1000);
+            } else {
+                notifyResponse.textContent = "Please enter your email or number.";
+                notifyResponse.classList.add('visible');
+                notifyResponse.style.color = "#ef4444"; // Error color
+                
+                setTimeout(() => {
+                    notifyResponse.classList.remove('visible');
+                    setTimeout(() => {
+                        notifyResponse.style.color = "#0d9488"; // Reset color
+                    }, 300);
+                }, 3000);
             }
         });
     }

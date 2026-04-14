@@ -87,9 +87,9 @@
                     <div class="hero-content fade-in-up">
                         <div class="hero-tagline">
                             <span class="live-dot"></span>
-                            <span>Available across in Bangalore</span>
+                            <span>Available across Bangalore</span>
                         </div>
-                        <h1>Home Care That Works. Or We Replace in <span class="highlight-text">24 Hours</span>.</h1>
+                        <h1>Home Care That Works. Or Get Replaced in <span class="highlight-text">24 Hours</span>.</h1>
 
                         <p class="subtitle">No uncertainty. No long-term risk. Just reliable care that adapts to your
                             needs.
@@ -184,6 +184,30 @@
             </div>
         </section>
 
+        <!-- Stats Counter Section (Deep Blue Bar) -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="200">0</div>
+                        <div class="stat-label">FAMILIES SERVED</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label">CERTIFIED CARETAKERS</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="stat-label">HOURS SUPPORT</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="70">0</div>
+                        <div class="stat-label">DOCTORS RECOMMEND US</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Google Reviews Section (Relocated for Credibility) -->
         <section class="section reviews-section" id="reviews">
@@ -223,7 +247,7 @@
                     <!-- Review 1 -->
                     <div class="review-card animate-on-scroll">
                         <div class="review-header">
-                            <div class="user-init-circle bg-blue-">P</div>
+                            <div class="user-init-circle bg-blue-500">P</div>
                             <div class="user-meta">
                                 <span class="user-name">Priya Nair</span>
                                 <div class="user-rating-stars">★★★★★</div>
@@ -297,30 +321,6 @@
                         <p class="review-text">"I called Aksraya and they had a nurse at our door by midnight. I cannot
                             put into words how grateful we are. Truly lifesaving."</p>
                         <div class="review-date">3 weeks ago</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Stats Counter Section (Deep Blue Bar) -->
-        <section class="stats-section">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="500">500</div>
-                        <div class="stat-label">FAMILIES SERVED</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="150">150</div>
-                        <div class="stat-label">CERTIFIED NURSES</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="24">24</div>
-                        <div class="stat-label">HOURS SUPPORT</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="70">70</div>
-                        <div class="stat-label">DOCTORS RECOMMEND US<br><span
-                                style="font-size: 11px; opacity: 0.8; font-weight: 500;">IN BANGALORE ALONE</span></div>
                     </div>
                 </div>
             </div>
@@ -544,8 +544,9 @@
                         <p class="notify-label">Get notified the moment we launch</p>
                         <div class="notify-input-group">
                             <input type="text" placeholder="Your email or WhatsApp number" class="notify-input">
-                            <button class="btn btn-notify">Notify Me</button>
+                            <button class="btn btn-notify" id="notify-btn">Notify Me</button>
                         </div>
+                        <div id="notify-response" class="notify-response"></div>
                     </div>
                 </div>
 
