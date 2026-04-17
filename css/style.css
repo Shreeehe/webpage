@@ -85,7 +85,7 @@ h2 {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--secondary-color);
+    color: #16a34a;
     margin-bottom: 12px;
 }
 
@@ -772,25 +772,31 @@ ul {
 .story-bento-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(180px, auto);
-    gap: 16px; /* Tight gap for "Big Grid" look */
+    grid-auto-rows: minmax(160px, auto);
+    gap: 14px;
     position: relative;
 }
 
 .bento-card {
-    background: #0f172a; /* Solid dark background */
-    padding: 32px;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+    padding: 22px;
+    border-radius: 18px;
+    border: 1px solid rgba(74, 222, 128, 0.12);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    color: white; /* Base color for inheritance */
+    justify-content: flex-start;
+    color: white;
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 1;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.24);
+}
+
+.bento-card:hover {
+    border-color: rgba(74, 222, 128, 0.3);
+    box-shadow: 0 8px 20px rgba(74, 222, 128, 0.15);
 }
 
 /* Fix for dark headers in bento cards */
@@ -844,15 +850,15 @@ ul {
 .bento-4 { grid-column: span 1; }
 
 .bento-card .story-card-icon {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     background: #1e293b;
     color: #4ade80;
     border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     transition: all 0.3s ease;
 }
 
@@ -862,23 +868,23 @@ ul {
 }
 
 .bento-card h4 {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 800;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: white;
 }
 
 .bento-card p {
-    font-size: 16px;
+    font-size: 14px;
     color: #94a3b8;
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 0;
 }
 
 /* Services Section Overhaul */
 .services-section {
     background: #052044; /* Deep Navy */
-    padding: 120px 0;
+    padding: 90px 0;
     position: relative;
     overflow: hidden;
 }
@@ -886,23 +892,23 @@ ul {
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 60px;
+    gap: 18px;
+    margin-top: 36px;
 }
 
 .service-card {
     background: #ffffff;
-    padding: 40px 32px;
-    border-radius: 24px;
+    padding: 24px 20px;
+    border-radius: 18px;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    min-height: 280px;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-height: 220px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
-    transform: translateY(40px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateY(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     z-index: 1;
 }
 
@@ -921,10 +927,10 @@ ul {
 
 .card-bg-circle {
     position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 150px;
-    height: 150px;
+    top: -35px;
+    right: -35px;
+    width: 110px;
+    height: 110px;
     background: linear-gradient(135deg, rgba(74, 222, 128, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
     border-radius: 50%;
     z-index: -1;
@@ -934,50 +940,50 @@ ul {
 
 .service-card.animate-in .card-bg-circle {
     transform: scale(1);
-    transition-delay: 0.5s;
+    transition-delay: 0.3s;
 }
 
 .service-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 }
 
 .service-card:hover .card-bg-circle {
-    transform: scale(1.5);
+    transform: scale(1.3);
     background: linear-gradient(135deg, rgba(74, 222, 128, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
 }
 
 .service-card .card-icon {
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
     background: #f8fafc;
     color: #16a34a;
-    border-radius: 16px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     transition: all 0.3s ease;
 }
 
 .service-card:hover .card-icon {
     background: #16a34a;
     color: #ffffff;
-    transform: rotate(10deg);
+    transform: rotate(8deg);
 }
 
 .service-card h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     color: #052044;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .service-card p {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.5;
     color: #64748b;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     flex-grow: 1;
 }
 
@@ -1039,20 +1045,23 @@ ul {
 .check-list li {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     font-weight: 500;
     color: var(--text-main);
-    padding: 16px;
+    padding: 18px 20px;
     background: white;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid transparent;
-    transition: all 0.2s;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(22, 163, 74, 0.08);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-height: 56px;
 }
 
 .check-list li:hover {
-    border-color: var(--accent-color);
-    transform: translateX(5px);
+    border-color: rgba(22, 163, 74, 0.3);
+    transform: translateX(6px);
+    box-shadow: 0 8px 16px rgba(22, 163, 74, 0.12);
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
 }
 
 .check-list li::before {
@@ -1060,14 +1069,14 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    background: var(--primary-color);
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
     color: white;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
-    flex-shrink: 0;
+    flex-shrink: 0
 }
 
 /* Steps Grid */
@@ -1933,6 +1942,143 @@ footer {
     background-size: 40px 40px;
 }
 
+.services-offer-strip-section {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    padding: 60px 0 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.services-offer-strip {
+    text-align: center;
+}
+
+.services-offer-strip h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    margin-bottom: 32px;
+    color: #052044;
+    font-weight: 700;
+}
+
+.services-offer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.services-offer-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: left;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1.5px solid rgba(74, 222, 128, 0.1);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.services-offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.services-offer-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(74, 222, 128, 0.15);
+    border-color: rgba(74, 222, 128, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.services-offer-card h3 {
+    font-size: 24px;
+    margin: 0 0 12px;
+    line-height: 1.15;
+    color: #052044;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.services-offer-card a {
+    color: #16a34a;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 14px;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+    padding-bottom: 4px;
+}
+
+.services-offer-card a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #16a34a;
+    transition: width 0.3s ease;
+}
+
+.services-offer-card:hover a::after {
+    width: 100%;
+}
+
+.services-offer-avatar {
+    margin-top: auto;
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4ade80, #10b981);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    box-shadow: 0 12px 28px rgba(74, 222, 128, 0.3);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.services-offer-card:hover .services-offer-avatar {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 16px 36px rgba(74, 222, 128, 0.4);
+}
+
+.services-offer-cta {
+    margin-top: 36px;
+    text-align: center;
+}
+
+.services-offer-cta .btn {
+    border-radius: 12px;
+    padding: 14px 40px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.services-offer-cta .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(22, 163, 74, 0.25);
+}
+
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -2009,19 +2155,22 @@ footer {
 .faq-grid {
     display: grid;
     gap: 16px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .faq-item {
-    background: white;
-    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1.5px solid rgba(74, 222, 128, 0.08);
     transition: all 0.3s ease;
 }
 
 .faq-item:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-color: rgba(74, 222, 128, 0.15);
 }
 
 .faq-question {
@@ -2031,23 +2180,35 @@ footer {
     justify-content: space-between;
     align-items: center;
     font-weight: 600;
-    color: var(--text-main);
-    transition: background 0.2s;
+    color: #052044;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    letter-spacing: -0.3px;
 }
 
 .faq-question:hover {
-    background: #f8fafc;
+    background: linear-gradient(135deg, #f0fdf4 0%, #f1f5f9 100%);
+    color: #16a34a;
 }
 
 .faq-question::after {
     content: '+';
-    font-size: 24px;
-    color: var(--primary-color);
-    transition: transform 0.3s;
+    font-size: 28px;
+    color: #16a34a;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), rotate 0.4s ease;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: 16px;
+    flex-shrink: 0;
 }
 
 .faq-item.active .faq-question::after {
     transform: rotate(45deg);
+    color: #16a34a;
 }
 
 .faq-answer {
@@ -2055,13 +2216,15 @@ footer {
     overflow: hidden;
     transition: max-height 0.4s ease, padding 0.3s ease;
     padding: 0 32px;
-    color: var(--text-secondary);
-    line-height: 1.7;
+    color: #64748b;
+    line-height: 1.8;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 .faq-item.active .faq-answer {
     max-height: 500px;
-    padding: 0 32px 24px;
+    padding: 16px 32px 24px;
 }
 
 /* Responsive adjustments for new elements */
@@ -3052,14 +3215,18 @@ footer {
     .faq-question {
         padding: 20px 24px;
         font-size: 15px;
+        font-weight: 600;
+        color: #052044;
     }
 
     .faq-answer {
         padding: 0 24px;
+        font-size: 14px;
+        color: #64748b;
     }
 
     .faq-item.active .faq-answer {
-        padding: 0 24px 20px;
+        padding: 12px 24px 20px;
     }
 
     /* Contact Mobile */
@@ -3215,11 +3382,32 @@ footer {
     /* Bento Grid small mobile */
     .story-bento-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 16px;
     }
 
     .bento-card {
-        padding: 20px;
+        padding: 24px;
+        min-height: 140px;
+    }
+
+    .bento-card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .bento-card p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .story-card-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .story-card-icon svg {
+        width: 20px;
+        height: 20px;
     }
 
     .bento-title {
@@ -3237,6 +3425,24 @@ footer {
     }
 
     .review-text {
+        font-size: 14px;
+    }
+
+    /* Check list small mobile */
+    .check-list {
+        gap: 14px;
+    }
+
+    .check-list li {
+        padding: 16px 18px;
+        gap: 14px;
+        min-height: 54px;
+        font-size: 14px;
+    }
+
+    .check-list li::before {
+        width: 26px;
+        height: 26px;
         font-size: 14px;
     }
 
@@ -3389,5 +3595,66 @@ img {
 
     .section > .container[style*="max-width: 900px"] h2 {
         font-size: 18px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-offer-strip-section {
+        padding: 84px 0 12px;
+    }
+
+    .services-offer-strip h2 {
+        font-size: 34px;
+        line-height: 1.12;
+        margin-bottom: 16px;
+        color: #0f172a;
+    }
+
+    .services-offer-grid {
+    grid-template-columns: 1fr 1fr;   /* ← 2×2 grid on mobile */
+    gap: 10px;
+    }
+
+    .services-offer-card {
+        min-height: auto;
+        display: grid;
+        grid-template-columns: 1fr 80px;
+        grid-template-rows: auto auto;
+        gap: 8px 12px;
+        align-items: center;
+        padding: 20px 18px;
+        border-radius: 16px;
+    }
+
+    .services-offer-card h3 {
+        font-size: 20px;
+        margin: 0;
+        grid-column: 1;
+        grid-row: 1;
+        color: #052044;
+        font-weight: 700;
+    }
+
+    .services-offer-card a {
+        margin: 0;
+        grid-column: 1;
+        grid-row: 2;
+        font-size: 14px;
+        color: #16a34a;
+        font-weight: 700;
+    }
+
+    .services-offer-avatar {
+        width: 78px;
+        height: 78px;
+        font-size: 36px;
+        margin: 0;
+        justify-self: end;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    .services-offer-cta {
+        margin-top: 14px;
     }
 }

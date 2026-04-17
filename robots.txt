@@ -1,6 +1,8 @@
 # Robots.txt for Aksraya Health Care
 # https://aksrayahealthcare.com
+# Last Updated: 2026-04-17
 
+# Allow all bots to crawl the site
 User-agent: *
 Allow: /
 Disallow: /generate_terms.py
@@ -8,5 +10,31 @@ Disallow: /remove_bg.py
 Disallow: /SERVICE CONSENT FORM.txt
 Disallow: /aksraya_staff_toc_justified.html
 Disallow: /aksraya_landing_redesign.html
+Disallow: /*.py$
+Disallow: */?*=*
 
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Sitemap location (critical for indexing)
 Sitemap: https://aksrayahealthcare.com/sitemap.xml
+
+# Request indexing
+# This helps search engines understand we want the site indexed
