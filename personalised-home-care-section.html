@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalised At-Home Care for Elders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            --navy: #0D1B4B;
+            --green: #22C55E;
+            --mint: #F0FDF4;
+            --surface: #ffffff;
+            --border: #E2E8F0;
+            --text-soft: #475569;
+            --text-strong: #0D1B4B;
+            --shadow: 0 18px 45px rgba(13, 27, 75, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f8fafc;
+            color: var(--text-strong);
+            line-height: 1.6;
+        }
+
+        body,
+        button,
+        input,
+        a {
+            font-family: inherit;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .section {
+            background: var(--mint);
+            padding: 56px 20px 40px;
+        }
+
+        .section-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 0 10px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2.25rem, 4vw, 3.4rem);
+            margin: 0;
+            letter-spacing: -0.03em;
+            line-height: 1.03;
+            color: var(--navy);
+        }
+
+        .section-heading p {
+            margin: 18px auto 0;
+            max-width: 680px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-soft);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 34px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+            opacity: 0;
+            transform: translateY(28px);
+            box-shadow: 0 4px 18px rgba(13, 27, 75, 0.06);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: var(--shadow);
+            border-color: rgba(34, 197, 94, 0.32);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: transparent;
+            transition: background 0.32s ease;
+        }
+
+        .card:hover::before {
+            background: var(--green);
+        }
+
+        .card-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .icon-shell {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.12);
+            display: grid;
+            place-items: center;
+            position: relative;
+            box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.14);
+        }
+
+        .icon-shell::after {
+            content: '';
+            position: absolute;
+            right: 6px;
+            bottom: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
+        }
+
+        .icon-shell svg {
+            width: 24px;
+            height: 24px;
+            color: var(--green);
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1.2;
+        }
+
+        .card-meta {
+            margin-top: 24px;
+        }
+
+        .view-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.97rem;
+            font-weight: 700;
+            color: var(--green);
+            text-decoration: none;
+            position: relative;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .view-more::after {
+            content: '→';
+            transition: transform 0.25s ease;
+        }
+
+        .view-more:hover {
+            color: #166534;
+            transform: translateX(2px);
+        }
+
+        .view-more:hover::after {
+            transform: translateX(3px);
+        }
+
+        .button-wrap {
+            margin-top: 34px;
+            text-align: center;
+        }
+
+        .primary-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 320px;
+            min-height: 54px;
+            border: none;
+            border-radius: 999px;
+            padding: 0 28px;
+            background: var(--navy);
+            color: white;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+            box-shadow: 0 15px 25px rgba(13, 27, 75, 0.16);
+        }
+
+        .primary-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 20px 30px rgba(13, 27, 75, 0.18);
+        }
+
+        .primary-button::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            width: 0;
+            height: 3px;
+            background: var(--green);
+            border-radius: 999px;
+            transform: translateX(-50%);
+            transition: width 0.28s ease;
+        }
+
+        .primary-button:hover::after {
+            width: 60%;
+        }
+
+        .primary-button:focus-visible {
+            outline: 3px solid rgba(34, 197, 94, 0.38);
+            outline-offset: 4px;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            background: rgba(255, 255, 255, 0.35);
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 860px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 38px 16px 28px;
+            }
+
+            .section-heading h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-heading p {
+                font-size: 0.98rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .icon-shell {
+                width: 52px;
+                height: 52px;
+            }
+
+            .card-title {
+                font-size: 1.02rem;
+            }
+
+            .view-more {
+                font-size: 0.95rem;
+            }
+
+            .button-wrap {
+                margin-top: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="section" aria-labelledby="home-care-title">
+        <div class="section-inner">
+            <div class="section-heading">
+                <span class="sr-only">Home care services introduction</span>
+                <h2 id="home-care-title">Personalised At-Home Care for Elders</h2>
+                <p>Compassionate, professional nursing care delivered to your home — 7 days a week.</p>
+            </div>
+
+            <div class="cards-grid">
+                <article class="card" aria-label="Palliative Care service card" style="--delay:0.05s;">
+                    <div class="card-header">
+                        <div class="icon-shell" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 21s-6-4.35-9-9.5C1.5 7.25 3.75 4 7.5 4c1.95 0 3.75 1.05 4.5 2.65C12.75 5.05 14.55 4 16.5 4 20.25 4 22.5 7.25 21 11.5 18 16.65 12 21 12 21z" />
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Palliative Care</h3>
+                    </div>
+                    <div class="card-meta">
+                        <a href="#services" class="view-more" aria-label="View more about Palliative Care">View More</a>
+                    </div>
+                </article>
+
+                <article class="card" aria-label="Elder Care service card" style="--delay:0.1s;">
+                    <div class="card-header">
+                        <div class="icon-shell" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Elder Care</h3>
+                    </div>
+                    <div class="card-meta">
+                        <a href="#services" class="view-more" aria-label="View more about Elder Care">View More</a>
+                    </div>
+                </article>
+
+                <article class="card" aria-label="Post-Hospital Care service card" style="--delay:0.15s;">
+                    <div class="card-header">
+                        <div class="icon-shell" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 7h18" />
+                                <rect x="3" y="7" width="18" height="14" rx="2" ry="2" />
+                                <path d="M12 11v6" />
+                                <path d="M9 14h6" />
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Post-Hospital Care</h3>
+                    </div>
+                    <div class="card-meta">
+                        <a href="#services" class="view-more" aria-label="View more about Post-Hospital Care">View More</a>
+                    </div>
+                </article>
+
+                <article class="card" aria-label="Bedridden Patient Care service card" style="--delay:0.2s;">
+                    <div class="card-header">
+                        <div class="icon-shell" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 11h18" />
+                                <path d="M5 11v6a2 2 0 0 0 2 2h8" />
+                                <path d="M18 11v6a2 2 0 0 0 2 2h1" />
+                                <path d="M6 7h6" />
+                                <path d="M9 7v4" />
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Bedridden Patient Care</h3>
+                    </div>
+                    <div class="card-meta">
+                        <a href="#services" class="view-more" aria-label="View more about Bedridden Patient Care">View More</a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="button-wrap">
+                <button class="primary-button" type="button">Enquire Now</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    const delay = parseFloat(getComputedStyle(card).getPropertyValue('--delay')) || 0;
+                    setTimeout(() => card.classList.add('visible'), delay * 1000);
+                    observer.unobserve(card);
+                }
+            });
+        }, {
+            threshold: 0.18
+        });
+
+        cards.forEach(card => observer.observe(card));
+
+        const button = document.querySelector('.primary-button');
+        button.addEventListener('click', (event) => {
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+
+            button.appendChild(ripple);
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+    </script>
+</body>
+</html>
