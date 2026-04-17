@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', () => {
             const heroHeight = document.querySelector('.hero')?.offsetHeight || 500;
             if (window.scrollY > heroHeight * 0.6) {
-                navbarCta.href = 'tel:9976913615';
+                navbarCta.href = 'tel:+918310962174';
                 navbarCta.textContent = '📞 Call Now';
                 navbarCta.classList.add('scrolled');
             } else {

@@ -1239,21 +1239,188 @@ ul {
     background: #f8fafc;
 }
 
+.pricing-section-v2 {
+    background: #050914;
+    color: #e2e8f0;
+}
+
+.pricing-v2-header {
+    text-align: left;
+    max-width: 760px;
+}
+
+.pricing-v2-header h2 {
+    color: #f8fafc;
+    font-size: clamp(34px, 5.2vw, 56px);
+    line-height: 1.05;
+    margin-bottom: 16px;
+}
+
+.pricing-v2-header p {
+    color: #94a3b8;
+    margin-bottom: 0;
+}
+
+.pricing-v2-grid {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+.pricing-v2-card {
+    background: #0b1220;
+    border: 1px solid #1e293b;
+    border-radius: 14px;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    position: relative;
+}
+
+.pricing-v2-featured {
+    background: linear-gradient(180deg, #1d4ed8, #1e3a8a);
+    border-color: #3b82f6;
+    box-shadow: 0 22px 44px rgba(14, 65, 177, 0.35);
+}
+
+.pricing-v2-badge {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0f172a;
+    background: #fbbf24;
+    padding: 4px 8px;
+    border-radius: 999px;
+}
+
+.pricing-v2-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.pricing-v2-name {
+    color: #e2e8f0;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.pricing-v2-shift {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #93c5fd;
+    border: 1px solid #1d4ed8;
+    border-radius: 999px;
+    padding: 4px 8px;
+    flex-shrink: 0;
+}
+
+.pricing-v2-price {
+    font-family: 'League Spartan', sans-serif;
+    color: #f8fafc;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.pricing-v2-price span {
+    font-size: 14px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.pricing-v2-list {
+    margin: 0 0 16px;
+    padding-left: 16px;
+    list-style: disc;
+    flex-grow: 1;
+}
+
+.pricing-v2-list li {
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.45;
+    margin-bottom: 8px;
+}
+
+.pricing-v2-card .btn {
+    margin-top: auto;
+}
+
+.pricing-v2-card .btn-outline-blue {
+    color: #93c5fd;
+    border-color: #2563eb;
+    background: rgba(37, 99, 235, 0.12);
+}
+
+.pricing-v2-card .btn-outline-blue:hover {
+    color: #f8fafc;
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.pricing-v2-featured .btn-primary {
+    background: #f8fafc;
+    color: #1d4ed8;
+    border-color: #f8fafc;
+}
+
+.pricing-v2-featured .btn-primary:hover {
+    background: #dbeafe;
+    color: #1e3a8a;
+    border-color: #dbeafe;
+}
+
+.pricing-v2-note {
+    margin-top: 24px;
+    border-top: 1px solid #1e293b;
+    padding-top: 18px;
+}
+
+.pricing-v2-note p {
+    color: #94a3b8;
+    margin-bottom: 8px;
+}
+
 .pricing-grid {
     align-items: stretch;
     margin-top: 40px;
 }
 
-.pricing-card {
-    background: white;
-    padding: 48px 32px;
-    border-radius: 20px;
-    border: 2px solid #e2e8f0;
+.pricing-grid-vertical {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    gap: 14px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pricing-card {
+    background: white;
+    padding: 24px 22px;
+    border-radius: 20px;
+    border: 2px solid #e2e8f0;
+    display: block;
+    text-align: left;
     transition: all 0.3s ease;
     position: relative;
+    min-height: auto;
+    height: auto;
 }
 
 .pricing-card:hover {
@@ -1287,14 +1454,14 @@ ul {
 .pricing-desc {
     font-size: 14px;
     color: #64748b;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 
 .pricing-card .price {
-    font-size: 42px;
+    font-size: 34px;
     font-weight: 800;
     color: var(--primary-color);
-    margin-bottom: 30px;
+    margin-bottom: 2px;
     font-family: 'League Spartan', sans-serif;
 }
 
@@ -1303,35 +1470,86 @@ ul {
 }
 
 .pricing-card .period {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     opacity: 0.7;
 }
 
-.pricing-features {
-    text-align: left;
-    margin-bottom: 40px;
-    flex-grow: 1;
-}
-
-.pricing-features li {
-    font-size: 15px;
-    margin-bottom: 12px;
-    padding-left: 28px;
-    position: relative;
+.pricing-quick {
+    font-size: 13px;
+    font-weight: 600;
     color: #475569;
+    margin: 0 0 6px;
 }
 
-.pricing-features li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--secondary-color);
-    font-weight: 900;
+.pricing-more {
+    margin: 0 0 10px;
+    text-align: left;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 8px;
 }
 
-.pricing-card.featured .pricing-features li::before {
-    color: #4ade80;
+.pricing-more summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pricing-more summary::-webkit-details-marker {
+    display: none;
+}
+
+.pricing-more summary::after {
+    content: '+';
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.pricing-more[open] summary::after {
+    content: '-';
+}
+
+.pricing-more-list {
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+
+.pricing-more-list li {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #64748b;
+    padding-left: 0;
+    list-style: disc;
+    margin-left: 18px;
+}
+
+.pricing-more-list li::before {
+    content: '';
+}
+
+.pricing-more-featured {
+    border-top-color: rgba(148, 163, 184, 0.35);
+}
+
+.pricing-more-featured summary {
+    color: #cbd5e1;
+}
+
+.pricing-more-featured .pricing-more-list li {
+    color: #cbd5e1;
+}
+
+.pricing-card .btn-block {
+    width: auto;
+    display: inline-flex;
+    min-width: 150px;
+    margin-top: 4px;
 }
 
 .btn-outline-blue {
@@ -2803,6 +3021,19 @@ footer {
         max-width: 420px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .pricing-v2-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .pricing-v2-card {
+        padding: 16px 14px;
+    }
+
+    .pricing-v2-price {
+        font-size: 34px;
     }
 
     .pricing-card {
