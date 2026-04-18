@@ -319,4 +319,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ─── Mobile Bottom Toolbar ────────────────────────────────────────
+    const heroSection = document.querySelector('.hero');
+    const mobileToolbar = document.getElementById('mobile-toolbar');
+
+    if (heroSection && mobileToolbar) {
+        const toolbarObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    // Hero section has left the viewport, show toolbar
+                    mobileToolbar.classList.add('visible');
+                } else {
+                    // Hero section is visible, hide toolbar
+                    mobileToolbar.classList.remove('visible');
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0
+        });
+
+        toolbarObserver.observe(heroSection);
+    }
 });
