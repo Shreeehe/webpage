@@ -76,29 +76,32 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     cards.forEach(card => {
+        let rafId;
         card.addEventListener('mousemove', (e) => {
             if (window.innerWidth <= 768) return;
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
 
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
+                card.style.transform =
+                    `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
 
-            card.style.transform =
-                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-
-            let glare = card.querySelector('.glare');
-            if (!glare) {
-                glare = document.createElement('div');
-                glare.classList.add('glare');
-                card.appendChild(glare);
-            }
-            glare.style.left = `${x}px`;
-            glare.style.top = `${y}px`;
-            glare.style.opacity = '1';
+                let glare = card.querySelector('.glare');
+                if (!glare) {
+                    glare = document.createElement('div');
+                    glare.classList.add('glare');
+                    card.appendChild(glare);
+                }
+                glare.style.left = `${x}px`;
+                glare.style.top = `${y}px`;
+                glare.style.opacity = '1';
+            });
         });
 
         card.addEventListener('mouseleave', () => {
@@ -170,17 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // ─── 7. Scroll Progress Bar ───────────────────────────────────────
+    // ─── 7. Scroll Progress Bar + Sticky Navbar CTA (merged, RAF-throttled) ──
     const scrollProgress = document.getElementById('scrollProgress');
-    if (scrollProgress) {
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight =
-                document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        }, { passive: true });
-    }
 
 
     // ─── 8. Animated Stats Counter ───────────────────────────────────
@@ -251,21 +245,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // ─── 10. Sticky Navbar CTA ────────────────────────────────────────
     const navbarCta = document.getElementById('navbar-cta');
-    if (navbarCta) {
+
+    if (scrollProgress || navbarCta) {
+        let scrollRafId;
+        const heroEl = document.querySelector('.hero');
+
         window.addEventListener('scroll', () => {
-            const heroHeight =
-                document.querySelector('.hero')?.offsetHeight || 500;
-            if (window.scrollY > heroHeight * 0.6) {
-                navbarCta.href = 'tel:+918310962174';
-                navbarCta.textContent = '📞 Call Now';
-                navbarCta.classList.add('scrolled');
-            } else {
-                navbarCta.href = '#contact';
-                navbarCta.textContent = 'Contact Us';
-                navbarCta.classList.remove('scrolled');
-            }
+            cancelAnimationFrame(scrollRafId);
+            scrollRafId = requestAnimationFrame(() => {
+                // Progress bar
+                if (scrollProgress) {
+                    const scrollTop = window.scrollY;
+                    const docHeight =
+                        document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+                    scrollProgress.style.width = scrollPercent + '%';
+                }
+
+                // Sticky navbar CTA
+                if (navbarCta) {
+                    const heroHeight = heroEl?.offsetHeight || 500;
+                    if (window.scrollY > heroHeight * 0.6) {
+                        navbarCta.href = 'tel:+918310962174';
+                        navbarCta.textContent = '📞 Call Now';
+                        navbarCta.classList.add('scrolled');
+                    } else {
+                        navbarCta.href = '#contact';
+                        navbarCta.textContent = 'Contact Us';
+                        navbarCta.classList.remove('scrolled');
+                    }
+                }
+            });
         }, { passive: true });
     }
 
