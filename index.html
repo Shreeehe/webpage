@@ -36,10 +36,10 @@
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <!-- Fonts: all three families in a single request -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=League+Spartan:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Preload hero image so the browser fetches it alongside CSS -->
+    <link rel="preload" as="image" href="assets/images/hero-image.jpg" fetchpriority="high">
     <link rel="icon" type="image/png" href="assets/images/logo_icon.png">
     <link rel="apple-touch-icon" href="assets/images/logo_icon.png">
 </head>
@@ -1137,45 +1137,6 @@
     }
     </script>
 
-    <script>
-        // Universal Scroll Trigger for Animations
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Track Timeline
-        const timeline = document.getElementById('process-timeline');
-        if (timeline) observer.observe(timeline);
-
-        // Track Service Cards
-        const serviceCards = document.querySelectorAll('.service-card');
-        serviceCards.forEach(card => observer.observe(card));
-
-        // Track Story elements
-        const storyContent = document.querySelector('.story-content');
-        if (storyContent) observer.observe(storyContent);
-
-        const bentoCards = document.querySelectorAll('.bento-card');
-        bentoCards.forEach(card => observer.observe(card));
-
-        // Track Review Cards
-        const reviewCards = document.querySelectorAll('.review-card');
-        reviewCards.forEach(card => observer.observe(card));
-
-        // Track App Launch elements
-        const appLaunchElements = document.querySelectorAll('.app-feature-card');
-        appLaunchElements.forEach(el => observer.observe(el));
-    </script>
     <script src="js/script.js" defer></script>
 
     <!-- Mobile Bottom Toolbar -->
