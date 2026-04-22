@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Aksraya Health Care – Caretaker Management Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=League+Spartan:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--navy:#052044;--green:#16a34a;--cyan:#22d3ee;--light:#f0f6ff;--grey:#64748b;--border:#e2e8f0;--red:#ef4444;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:var(--light);color:#1e293b;min-height:100vh;}
+
+/* ── LOGIN ── */
+#login-page{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;
+  background:var(--navy);
+  background-image:radial-gradient(ellipse at 20% 50%,rgba(34,211,238,.07) 0%,transparent 60%),
+                   radial-gradient(ellipse at 80% 20%,rgba(22,163,74,.06) 0%,transparent 55%);
+}
+.login-box{
+  background:#fff;border-radius:20px;
+  padding:44px 40px 36px;
+  width:100%;max-width:420px;
+  box-shadow:0 24px 80px rgba(0,0,0,.35);
+}
+.login-logo{text-align:center;margin-bottom:32px;}
+.login-logo-inner{
+  display:inline-flex;align-items:center;gap:0;
+  text-decoration:none;
+}
+.login-logo-inner img{
+  width:70px;height:70px;
+  object-fit:contain;border-radius:50%;
+  margin-right:-6px;flex-shrink:0;
+}
+.login-brand-text{display:flex;flex-direction:column;justify-content:center;}
+.login-brand-name{
+  font-family:'League Spartan',sans-serif;
+  font-weight:700;font-size:1.25rem;
+  line-height:1;color:var(--navy);
+  letter-spacing:-0.3px;
+}
+.login-brand-tag{
+  font-family:'League Spartan',sans-serif;
+  font-weight:700;font-size:.72rem;
+  color:var(--navy);opacity:.55;
+  text-align:right;margin-top:1px;
+}
+.login-portal-badge{
+  display:inline-block;
+  background:rgba(5,32,68,.07);
+  color:var(--navy);
+  font-size:.72rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;
+  margin-top:12px;
+}
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--navy);margin-bottom:5px;letter-spacing:.02em;}
+.field input{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  font-family:'Outfit',sans-serif;font-size:.95rem;
+  outline:none;transition:border-color .2s;
+}
+.field input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.1);}
+.btn-primary{
+  width:100%;padding:13px;
+  background:var(--green);color:#fff;
+  border:none;border-radius:10px;
+  font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;
+  cursor:pointer;transition:background .2s,transform .1s;
+  letter-spacing:.02em;
+}
+.btn-primary:hover{background:#15803d;}
+.btn-primary:active{transform:scale(.98);}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;}
+.login-err{
+  color:var(--red);font-size:.82rem;
+  margin-top:10px;text-align:center;display:none;
+  background:rgba(239,68,68,.07);border-radius:8px;padding:8px;
+}
+/* NAV */
+#dashboard{display:none;}
+nav{
+  background:var(--navy);padding:14px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 12px rgba(0,0,0,.2);
+}
+.brand{
+  display:flex;align-items:center;gap:0;
+  text-decoration:none;
+}
+.brand-logo{
+  width:46px;height:46px;
+  object-fit:contain;border-radius:50%;
+  margin-right:-4px;flex-shrink:0;
+}
+.brand-text{display:flex;flex-direction:column;justify-content:center;}
+.brand-name{
+  font-family:'League Spartan',sans-serif;
+  font-weight:700;font-size:1rem;
+  line-height:1;color:#fff;
+  letter-spacing:-0.2px;
+}
+.brand-tag{
+  font-family:'League Spartan',sans-serif;
+  font-weight:600;font-size:.62rem;
+  color:var(--cyan);line-height:1;
+  margin-top:2px;
+}
+
+.nav-right{display:flex;align-items:center;gap:14px;}
+.welcome{color:#cbd5e1;font-size:.88rem;}
+.btn-logout{padding:7px 16px;background:transparent;border:1.5px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.82rem;cursor:pointer;}
+/* STATS */
+.stats-bar{background:var(--navy);padding:0 28px 20px;display:flex;gap:16px;flex-wrap:wrap;}
+.stat-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 20px;min-width:130px;}
+.stat-pill .val{font-size:1.6rem;font-weight:700;color:var(--cyan);}
+.stat-pill .lbl{font-size:.75rem;color:#94a3b8;margin-top:2px;}
+/* TOOLBAR */
+.toolbar{padding:20px 28px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.toolbar input[type=text]{flex:1;min-width:200px;padding:10px 16px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:.9rem;outline:none;}
+.toolbar input[type=text]:focus{border-color:var(--cyan);}
+.toolbar select{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:.88rem;background:#fff;cursor:pointer;outline:none;}
+.btn-add{padding:10px 20px;background:var(--green);color:#fff;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;white-space:nowrap;}
+.btn-add:hover{background:#15803d;}
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;padding:0 28px 40px;}
+.ct-card{background:#fff;border-radius:14px;border:1.5px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.ct-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(5,32,68,.12);}
+.card-head{background:var(--navy);padding:20px;text-align:center;}
+.card-head img{width:72px;height:72px;border-radius:50%;border:3px solid var(--cyan);object-fit:cover;}
+.cname{color:#fff;font-size:1rem;font-weight:600;margin-top:10px;}
+.crole{display:inline-block;background:rgba(34,211,238,.15);color:var(--cyan);font-size:.72rem;padding:3px 10px;border-radius:20px;margin-top:4px;}
+.duty-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;margin-top:6px;}
+.duty-badge.on{background:rgba(22,163,74,.15);color:var(--green);}
+.duty-badge.off{background:rgba(100,116,139,.15);color:var(--grey);}
+.card-body{padding:14px 16px;}
+.card-row{display:flex;gap:6px;margin-bottom:8px;font-size:.82rem;color:#475569;}
+.card-row .ic{width:18px;flex-shrink:0;}
+.card-hint{text-align:center;padding:10px;border-top:1px solid var(--border);color:var(--cyan);font-size:.78rem;font-weight:500;}
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(5,32,68,.6);z-index:100;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;}
+.overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:720px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.3);}
+.modal-head{background:var(--navy);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;}
+.modal-head h2{color:#fff;font-size:1.1rem;font-weight:600;}
+.btn-close{background:none;border:none;color:#94a3b8;font-size:1.4rem;cursor:pointer;}
+.btn-close:hover{color:#fff;}
+.modal-body{padding:24px;max-height:72vh;overflow-y:auto;}
+.sec-title{font-size:.78rem;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.sec-title:first-child{margin-top:0;}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.fg{grid-template-columns:1fr;}}
+.fg .full{grid-column:1/-1;}
+.fg label{display:block;font-size:.78rem;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.fg input,.fg select,.fg textarea{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--cyan);}
+.fg textarea{resize:vertical;min-height:70px;}
+.modal-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;align-items:center;}
+.foot-status{font-size:.78rem;color:var(--grey);margin-right:auto;}
+.btn-sec{padding:9px 20px;background:#f1f5f9;color:#334155;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.88rem;cursor:pointer;}
+/* DETAIL */
+.detail-modal{max-width:780px;}
+.detail-head{background:var(--navy);padding:24px;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;}
+.detail-head img{width:90px;height:90px;border-radius:50%;border:3px solid var(--cyan);object-fit:cover;flex-shrink:0;}
+.d-info h2{color:#fff;font-size:1.2rem;font-weight:700;}
+.d-info p{color:#94a3b8;font-size:.85rem;margin-top:2px;}
+.d-badges{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.d-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.btn-sm{padding:7px 14px;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-sm:disabled{opacity:.5;cursor:not-allowed;}
+.btn-duty-on{background:rgba(22,163,74,.15);color:var(--green);}
+.btn-duty-off{background:rgba(100,116,139,.15);color:var(--grey);}
+.btn-edit{background:rgba(34,211,238,.15);color:#0891b2;}
+.btn-export{background:var(--green);color:#fff;}
+.detail-body{padding:24px;max-height:62vh;overflow-y:auto;}
+.d-section{margin-bottom:24px;}
+.d-section h3{font-size:.76rem;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.d-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.d-field label{font-size:.7rem;color:var(--grey);font-weight:600;}
+.d-field p{font-size:.88rem;color:#1e293b;margin-top:2px;word-break:break-word;}
+/* EXPORT CARD */
+#export-card{position:fixed;left:-9999px;top:0;width:600px;height:350px;background:#fff;font-family:'Outfit',sans-serif;display:flex;box-sizing:border-box;}
+.ec-left{width:230px;background:var(--navy);padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;}
+.ec-left img{width:120px;height:120px;border-radius:50%;border:4px solid var(--cyan);object-fit:cover;margin-bottom:16px;background:#fff;}
+.ec-name{font-size:1.35rem;font-weight:700;line-height:1.2;}
+.ec-role-tag{display:inline-block;background:var(--green);color:#fff;font-size:.75rem;font-weight:600;padding:4px 14px;border-radius:20px;margin-top:10px;letter-spacing:0.5px;}
+.ec-right{flex:1;padding:28px 32px;display:flex;flex-direction:column;justify-content:space-between;}
+.ec-header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--light);padding-bottom:14px;margin-bottom:16px;}
+.ec-brand-wrap{display:flex;align-items:center;gap:10px;}
+.ec-brand-logo{width:40px;height:40px;object-fit:contain;border-radius:50%;background:var(--navy);}
+.ec-brand-text{display:flex;flex-direction:column;}
+.ec-brand-name{font-family:'League Spartan',sans-serif;font-weight:700;font-size:1.2rem;line-height:1;color:var(--navy);letter-spacing:-0.2px;}
+.ec-brand-tag{font-family:'League Spartan',sans-serif;font-weight:600;font-size:.68rem;color:var(--cyan);line-height:1;margin-top:2px;}
+.ec-title{font-size:.85rem;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.ec-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;}
+.ec-item{display:flex;flex-direction:column;gap:3px;}
+.ec-full{grid-column:1/-1;}
+.ec-label{font-size:.7rem;color:var(--grey);font-weight:600;text-transform:uppercase;}
+.ec-value{font-size:1rem;color:#1e293b;font-weight:600;}
+.ec-foot{margin-top:auto;padding-top:14px;border-top:2px solid var(--light);text-align:center;color:var(--grey);font-size:.78rem;font-weight:600;display:flex;justify-content:space-between;}
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:10px;font-size:.88rem;z-index:999;transform:translateY(80px);opacity:0;transition:.3s;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.green{border-left:4px solid var(--green);}
+.toast.red{border-left:4px solid var(--red);}
+/* MISC */
+.loader{display:flex;align-items:center;justify-content:center;padding:60px;grid-column:1/-1;color:var(--grey);gap:10px;}
+.spinner{width:22px;height:22px;border:2.5px solid var(--border);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.no-results{grid-column:1/-1;text-align:center;padding:60px;color:var(--grey);}
+@media(max-width:640px){
+  .stats-bar,.toolbar,.grid{padding-left:16px;padding-right:16px;}
+  nav{padding:12px 16px;}
+  .detail-head{flex-direction:column;align-items:center;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-inner">
+        <img src="assets/images/logo_transparent.png" alt="Aksraya Health Care Logo" onerror="this.style.display='none'"/>
+        <div class="login-brand-text">
+          <span class="login-brand-name">aksraya health care®</span>
+          <span class="login-brand-tag">care, built for home.</span>
+        </div>
+      </div>
+      <div class="login-portal-badge">🔐 Caretaker Management Portal</div>
+    </div>
+    <div class="field"><label>Username</label><input id="un" type="text" placeholder="Enter username" onkeydown="if(event.key==='Enter')login()"/></div>
+    <div class="field"><label>Password</label><input id="pw" type="password" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()"/></div>
+    <button class="btn-primary" id="login-btn" onclick="login()">Login</button>
+    <p class="login-err" id="login-err">Invalid username or password.</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <nav>
+    <div class="brand">
+      <img class="brand-logo" src="assets/images/logo_transparent.png" alt="Aksraya" onerror="this.style.display='none'"/>
+      <div class="brand-text">
+        <span class="brand-name">aksraya health care®</span>
+        <span class="brand-tag">Caretaker Portal</span>
+      </div>
+    </div>
+    <div class="nav-right"><span class="welcome" id="welcome-msg"></span><button class="btn-logout" onclick="logout()">Logout</button></div>
+  </nav>
+  <div class="stats-bar">
+    <div class="stat-pill"><div class="val" id="s-total">–</div><div class="lbl">Total</div></div>
+    <div class="stat-pill"><div class="val" id="s-on">–</div><div class="lbl">On Duty</div></div>
+    <div class="stat-pill"><div class="val" id="s-off">–</div><div class="lbl">Off Duty</div></div>
+  </div>
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="🔍  Search name, role, skill…" oninput="filterRender()"/>
+    <select id="f-role" onchange="filterRender()">
+      <option value="">All Roles</option>
+      <option>Home Nurse</option><option>Patient Attendant</option>
+      <option>Elderly Caretaker</option><option>Physiotherapy Assistant</option>
+    </select>
+    <select id="f-duty" onchange="filterRender()">
+      <option value="">All Status</option><option value="on">On Duty</option><option value="off">Off Duty</option>
+    </select>
+    <button class="btn-add" onclick="openAdd()">+ Add Caretaker</button>
+  </div>
+  <div class="grid" id="grid"><div class="loader"><div class="spinner"></div>Loading…</div></div>
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="overlay" id="form-ov" onclick="bgClose(event,'form-ov')">
+  <div class="modal">
+    <div class="modal-head"><h2 id="form-title">Add Caretaker</h2><button class="btn-close" onclick="closeM('form-ov')">✕</button></div>
+    <div class="modal-body">
+      <div class="sec-title">Personal Info</div>
+      <div class="fg">
+        <div><label>Full Name *</label><input id="f-name" placeholder="Full Name"/></div>
+        <div><label>Date of Birth *</label><input id="f-dob" type="date"/></div>
+        <div><label>Gender</label><select id="f-gender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+        <div><label>Nationality</label><input id="f-nat" placeholder="Indian"/></div>
+        <div><label>Religion</label><input id="f-rel"/></div>
+        <div><label>Blood Group</label><select id="f-bg"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select></div>
+        <div><label>Marital Status</label><select id="f-ms"><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div>
+        <div><label>Identification Marks</label><input id="f-idmarks" placeholder="e.g. Mole on left cheek"/></div>
+      </div>
+      <div class="sec-title">Contact Details</div>
+      <div class="fg">
+        <div><label>Mobile *</label><input id="f-mob" placeholder="10-digit"/></div>
+        <div><label>Alternate Number</label><input id="f-altmob"/></div>
+        <div><label>Email</label><input id="f-email" type="email"/></div>
+        <div><label>Aadhaar Number</label><input id="f-aadhar" placeholder="XXXX XXXX XXXX"/></div>
+        <div class="full"><label>Permanent Address</label><textarea id="f-paddr"></textarea></div>
+        <div class="full"><label>Current Address</label><textarea id="f-caddr"></textarea></div>
+      </div>
+      <div class="sec-title">Professional Details</div>
+      <div class="fg">
+        <div><label>Role *</label><select id="f-role2"><option>Home Nurse</option><option>Patient Attendant</option><option>Elderly Caretaker</option><option>Physiotherapy Assistant</option></select></div>
+        <div><label>Qualification</label><input id="f-qual"/></div>
+        <div><label>Experience</label><input id="f-exp" placeholder="e.g. 4 years"/></div>
+        <div><label>Date of Registration</label><input id="f-dor" type="date"/></div>
+        <div class="full"><label>Key Skills</label><input id="f-skills" placeholder="e.g. Wound care, IV administration"/></div>
+        <div class="full"><label>Languages Known</label><input id="f-langs" placeholder="e.g. Tamil, English, Kannada"/></div>
+      </div>
+      <div class="sec-title">Employment Terms</div>
+      <div class="fg">
+        <div><label>Monthly Salary</label><input id="f-sal" placeholder="₹ Amount"/></div>
+        <div><label>Payment Cycle</label><select id="f-pcycle"><option>Monthly</option><option>Weekly</option><option>Fortnightly</option></select></div>
+        <div><label>Service Bond</label><input id="f-bond" placeholder="e.g. 1 year"/></div>
+        <div><label>Notice Period</label><input id="f-notice" placeholder="e.g. 15 days"/></div>
+      </div>
+      <div class="sec-title">Bank Details</div>
+      <div class="fg">
+        <div><label>Bank Name</label><input id="f-bank"/></div>
+        <div><label>Account Holder</label><input id="f-ach"/></div>
+        <div><label>Account Number</label><input id="f-acno"/></div>
+        <div><label>IFSC Code</label><input id="f-ifsc"/></div>
+        <div><label>Branch</label><input id="f-branch"/></div>
+      </div>
+      <div class="sec-title">Documents</div>
+      <div class="fg">
+        <div><label>PAN Card Number</label><input id="f-pan"/></div>
+        <div><label>Form Reference No</label><input id="f-refno"/></div>
+      </div>
+      <div class="sec-title">Photo</div>
+      <div>
+        <label style="font-size:.78rem;font-weight:600;color:var(--navy);display:block;margin-bottom:4px;">Upload Photo (JPG/PNG, max 2MB)</label>
+        <input id="f-photo" type="file" accept="image/*" onchange="prevPhoto(this)"/>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:12px;">
+          <img id="f-prev" src="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;display:none;border:2px solid var(--cyan);"/>
+          <span id="photo-lbl" style="font-size:.78rem;color:var(--grey);"></span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="foot-status" id="save-lbl"></span>
+      <button class="btn-sec" onclick="closeM('form-ov')">Cancel</button>
+      <button class="btn-primary" id="save-btn" style="width:auto;padding:9px 24px;" onclick="saveCaretaker()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detail-ov" onclick="bgClose(event,'detail-ov')">
+  <div class="modal detail-modal">
+    <div class="detail-head" id="d-head"></div>
+    <div class="detail-body" id="d-body"></div>
+  </div>
+</div>
+
+<!-- EXPORT CARD (off-screen) -->
+<div id="export-card"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SB_URL='https://xfowrwvqhwkierhjokgj.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhmb3dyd3ZxaHdraWVyaGpva2dqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MjAzNzMsImV4cCI6MjA5MjM5NjM3M30.YKgmuGNeZL6PgOMpg9mzwluX8tIINovpbStv27Gfgg0';
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const BUCKET='caretaker-photos';
+const USERS={hobinath:'hob@2024',ramkumar:'ram@2024'};
+
+let all=[],editId=null,photoFile=null;
+
+// AUTH
+function login(){
+  const u=document.getElementById('un').value.trim().toLowerCase();
+  const p=document.getElementById('pw').value;
+  if(USERS[u]&&USERS[u]===p){
+    document.getElementById('login-page').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    document.getElementById('welcome-msg').textContent='Welcome, '+u.charAt(0).toUpperCase()+u.slice(1);
+    loadAll();
+  }else document.getElementById('login-err').style.display='block';
+}
+function logout(){
+  document.getElementById('login-page').style.display='flex';
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('un').value='';document.getElementById('pw').value='';all=[];
+}
+
+// SUPABASE LOAD
+async function loadAll(){
+  document.getElementById('grid').innerHTML='<div class="loader"><div class="spinner"></div>Loading…</div>';
+  const{data,error}=await sb.from('caretakers').select('*').order('created_at',{ascending:false});
+  if(error){toast('Load failed: '+error.message,'red');return;}
+  all=data||[];updateStats();filterRender();
+}
+
+// STATS
+function updateStats(){
+  const on=all.filter(c=>c.on_duty).length;
+  document.getElementById('s-total').textContent=all.length;
+  document.getElementById('s-on').textContent=on;
+  document.getElementById('s-off').textContent=all.length-on;
+}
+
+// RENDER
+function filterRender(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const fr=document.getElementById('f-role').value;
+  const fd=document.getElementById('f-duty').value;
+  const list=all.filter(c=>{
+    if(q&&!(c.name+c.role+(c.skills||'')+(c.langs||'')).toLowerCase().includes(q))return false;
+    if(fr&&c.role!==fr)return false;
+    if(fd==='on'&&!c.on_duty)return false;
+    if(fd==='off'&&c.on_duty)return false;
+    return true;
+  });
+  const g=document.getElementById('grid');
+  if(!list.length){g.innerHTML='<div class="no-results">🔍 No caretakers found</div>';return;}
+  g.innerHTML=list.map(c=>`
+    <div class="ct-card" onclick="openDetail(${c.id})">
+      <div class="card-head">
+        <img src="${pSrc(c)}" onerror="this.src='${avatar(c.name)}'"/>
+        <div class="cname">${c.name}</div>
+        <div class="crole">${c.role}</div>
+        <div class="duty-badge ${c.on_duty?'on':'off'}">${c.on_duty?'● On Duty':'● Off Duty'}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-row"><span class="ic">🎂</span>${age(c.dob)} · ${c.gender||''}</div>
+        <div class="card-row"><span class="ic">🗣</span>${c.langs||'–'}</div>
+        <div class="card-row"><span class="ic">📞</span>${c.mobile}</div>
+      </div>
+      <div class="card-hint">Tap to view full profile →</div>
+    </div>`).join('');
+}
+
+function pSrc(c){return c.photo_url||avatar(c.name);}
+function avatar(n){return'https://ui-avatars.com/api/?name='+encodeURIComponent(n)+'&background=052044&color=fff&size=128';}
+function age(d){
+  if(!d)return'–';const b=new Date(d),n=new Date();
+  let a=n.getFullYear()-b.getFullYear();
+  if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;
+  return a+' yrs';
+}
+
+// DETAIL
+function openDetail(id){
+  const c=all.find(x=>x.id===id);if(!c)return;
+  document.getElementById('d-head').innerHTML=`
+    <img src="${pSrc(c)}" onerror="this.src='${avatar(c.name)}'"/>
+    <div class="d-info">
+      <h2>${c.name}</h2>
+      <p>${c.qual||''} · ${c.exp||''}</p>
+      <div class="d-badges">
+        <span class="crole">${c.role}</span>
+        <span class="duty-badge ${c.on_duty?'on':'off'}" id="dd-badge">${c.on_duty?'● On Duty':'● Off Duty'}</span>
+      </div>
+      <div class="d-actions">
+        <button class="btn-sm btn-edit" onclick="openEdit(${id})">✏️ Edit</button>
+        <button class="btn-sm ${c.on_duty?'btn-duty-off':'btn-duty-on'}" id="dd-btn" onclick="toggleDuty(${id})">${c.on_duty?'Mark Off Duty':'Mark On Duty'}</button>
+        <button class="btn-sm btn-export" onclick="doExport(${id})">📤 Export ID Card</button>
+        <button class="btn-sm btn-sec" onclick="closeM('detail-ov')">✕ Close</button>
+      </div>
+    </div>`;
+  const sec=(t,f)=>`<div class="d-section"><h3>${t}</h3><div class="d-grid">${f.map(([k,v])=>`<div class="d-field"><label>${k}</label><p>${v||'–'}</p></div>`).join('')}</div></div>`;
+  document.getElementById('d-body').innerHTML=
+    sec('Personal',[['Name',c.name],['DOB',c.dob],['Age',age(c.dob)],['Gender',c.gender],['Nationality',c.nationality],['Religion',c.religion],['Blood',c.blood],['Marital',c.marital],['ID Marks',c.idmarks]])+
+    sec('Contact',[['Mobile',c.mobile],['Alternate',c.altmob],['Email',c.email],['Aadhaar',c.aadhar],['Perm. Address',c.paddr],['Curr. Address',c.caddr]])+
+    sec('Professional',[['Role',c.role],['Qualification',c.qual],['Experience',c.exp],['Key Skills',c.skills],['Languages',c.langs],['Reg. Date',c.dor]])+
+    sec('Employment',[['Salary',c.salary],['Pay Cycle',c.pcycle],['Bond',c.bond],['Notice',c.notice]])+
+    sec('Bank',[['Bank',c.bank],['Holder',c.ach],['Account No',c.acno],['IFSC',c.ifsc],['Branch',c.branch]])+
+    sec('Documents',[['PAN',c.pan],['Ref No',c.refno]]);
+  document.getElementById('detail-ov').classList.add('open');
+}
+
+// TOGGLE DUTY
+async function toggleDuty(id){
+  const c=all.find(x=>x.id===id);
+  const btn=document.getElementById('dd-btn');if(btn)btn.disabled=true;
+  const nv=!c.on_duty;
+  const{error}=await sb.from('caretakers').update({on_duty:nv}).eq('id',id);
+  if(error){toast('Update failed','red');if(btn)btn.disabled=false;return;}
+  c.on_duty=nv;
+  const badge=document.getElementById('dd-badge');
+  if(badge){badge.className='duty-badge '+(nv?'on':'off');badge.textContent=nv?'● On Duty':'● Off Duty';}
+  if(btn){btn.className='btn-sm '+(nv?'btn-duty-off':'btn-duty-on');btn.textContent=nv?'Mark Off Duty':'Mark On Duty';btn.disabled=false;}
+  updateStats();filterRender();
+  toast(c.name+' → '+(nv?'On Duty':'Off Duty'),'green');
+}
+
+// ADD / EDIT
+function openAdd(){
+  editId=null;photoFile=null;
+  document.getElementById('form-title').textContent='Add Caretaker';
+  clearForm();
+  document.getElementById('form-ov').classList.add('open');
+}
+function openEdit(id){
+  editId=id;photoFile=null;
+  const c=all.find(x=>x.id===id);
+  document.getElementById('form-title').textContent='Edit Caretaker';
+  const m={name:c.name,dob:c.dob,nat:c.nationality,rel:c.religion,idmarks:c.idmarks,mob:c.mobile,altmob:c.altmob,email:c.email,aadhar:c.aadhar,paddr:c.paddr,caddr:c.caddr,qual:c.qual,exp:c.exp,skills:c.skills,dor:c.dor,langs:c.langs,sal:c.salary,bond:c.bond,notice:c.notice,bank:c.bank,ach:c.ach,acno:c.acno,ifsc:c.ifsc,branch:c.branch,pan:c.pan,refno:c.refno};
+  Object.entries(m).forEach(([k,v])=>{const el=document.getElementById('f-'+k);if(el)el.value=v||'';});
+  setSel('f-gender',c.gender);setSel('f-bg',c.blood);setSel('f-ms',c.marital);setSel('f-role2',c.role);setSel('f-pcycle',c.pcycle);
+  const pv=document.getElementById('f-prev');
+  if(c.photo_url){pv.src=c.photo_url;pv.style.display='block';document.getElementById('photo-lbl').textContent='Current photo';}
+  else{pv.style.display='none';document.getElementById('photo-lbl').textContent='';}
+  closeM('detail-ov');
+  document.getElementById('form-ov').classList.add('open');
+}
+function clearForm(){
+  ['name','dob','nat','rel','idmarks','mob','altmob','email','aadhar','paddr','caddr','qual','exp','skills','dor','langs','sal','bond','notice','bank','ach','acno','ifsc','branch','pan','refno'].forEach(k=>{const e=document.getElementById('f-'+k);if(e)e.value='';});
+  ['f-gender','f-bg','f-ms','f-role2','f-pcycle'].forEach(id=>{const e=document.getElementById(id);if(e)e.selectedIndex=0;});
+  document.getElementById('f-photo').value='';
+  document.getElementById('f-prev').style.display='none';
+  document.getElementById('photo-lbl').textContent='';
+}
+function setSel(id,v){const e=document.getElementById(id);if(!e||!v)return;for(let i=0;i<e.options.length;i++)if(e.options[i].text===v||e.options[i].value===v){e.selectedIndex=i;break;}}
+function prevPhoto(input){
+  const f=input.files[0];if(!f)return;
+  if(f.size>2097152){toast('Photo must be under 2MB','red');input.value='';return;}
+  photoFile=f;
+  const r=new FileReader();r.onload=e=>{const pv=document.getElementById('f-prev');pv.src=e.target.result;pv.style.display='block';document.getElementById('photo-lbl').textContent=f.name;};r.readAsDataURL(f);
+}
+
+// SAVE
+async function saveCaretaker(){
+  const name=document.getElementById('f-name').value.trim();
+  const mob=document.getElementById('f-mob').value.trim();
+  const dob=document.getElementById('f-dob').value;
+  if(!name||!mob||!dob){toast('Name, Mobile and DOB required','red');return;}
+  const btn=document.getElementById('save-btn');
+  const lbl=document.getElementById('save-lbl');
+  btn.disabled=true;btn.textContent='Saving…';
+
+  // Upload photo
+  let photoUrl=editId?all.find(x=>x.id===editId)?.photo_url||null:null;
+  if(photoFile){
+    lbl.textContent='Uploading photo…';
+    const ext=photoFile.name.split('.').pop();
+    const path=Date.now()+'_'+name.replace(/\s+/g,'_')+'.'+ext;
+    const{error:ue}=await sb.storage.from(BUCKET).upload(path,photoFile,{upsert:true});
+    if(ue){toast('Photo upload failed: '+ue.message,'red');btn.disabled=false;btn.textContent='Save';lbl.textContent='';return;}
+    photoUrl=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+  }
+
+  const row={
+    name,dob,
+    gender:document.getElementById('f-gender').value,
+    nationality:document.getElementById('f-nat').value,
+    religion:document.getElementById('f-rel').value,
+    blood:document.getElementById('f-bg').value,
+    marital:document.getElementById('f-ms').value,
+    aadhar:document.getElementById('f-aadhar').value,
+    mobile:mob,altmob:document.getElementById('f-altmob').value,
+    email:document.getElementById('f-email').value,
+    paddr:document.getElementById('f-paddr').value,
+    caddr:document.getElementById('f-caddr').value,
+    role:document.getElementById('f-role2').value,
+    qual:document.getElementById('f-qual').value,
+    exp:document.getElementById('f-exp').value,
+    skills:document.getElementById('f-skills').value,
+    dor:document.getElementById('f-dor').value,
+    salary:document.getElementById('f-sal').value,
+    pcycle:document.getElementById('f-pcycle').value,
+    bond:document.getElementById('f-bond').value,
+    notice:document.getElementById('f-notice').value,
+    bank:document.getElementById('f-bank').value,
+    ach:document.getElementById('f-ach').value,
+    acno:document.getElementById('f-acno').value,
+    ifsc:document.getElementById('f-ifsc').value,
+    branch:document.getElementById('f-branch').value,
+    langs:document.getElementById('f-langs').value,
+    pan:document.getElementById('f-pan').value,
+    refno:document.getElementById('f-refno').value,
+    idmarks:document.getElementById('f-idmarks').value,
+    photo_url:photoUrl,
+  };
+
+  lbl.textContent='Saving to database…';
+  let error;
+  if(editId){({error}=await sb.from('caretakers').update(row).eq('id',editId));}
+  else{row.on_duty=false;({error}=await sb.from('caretakers').insert(row));}
+
+  btn.disabled=false;btn.textContent='Save';lbl.textContent='';
+  if(error){toast('Save failed: '+error.message,'red');return;}
+  toast(editId?'Updated successfully!':'Caretaker added!','green');
+  closeM('form-ov');loadAll();
+}
+
+// PNG EXPORT
+function doExport(id){
+  const c=all.find(x=>x.id===id);
+  const ec=document.getElementById('export-card');
+  ec.innerHTML=`
+    <div class="ec-left">
+      <img src="${pSrc(c)}" crossorigin="anonymous"/>
+      <div class="ec-name">${c.name}</div>
+      <div class="ec-role-tag">${c.role}</div>
+    </div>
+    <div class="ec-right">
+      <div class="ec-header">
+        <div class="ec-brand-wrap">
+          <img class="ec-brand-logo" src="assets/images/logo_transparent.png" crossorigin="anonymous" onerror="this.style.display='none'"/>
+          <div class="ec-brand-text">
+            <span class="ec-brand-name">aksraya health care®</span>
+            <span class="ec-brand-tag">care, built for home.</span>
+          </div>
+        </div>
+        <div class="ec-title">ID Profile</div>
+      </div>
+      <div class="ec-grid">
+        <div class="ec-item"><span class="ec-label">Age</span><span class="ec-value">${age(c.dob)}</span></div>
+        <div class="ec-item"><span class="ec-label">Gender</span><span class="ec-value">${c.gender||'–'}</span></div>
+        <div class="ec-item"><span class="ec-label">Blood Group</span><span class="ec-value">${c.blood||'–'}</span></div>
+        <div class="ec-item"><span class="ec-label">Qualification</span><span class="ec-value">${c.qual||'–'}</span></div>
+        <div class="ec-item ec-full"><span class="ec-label">Languages</span><span class="ec-value">${c.langs||'–'}</span></div>
+        <div class="ec-item ec-full"><span class="ec-label">Key Skills</span><span class="ec-value">${c.skills||'–'}</span></div>
+      </div>
+      <div class="ec-foot">
+        <span>Verified Professional</span>
+        <span>aksrayahealthcare.com</span>
+      </div>
+    </div>`;
+  toast('Generating PNG…','green');
+  setTimeout(()=>{
+    html2canvas(ec,{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#fff'}).then(canvas=>{
+      const a=document.createElement('a');
+      a.download='Aksraya_'+c.name.replace(/\s+/g,'_')+'_Profile.png';
+      a.href=canvas.toDataURL('image/png');a.click();
+    });
+  },200);
+}
+
+// UTILS
+function closeM(id){document.getElementById(id).classList.remove('open');}
+function bgClose(e,id){if(e.target.id===id)closeM(id);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeM('form-ov');closeM('detail-ov');}});
+let tt;
+function toast(msg,type='green'){
+  const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type+' show';
+  clearTimeout(tt);tt=setTimeout(()=>t.className='toast',3200);
+}
+</script>
+</body>
+</html>
