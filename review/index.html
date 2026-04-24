@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>Client Reviews | Aksraya Health Care – Trusted Home Nursing in Bangalore</title>
+  <meta name="description"
+    content="Read verified reviews from families who trust Aksraya Health Care for home nursing, elder care, and bedridden patient care in Bangalore. Share your own experience." />
+  <link rel="canonical" href="https://aksrayahealthcare.com/review/" />
+  <link rel="icon" type="image/png" href="../assets/images/logo_icon.png" />
+  <link rel="apple-touch-icon" href="../assets/images/logo_icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=League+Spartan:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Site CSS (inherits all shared tokens) -->
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════════
+       PAGE-SPECIFIC OVERRIDES
+    ═══════════════════════════════════════════════ */
+
+    /* ── Page hero (matches site's compact section headers) ── */
+    .reviews-page-hero {
+      background: var(--primary-color);
+      padding: 120px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reviews-page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 50h40M50 30v40' stroke='white' stroke-width='1' stroke-opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 100px 100px;
+    }
+
+    .reviews-page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .reviews-page-hero .section-subtitle {
+      color: #4ade80;
+    }
+
+    .reviews-page-hero h1 {
+      background: linear-gradient(to right, #ffffff, #e8eff6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: clamp(36px, 5vw, 60px);
+      margin-bottom: 16px;
+    }
+
+    .reviews-page-hero p {
+      color: #94a3b8;
+      font-size: 18px;
+      max-width: 560px;
+      margin-bottom: 0;
+    }
+
+    /* ── Rating summary strip ── */
+    .rating-strip {
+      background: #ffffff;
+      border-bottom: 1px solid #f1f5f9;
+      padding: 20px 0;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 83px;
+      z-index: 100;
+    }
+
+    .rating-strip-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .rating-summary-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .big-rating-num {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--primary-color);
+      line-height: 1;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .rating-summary-detail {}
+
+    .summary-stars {
+      color: #f59e0b;
+      font-size: 20px;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .summary-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* Filter pills */
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-pill {
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1.5px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--secondary-color);
+      color: var(--secondary-color);
+      background: #f0fdf4;
+    }
+
+    .filter-pill.active {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(5, 32, 68, 0.2);
+    }
+
+    /* Write Review button in strip */
+    .write-review-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: #fff;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .write-review-btn:hover {
+      background: linear-gradient(135deg, #15803d, #166534);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.35);
+    }
+
+    .write-review-btn svg {
+      flex-shrink: 0;
+    }
+
+    /* ── Reviews content area ── */
+    .reviews-content-section {
+      padding: 52px 0 80px;
+      background: #ffffff;
+      min-height: 60vh;
+    }
+
+    .reviews-count-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .reviews-count-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .reviews-count-text strong {
+      color: var(--primary-color);
+    }
+
+    /* ── Review cards grid – takes full width ── */
+    .reviews-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .reviews-masonry {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .reviews-masonry {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card – inherits site's .review-card base, we add more */
+    .rv-card {
+      background: #ffffff;
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      animation: cardFadeUp 0.4s ease both;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rv-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      border-color: #4ade80;
+    }
+
+    @keyframes cardFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rv-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .rv-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .rv-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .rv-name {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rv-stars {
+      display: flex;
+      gap: 2px;
+      margin: 3px 0;
+    }
+
+    .rv-star {
+      font-size: 13px;
+    }
+
+    .rv-star.on {
+      color: #f59e0b;
+    }
+
+    .rv-star.off {
+      color: #e2e8f0;
+    }
+
+    .rv-date {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .rv-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.35;
+    }
+
+    .rv-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .rv-tag {
+      padding: 4px 12px;
+      border-radius: 50px;
+      background: #f0fdf4;
+      border: 1px solid rgba(22, 163, 74, 0.2);
+      color: #15803d;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .rv-desc {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #475569;
+      margin: 0;
+    }
+
+    /* ── Skeleton loader ── */
+    .sk-card {
+      background: #fff;
+      border: 1px solid #f1f5f9;
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sk-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .sk-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #f1f5f9 25%, #e8eff6 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      flex-shrink: 0;
+    }
+
+    .sk-line {
+      border-radius: 6px;
+      background: linear-gradient(90deg, #f1f5f9 25%, #e8eff6 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      height: 13px;
+    }
+
+    .sk-line.w80 {
+      width: 80%;
+    }
+
+    .sk-line.w50 {
+      width: 50%;
+    }
+
+    .sk-line.w30 {
+      width: 30%;
+    }
+
+    .sk-line.h18 {
+      height: 18px;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 72px 24px;
+      color: var(--text-secondary);
+    }
+
+    .empty-icon {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+
+    .empty-state h3 {
+      font-size: 20px;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════════════ */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(2, 12, 27, 0.65);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 540px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.25);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .modal-backdrop.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover {
+      background: #e2e8f0;
+      color: var(--primary-color);
+    }
+
+    .modal h2 {
+      font-size: 24px;
+      color: var(--primary-color);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .modal-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    /* Form fields */
+    .f-group {
+      margin-bottom: 18px;
+    }
+
+    .f-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary-color);
+      margin-bottom: 7px;
+    }
+
+    .f-input,
+    .f-textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      color: var(--text-main);
+      background: #f8fafc;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .f-input::placeholder,
+    .f-textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    .f-input:focus,
+    .f-textarea:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+      background: #fff;
+    }
+
+    .f-input.err,
+    .f-textarea.err {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    .f-textarea {
+      resize: vertical;
+      min-height: 96px;
+    }
+
+    .f-error {
+      font-size: 12px;
+      color: #dc2626;
+      font-weight: 600;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .f-error.show {
+      display: block;
+    }
+
+    /* Stars */
+    .star-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .s-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 2.1rem;
+      line-height: 1;
+      color: #e2e8f0;
+      padding: 2px;
+      transition: color 0.15s, transform 0.15s;
+    }
+
+    .s-btn:hover,
+    .s-btn.lit {
+      color: #f59e0b;
+      transform: scale(1.18);
+    }
+
+    .s-btn.lit {
+      color: #f59e0b;
+      transform: scale(1);
+    }
+
+    /* Tag pills */
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .m-tag {
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1.5px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Outfit', sans-serif;
+      user-select: none;
+    }
+
+    .m-tag:hover {
+      border-color: var(--secondary-color);
+      color: var(--secondary-color);
+      background: #f0fdf4;
+    }
+
+    .m-tag.picked {
+      background: var(--secondary-color);
+      border-color: var(--secondary-dark);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(22, 163, 74, 0.25);
+    }
+
+    /* Submit */
+    .modal-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(5, 32, 68, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .modal-submit:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0a3060, #051228);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(5, 32, 68, 0.4);
+    }
+
+    .modal-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .modal-submit.loading .btn-spinner {
+      display: block;
+    }
+
+    .modal-submit.loading .btn-label {
+      display: none;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       TOAST
+    ═══════════════════════════════════════════════ */
+    .toast-wrap {
+      position: fixed;
+      top: 100px;
+      right: 24px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid var(--secondary-color);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14);
+      min-width: 280px;
+      max-width: 360px;
+      pointer-events: all;
+      animation: toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .toast.err {
+      border-left-color: #ef4444;
+    }
+
+    .toast-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .toast-msg {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .toast-x {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .toast-x:hover {
+      color: var(--text-main);
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateX(32px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    .toast.bye {
+      animation: toastOut 0.22s ease forwards;
+    }
+
+    @keyframes toastOut {
+      to {
+        opacity: 0;
+        transform: translateX(32px) scale(0.95);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       MOBILE RESPONSIVE OVERRIDES
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .rating-strip {
+        top: 0;
+      }
+
+      .rating-strip-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .big-rating-num {
+        font-size: 40px;
+      }
+
+      .write-review-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .modal {
+        padding: 28px 20px;
+      }
+
+      .toast-wrap {
+        right: 12px;
+        left: 12px;
+        top: 12px;
+      }
+
+      .toast {
+        min-width: unset;
+      }
+
+      .reviews-page-hero {
+        padding: 100px 0 44px;
+      }
+    }
+
+    /* ── btn-outline-blue from site style ── */
+    .btn-outline-blue {
+      border: 2px solid var(--primary-color);
+      background: transparent;
+      color: var(--primary-color);
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Outfit', sans-serif;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .btn-outline-blue:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── SCROLL PROGRESS ──────────────────────── -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ── NAVBAR (identical to index.html) ──────── -->
+  <header class="navbar">
+    <div class="container navbar-content">
+      <a class="logo" href="/" style="display:flex;align-items:center;text-decoration:none;">
+        <img src="../assets/images/logo_transparent.png" alt="Aksraya Health Care Logo" width="105" height="105"
+          style="height:105px;width:105px;object-fit:contain;margin-right:-10px;flex-shrink:0;border-radius:50%;" />
+        <div style="display:flex;flex-direction:column;justify-content:center;">
+          <span
+            style="font-family:'League Spartan',sans-serif;font-weight:650;font-size:28px;line-height:1;color:var(--primary-color);letter-spacing:-0.5px;">aksraya
+            health care®</span>
+          <span
+            style="font-family:'League Spartan',sans-serif;font-weight:700;font-size:15px;line-height:0.3;color:var(--primary-color);text-align:right;margin-top:2px;">care,
+            built for home.</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#services">Services</a>
+        <a href="/careers.html">Careers</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#contact" id="navbar-cta" class="btn btn-sm">Contact Us</a>
+      </nav>
+      <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobileNav"
+      style="display:none;background:#fff;border-top:1px solid #f1f5f9;padding:16px 24px;">
+      <a href="/#about" style="display:block;padding:10px 0;font-weight:500;color:#334155;">About</a>
+      <a href="/#services" style="display:block;padding:10px 0;font-weight:500;color:#334155;">Services</a>
+      <a href="/careers.html" style="display:block;padding:10px 0;font-weight:500;color:#334155;">Careers</a>
+      <a href="/#pricing" style="display:block;padding:10px 0;font-weight:500;color:#334155;">Pricing</a>
+      <a href="/#contact"
+        style="display:block;padding:10px 0;font-weight:600;color:var(--primary-color);">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- ── TOAST CONTAINER ──────────────────────── -->
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+  <!-- ── REVIEW FORM MODAL ─────────────────────── -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Write a review">
+    <div class="modal" id="modalBox">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <h2>Share Your Experience</h2>
+      <p class="modal-sub">Your feedback helps families in Bangalore trust us.</p>
+
+      <!-- Name -->
+      <div class="f-group">
+        <label class="f-label" for="fn">Client Name</label>
+        <input class="f-input" type="text" id="fn" placeholder="Your full name" maxlength="80" autocomplete="name" />
+        <div class="f-error" id="e-name">Please enter your name.</div>
+      </div>
+
+      <!-- Phone -->
+      <div class="f-group">
+        <label class="f-label" for="fp">Phone Number</label>
+        <input class="f-input" type="tel" id="fp" placeholder="10-digit mobile number" maxlength="10"
+          inputmode="numeric" />
+        <div class="f-error" id="e-phone">Enter a valid 10-digit Indian number (starts with 6–9).</div>
+      </div>
+
+      <!-- Stars -->
+      <div class="f-group">
+        <label class="f-label">Star Rating</label>
+        <div class="star-row" id="starRow" role="group" aria-label="Star rating">
+          <button class="s-btn" data-v="1" type="button" aria-label="1 star">★</button>
+          <button class="s-btn" data-v="2" type="button" aria-label="2 stars">★</button>
+          <button class="s-btn" data-v="3" type="button" aria-label="3 stars">★</button>
+          <button class="s-btn" data-v="4" type="button" aria-label="4 stars">★</button>
+          <button class="s-btn" data-v="5" type="button" aria-label="5 stars">★</button>
+        </div>
+        <div class="f-error" id="e-rating">Please select a star rating.</div>
+      </div>
+
+      <!-- Tags -->
+      <div class="f-group">
+        <label class="f-label">Tags <span
+            style="text-transform:none;letter-spacing:0;font-weight:500;color:#64748b;">(select all that
+            apply)</span></label>
+        <div class="modal-tags" id="modalTags">
+          <button class="m-tag" data-tag="Great Quality" type="button">Great Quality</button>
+          <button class="m-tag" data-tag="Fast Delivery" type="button">Fast Delivery</button>
+          <button class="m-tag" data-tag="Good Price" type="button">Good Price</button>
+          <button class="m-tag" data-tag="Friendly Staff" type="button">Friendly Staff</button>
+          <button class="m-tag" data-tag="Would Recommend" type="button">Would Recommend</button>
+          <button class="m-tag" data-tag="Excellent Service" type="button">Excellent Service</button>
+          <button class="m-tag" data-tag="Professional" type="button">Professional</button>
+          <button class="m-tag" data-tag="On Time" type="button">On Time</button>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="f-group">
+        <label class="f-label" for="ft">Review Title</label>
+        <input class="f-input" type="text" id="ft" placeholder="Summarise your experience" maxlength="120" />
+        <div class="f-error" id="e-title">Please add a review title.</div>
+      </div>
+
+      <!-- Description -->
+      <div class="f-group">
+        <label class="f-label" for="fd">Description</label>
+        <textarea class="f-textarea" id="fd" placeholder="Tell us more about your experience…" maxlength="1000"
+          rows="4"></textarea>
+        <div class="f-error" id="e-desc">Please write a short description (minimum 10 characters).</div>
+      </div>
+
+      <!-- Submit -->
+      <button class="modal-submit" id="modalSubmit" type="button">
+        <span class="btn-spinner" id="btnSpinner"></span>
+        <span class="btn-label">Submit Review</span>
+      </button>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ── PAGE HERO ──────────────────────────── -->
+    <section class="reviews-page-hero">
+      <div class="container">
+        <span class="section-subtitle">Testimonials</span>
+        <h1>What families say about us.</h1>
+        <p>Real stories from clients across Bangalore who trusted Aksraya for home nursing and care.</p>
+      </div>
+    </section>
+
+    <!-- ── STICKY RATING STRIP ───────────────── -->
+    <div class="rating-strip">
+      <div class="container rating-strip-inner">
+
+        <div class="rating-summary-left">
+          <div class="big-rating-num" id="avgRating">–</div>
+          <div class="rating-summary-detail">
+            <div class="summary-stars" id="summaryStars">☆☆☆☆☆</div>
+            <div class="summary-label" id="summaryLabel">Loading reviews…</div>
+          </div>
+        </div>
+
+        <div class="filter-pills" role="group" aria-label="Filter reviews by star rating">
+          <button class="filter-pill active" data-f="all" id="fAll">All</button>
+          <button class="filter-pill" data-f="5">⭐ 5</button>
+          <button class="filter-pill" data-f="4">⭐ 4</button>
+          <button class="filter-pill" data-f="3">⭐ 3</button>
+          <button class="filter-pill" data-f="2">⭐ 2</button>
+          <button class="filter-pill" data-f="1">⭐ 1</button>
+        </div>
+
+        <button class="write-review-btn" id="openModal" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          Write a Review
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ── REVIEWS MAIN CONTENT ──────────────── -->
+    <section class="reviews-content-section">
+      <div class="container">
+        <div class="reviews-count-bar">
+          <p class="reviews-count-text" id="countText">Loading…</p>
+          <a href="https://maps.app.goo.gl/dpqirLAq5gJ2dBSc6" target="_blank" rel="noopener noreferrer"
+            class="btn-outline-blue">
+            View Google Reviews
+          </a>
+        </div>
+
+        <div class="reviews-masonry" id="reviewsGrid">
+          <!-- Skeleton placeholders -->
+          <div class="sk-card">
+            <div class="sk-row">
+              <div class="sk-circle"></div>
+              <div style="flex:1">
+                <div class="sk-line w80" style="margin-bottom:8px"></div>
+                <div class="sk-line w50"></div>
+              </div>
+            </div>
+            <div class="sk-line h18 w80"></div>
+            <div class="sk-line"></div>
+            <div class="sk-line w80"></div>
+            <div class="sk-line w50"></div>
+          </div>
+          <div class="sk-card">
+            <div class="sk-row">
+              <div class="sk-circle"></div>
+              <div style="flex:1">
+                <div class="sk-line w80" style="margin-bottom:8px"></div>
+                <div class="sk-line w50"></div>
+              </div>
+            </div>
+            <div class="sk-line h18 w80"></div>
+            <div class="sk-line"></div>
+            <div class="sk-line w80"></div>
+            <div class="sk-line w50"></div>
+          </div>
+          <div class="sk-card">
+            <div class="sk-row">
+              <div class="sk-circle"></div>
+              <div style="flex:1">
+                <div class="sk-line w80" style="margin-bottom:8px"></div>
+                <div class="sk-line w50"></div>
+              </div>
+            </div>
+            <div class="sk-line h18 w80"></div>
+            <div class="sk-line"></div>
+            <div class="sk-line w80"></div>
+            <div class="sk-line w50"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER (identical to index.html) ─────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3>Aksraya Health Care</h3>
+          <p>Providing compassionate home healthcare services across Bangalore.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/#about">About Us</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/careers.html">Careers</a></li>
+            <li><a href="/#pricing">Pricing</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div class="social-links">
+            <a href="https://instagram.com/aksrayahealthcare" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/company/aksraya-health-care" target="_blank"
+              rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aksraya Health Care. All rights reserved.</p>
+        <div class="legal-links">
+          <a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile bottom toolbar -->
+  <div id="mobile-toolbar" class="mobile-toolbar">
+    <div class="toolbar-container">
+      <a href="https://tally.so/r/xXP829" target="_blank" rel="noopener noreferrer"
+        class="toolbar-btn toolbar-action-appointment">
+        <span class="toolbar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white"
+            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="3" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+        </span>
+        <span>Book Appointment</span>
+      </a>
+      <div class="toolbar-divider"></div>
+      <a href="tel:+918310962174" class="toolbar-btn toolbar-action-call">
+        <span class="toolbar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+        </span>
+      </a>
+      <a href="https://wa.me/918310962174" target="_blank" rel="noopener noreferrer"
+        class="toolbar-btn toolbar-action-whatsapp">
+        <span class="toolbar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3.5Z" />
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Shared site JS -->
+  <script src="../js/script.js" defer></script>
+
+  <script>
+    /* ════════════════════════════════════════════
+       SUPABASE CONFIG  ← replace these two values
+    ════════════════════════════════════════════ */
+    const SUPABASE_URL = 'https://jrpuuyvcibgvfuqifird.supabase.co'
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpycHV1eXZjaWJndmZ1cWlmaXJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NzE1NzgsImV4cCI6MjA5MjI0NzU3OH0.Qnz8psLynIUoGuE5Xpr_4ep8zFhTgIemwcvQPxm-kqw';
+
+    /* ════════════════════════════════════════════
+       INIT
+    ════════════════════════════════════════════ */
+    const { createClient } = supabase;
+    const db = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    /* ════════════════════════════════════════════
+       UTILITIES
+    ════════════════════════════════════════════ */
+    function esc(s) {
+      if (!s) return '';
+      return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    const AVATAR_COLORS = [
+      '#052044', '#15803d', '#0e7490', '#7c3aed', '#be185d',
+      '#b45309', '#dc2626', '#0f766e', '#1d4ed8', '#9a3412',
+    ];
+    function avatarColor(name) {
+      let h = 0;
+      for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+      return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
+    }
+
+    function fmtDate(iso) {
+      return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function starsHTML(r) {
+      return Array.from({ length: 5 }, (_, i) =>
+        `<span class="rv-star ${i < r ? 'on' : 'off'}" aria-hidden="true">★</span>`
+      ).join('');
+    }
+
+    /* ════════════════════════════════════════════
+       TOAST
+    ════════════════════════════════════════════ */
+    function toast(msg, type = 'ok') {
+      const wrap = document.getElementById('toastWrap');
+      const el = document.createElement('div');
+      el.className = `toast${type === 'err' ? ' err' : ''}`;
+      el.setAttribute('role', 'alert');
+      el.innerHTML = `
+        <span class="toast-icon">${type === 'ok' ? '✅' : '❌'}</span>
+        <div class="toast-msg">${esc(msg)}</div>
+        <button class="toast-x" aria-label="Dismiss">&times;</button>`;
+      el.querySelector('.toast-x').onclick = () => kill(el);
+      wrap.appendChild(el);
+      // Error toasts stay longer so you can read the message
+      setTimeout(() => kill(el), type === 'err' ? 12000 : 5000);
+    }
+    // Shorthand for error toasts that don't escape (raw error strings may need full visibility)
+    function toastErr(msg) { toast(msg, 'err'); }
+    function kill(el) {
+      el.classList.add('bye');
+      setTimeout(() => el.remove(), 230);
+    }
+
+    /* ════════════════════════════════════════════
+       MODAL
+    ════════════════════════════════════════════ */
+    const backdrop = document.getElementById('modalBackdrop');
+    document.getElementById('openModal').onclick = () => openModal();
+    document.getElementById('modalClose').onclick = () => closeModal();
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    function openModal() { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { backdrop.classList.remove('open'); document.body.style.overflow = ''; }
+
+    /* ════════════════════════════════════════════
+       STAR SELECTOR
+    ════════════════════════════════════════════ */
+    let selRating = 0;
+    const sBtns = document.querySelectorAll('.s-btn');
+
+    function lightStars(n) { sBtns.forEach(b => b.classList.toggle('lit', +b.dataset.v <= n)); }
+
+    sBtns.forEach(b => {
+      b.addEventListener('click', () => {
+        selRating = +b.dataset.v;
+        lightStars(selRating);
+        clrErr('e-rating');
+      });
+      b.addEventListener('mouseenter', () => lightStars(+b.dataset.v));
+      b.addEventListener('mouseleave', () => lightStars(selRating));
+    });
+
+    /* ════════════════════════════════════════════
+       TAG PILLS
+    ════════════════════════════════════════════ */
+    const selTags = new Set();
+    document.querySelectorAll('.m-tag').forEach(p => {
+      p.addEventListener('click', () => {
+        const t = p.dataset.tag;
+        selTags.has(t) ? (selTags.delete(t), p.classList.remove('picked'))
+          : (selTags.add(t), p.classList.add('picked'));
+      });
+    });
+
+    /* ════════════════════════════════════════════
+       VALIDATION
+    ════════════════════════════════════════════ */
+    function showErr(id, show) { document.getElementById(id).classList.toggle('show', show); }
+    function clrErr(id) { showErr(id, false); }
+    function markErr(fId, eId) { document.getElementById(fId).classList.add('err'); showErr(eId, true); }
+    function clrField(fId, eId) { document.getElementById(fId).classList.remove('err'); clrErr(eId); }
+
+    ['fn', 'fp', 'ft', 'fd'].forEach(id => {
+      const errMap = { fn: 'e-name', fp: 'e-phone', ft: 'e-title', fd: 'e-desc' };
+      document.getElementById(id).addEventListener('input', () => clrField(id, errMap[id]));
+    });
+    document.getElementById('fp').addEventListener('keypress', e => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
+
+    function validateForm() {
+      let ok = true;
+      const name = document.getElementById('fn').value.trim();
+      const phone = document.getElementById('fp').value.trim();
+      const title = document.getElementById('ft').value.trim();
+      const desc = document.getElementById('fd').value.trim();
+
+      if (!name) { markErr('fn', 'e-name'); ok = false; }
+      if (!/^[6-9]\d{9}$/.test(phone)) { markErr('fp', 'e-phone'); ok = false; }
+      if (!selRating) { showErr('e-rating', true); ok = false; }
+      if (!title) { markErr('ft', 'e-title'); ok = false; }
+      if (desc.length < 10) { markErr('fd', 'e-desc'); ok = false; }
+      return ok;
+    }
+
+    /* ════════════════════════════════════════════
+       SUBMIT
+    ════════════════════════════════════════════ */
+    document.getElementById('modalSubmit').addEventListener('click', async () => {
+      if (!validateForm()) return;
+      const btn = document.getElementById('modalSubmit');
+      btn.disabled = true; btn.classList.add('loading');
+
+      const payload = {
+        name: document.getElementById('fn').value.trim(),
+        phone: document.getElementById('fp').value.trim(),
+        rating: selRating,
+        tags: Array.from(selTags),
+        title: document.getElementById('ft').value.trim(),
+        description: document.getElementById('fd').value.trim(),
+      };
+
+      try {
+        const { error } = await db.from('reviews').insert([payload]);
+        if (error) throw error;
+        toast('Thank you! Your review has been submitted.', 'ok');
+        resetForm();
+        closeModal();
+        await loadReviews();
+      } catch (err) {
+        console.error('Supabase INSERT error:', err);
+        // Show the real error so it's easier to debug (RLS, missing table, wrong column, etc.)
+        const msg = err?.message || err?.details || JSON.stringify(err) || 'Unknown error';
+        toastErr(`Submit failed: ${msg}`);
+      } finally {
+        btn.disabled = false; btn.classList.remove('loading');
+      }
+    });
+
+    function resetForm() {
+      ['fn', 'fp', 'ft'].forEach(id => { document.getElementById(id).value = ''; });
+      document.getElementById('fd').value = '';
+      selRating = 0; lightStars(0);
+      selTags.clear();
+      document.querySelectorAll('.m-tag').forEach(p => p.classList.remove('picked'));
+      ['fn', 'fp', 'ft', 'fd'].forEach(id => document.getElementById(id).classList.remove('err'));
+      ['e-name', 'e-phone', 'e-rating', 'e-title', 'e-desc'].forEach(clrErr);
+    }
+
+    /* ════════════════════════════════════════════
+       FETCH & RENDER REVIEWS
+    ════════════════════════════════════════════ */
+    let allRevs = [];
+    let activeFilter = 'all';
+
+    async function loadReviews() {
+      try {
+        const { data, error } = await db
+          .from('reviews')
+          .select('id,name,rating,tags,title,description,created_at')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        allRevs = data || [];
+        updateSummary();
+        renderReviews();
+      } catch (err) {
+        console.error('Supabase SELECT error:', err);
+        const msg = err?.message || err?.details || JSON.stringify(err) || 'Unknown error';
+        document.getElementById('reviewsGrid').innerHTML =
+          `<div class="empty-state"><div class="empty-icon">⚠️</div><h3>Could not load reviews</h3><p style="color:#dc2626;font-weight:600;font-size:13px;margin-top:8px">${esc(msg)}</p><p style="margin-top:4px">Tip: Check that RLS SELECT policy is enabled for anon role in Supabase.</p></div>`;
+        document.getElementById('countText').textContent = '';
+      }
+    }
+
+    function updateSummary() {
+      const total = allRevs.length;
+      if (!total) {
+        document.getElementById('avgRating').textContent = '–';
+        document.getElementById('summaryStars').textContent = '☆☆☆☆☆';
+        document.getElementById('summaryLabel').textContent = 'No reviews yet';
+        return;
+      }
+      const avg = allRevs.reduce((s, r) => s + r.rating, 0) / total;
+      document.getElementById('avgRating').textContent = avg.toFixed(1);
+      document.getElementById('summaryLabel').textContent = `Based on ${total} review${total !== 1 ? 's' : ''}`;
+      // Build filled stars
+      const filled = Math.round(avg);
+      document.getElementById('summaryStars').innerHTML =
+        Array.from({ length: 5 }, (_, i) =>
+          `<span style="color:${i < filled ? '#f59e0b' : '#e2e8f0'}">★</span>`
+        ).join('');
+    }
+
+    function renderReviews() {
+      const filtered = activeFilter === 'all'
+        ? allRevs
+        : allRevs.filter(r => r.rating === +activeFilter);
+
+      const n = filtered.length;
+      document.getElementById('countText').innerHTML =
+        `Showing <strong>${n}</strong> review${n !== 1 ? 's' : ''}` +
+        (activeFilter !== 'all' ? ` with <strong>${activeFilter} star${activeFilter !== '1' ? 's' : ''}</strong>` : '');
+
+      const grid = document.getElementById('reviewsGrid');
+
+      if (!n) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">💬</div>
+            <h3>${activeFilter === 'all' ? 'No reviews yet' : `No ${activeFilter}-star reviews`}</h3>
+            <p>${activeFilter === 'all' ? 'Be the first to share your experience with Aksraya!' : 'Try a different filter or be the first to leave this rating.'}</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((r, i) => {
+        const name = esc(r.name || 'Anonymous');
+        const letter = name.charAt(0).toUpperCase();
+        const color = avatarColor(name);
+        const ttl = esc(r.title || '');
+        const dsc = esc(r.description || '');
+        const date = r.created_at ? fmtDate(r.created_at) : '';
+        const tagsHtml = Array.isArray(r.tags)
+          ? r.tags.map(t => `<span class="rv-tag">${esc(t)}</span>`).join('')
+          : '';
+
+        return `
+        <article class="rv-card" style="animation-delay:${i * 0.06}s" aria-label="Review by ${name}">
+          <div class="rv-card-header">
+            <div class="rv-avatar" style="background:${color}" aria-hidden="true">${letter}</div>
+            <div class="rv-meta">
+              <span class="rv-name">${name}</span>
+              <div class="rv-stars" aria-label="${r.rating} out of 5 stars">${starsHTML(r.rating)}</div>
+              <div class="rv-date">${date}</div>
+            </div>
+          </div>
+          ${ttl ? `<div class="rv-title">${ttl}</div>` : ''}
+          ${tagsHtml ? `<div class="rv-tags">${tagsHtml}</div>` : ''}
+          ${dsc ? `<p class="rv-desc">${dsc}</p>` : ''}
+        </article>`;
+      }).join('');
+    }
+
+    /* ════════════════════════════════════════════
+       FILTER PILLS
+    ════════════════════════════════════════════ */
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.f;
+        renderReviews();
+      });
+    });
+
+    /* ════════════════════════════════════════════
+       MOBILE MENU TOGGLE
+    ════════════════════════════════════════════ */
+    document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+      const nav = document.getElementById('mobileNav');
+      nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+    });
+
+    /* ════════════════════════════════════════════
+       BOOT
+    ════════════════════════════════════════════ */
+    loadReviews();
+  </script>
+
+</body>
+
+</html>
