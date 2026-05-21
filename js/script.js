@@ -338,19 +338,75 @@ document.addEventListener('DOMContentLoaded', () => {
         const toolbarObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) {
-                    // Hero section has left the viewport, show toolbar
                     mobileToolbar.classList.add('visible');
                 } else {
-                    // Hero section is visible, hide toolbar
                     mobileToolbar.classList.remove('visible');
                 }
             });
-        }, {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0
-        });
-
+        }, { root: null, rootMargin: '0px', threshold: 0 });
         toolbarObserver.observe(heroSection);
     }
+
+    // ─── Hero Typewriter Effect ───────────────────────────────────────
+    const typewriterEl = document.getElementById('heroTypewriter');
+    if (typewriterEl) {
+        const phrases = [
+            'Your Family',
+            'Elderly Parents',
+            'Recovery Patients',
+            'Bedridden Care',
+            'Peace of Mind'
+        ];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        let typePause = false;
+
+        function typeStep() {
+            const current = phrases[phraseIdx];
+            if (!isDeleting) {
+                typewriterEl.textContent = current.slice(0, charIdx + 1);
+                charIdx++;
+                if (charIdx === current.length) {
+                    typePause = true;
+                    setTimeout(() => { typePause = false; isDeleting = true; typeStep(); }, 1800);
+                    return;
+                }
+                setTimeout(typeStep, 68);
+            } else {
+                typewriterEl.textContent = current.slice(0, charIdx - 1);
+                charIdx--;
+                if (charIdx === 0) {
+                    isDeleting = false;
+                    phraseIdx = (phraseIdx + 1) % phrases.length;
+                    setTimeout(typeStep, 400);
+                    return;
+                }
+                setTimeout(typeStep, 36);
+            }
+        }
+        setTimeout(typeStep, 1200);
+    }
+
+    // ─── Pricing Tabs ─────────────────────────────────────────────────
+    const pricingTabs = document.querySelectorAll('.pricing-tab');
+    const pricing12 = document.getElementById('pricing-12hr');
+    const pricing24 = document.getElementById('pricing-24hr');
+
+    pricingTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            pricingTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const target = tab.getAttribute('data-tab');
+            if (pricing12 && pricing24) {
+                if (target === '12hr') {
+                    pricing12.style.display = 'grid';
+                    pricing24.style.display = 'none';
+                } else {
+                    pricing12.style.display = 'none';
+                    pricing24.style.display = 'grid';
+                }
+            }
+        });
+    });
 });

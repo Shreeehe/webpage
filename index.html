@@ -104,7 +104,12 @@
                             <span class="live-dot live-dot-green"></span>
                             <span>Available across Bangalore</span>
                         </div>
-                        <h1 class="hero-split-h1">The Only Home Care in Bangalore with <span class="highlight-text-dark">24-Hour Replacement</span></h1>
+                        <h1 class="hero-split-h1">
+                            Home Care<br>
+                            <span class="hero-typewriter-wrap">
+                                <span class="hero-typewriter-prefix">Built for&nbsp;</span><span class="hero-typewriter-text" id="heroTypewriter"></span><span class="hero-cursor">|</span>
+                            </span>
+                        </h1>
                         <p class="subtitle subtitle-dark">Trusted nursing care, elder care, and bedridden patient care at home in Bangalore. Reliable 12hrs and 24hrs support that adapts to your needs.</p>
 
                         <div class="cta-group">
@@ -788,16 +793,22 @@
             aria-label="Service pricing">
             <div class="container">
                 <div class="pricing-v2-header fade-in">
-                    <span class="section-subtitle">Site Plans</span>
+                    <span class="section-subtitle">Care Plans</span>
                     <h2>Find the right care plan for your needs</h2>
-                    <p>Choose from 12hrs and 24hrs services. All plans are arranged in ascending price order for easy
-                        comparison.</p>
+                    <p>Choose from 12hrs and 24hrs services. All plans arranged by price — no hidden charges.</p>
                 </div>
 
-                <div class="pricing-v2-grid stagger-container">
+                <!-- Tab Toggle -->
+                <div class="pricing-tabs fade-in">
+                    <button class="pricing-tab active" data-tab="12hr">12-Hour Shifts</button>
+                    <button class="pricing-tab" data-tab="24hr">24-Hour / Full Day</button>
+                </div>
+
+                <!-- 12hr Plans -->
+                <div class="pricing-v2-grid stagger-container" id="pricing-12hr">
                     <div class="pricing-v2-card fade-in-up">
                         <div class="pricing-v2-top">
-                            <p class="pricing-v2-name">12hrs Care Assistant</p>
+                            <p class="pricing-v2-name">Care Assistant</p>
                             <span class="pricing-v2-shift">12hrs</span>
                         </div>
                         <div class="pricing-v2-price">₹799 <span>/ shift</span></div>
@@ -812,7 +823,7 @@
 
                     <div class="pricing-v2-card fade-in-up">
                         <div class="pricing-v2-top">
-                            <p class="pricing-v2-name">12hrs Nursing Assistant</p>
+                            <p class="pricing-v2-name">Nursing Assistant</p>
                             <span class="pricing-v2-shift">12hrs</span>
                         </div>
                         <div class="pricing-v2-price">₹999 <span>/ shift</span></div>
@@ -825,9 +836,28 @@
                             class="btn btn-outline-blue btn-block">Choose Plan</a>
                     </div>
 
+                    <div class="pricing-v2-card pricing-v2-featured fade-in-up">
+                        <div class="pricing-v2-badge">Most Booked</div>
+                        <div class="pricing-v2-top">
+                            <p class="pricing-v2-name">Nursing Service</p>
+                            <span class="pricing-v2-shift">12hrs</span>
+                        </div>
+                        <div class="pricing-v2-price">₹1,799 <span>/ shift</span></div>
+                        <ul class="pricing-v2-list">
+                            <li>Professional nursing for scheduled support</li>
+                            <li>Focused care for home medical needs</li>
+                            <li>Best for supervised nursing requirements</li>
+                        </ul>
+                        <a href="https://tally.so/r/xXP829" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-primary btn-block">Choose Plan</a>
+                    </div>
+                </div>
+
+                <!-- 24hr Plans -->
+                <div class="pricing-v2-grid stagger-container pricing-tab-panel" id="pricing-24hr" style="display:none;">
                     <div class="pricing-v2-card fade-in-up">
                         <div class="pricing-v2-top">
-                            <p class="pricing-v2-name">24hrs Care Assistant</p>
+                            <p class="pricing-v2-name">Care Assistant</p>
                             <span class="pricing-v2-shift">24hrs</span>
                         </div>
                         <div class="pricing-v2-price">₹1,299 <span>/ day</span></div>
@@ -842,7 +872,7 @@
 
                     <div class="pricing-v2-card fade-in-up">
                         <div class="pricing-v2-top">
-                            <p class="pricing-v2-name">24hrs Nursing Assistant</p>
+                            <p class="pricing-v2-name">Nursing Assistant</p>
                             <span class="pricing-v2-shift">24hrs</span>
                         </div>
                         <div class="pricing-v2-price">₹1,499 <span>/ day</span></div>
@@ -856,24 +886,9 @@
                     </div>
 
                     <div class="pricing-v2-card pricing-v2-featured fade-in-up">
-                        <div class="pricing-v2-badge">Most Booked</div>
+                        <div class="pricing-v2-badge">Best Value</div>
                         <div class="pricing-v2-top">
-                            <p class="pricing-v2-name">12hrs Nursing Service</p>
-                            <span class="pricing-v2-shift">12hrs</span>
-                        </div>
-                        <div class="pricing-v2-price">₹1,799 <span>/ shift</span></div>
-                        <ul class="pricing-v2-list">
-                            <li>Professional nursing for scheduled support</li>
-                            <li>Focused care for home medical needs</li>
-                            <li>Best for supervised nursing requirements</li>
-                        </ul>
-                        <a href="https://tally.so/r/xXP829" target="_blank" rel="noopener noreferrer"
-                            class="btn btn-primary btn-block">Choose Plan</a>
-                    </div>
-
-                    <div class="pricing-v2-card fade-in-up">
-                        <div class="pricing-v2-top">
-                            <p class="pricing-v2-name">24hrs Nursing Service</p>
+                            <p class="pricing-v2-name">Nursing Service</p>
                             <span class="pricing-v2-shift">24hrs</span>
                         </div>
                         <div class="pricing-v2-price">₹2,499 <span>/ day</span></div>
@@ -883,7 +898,7 @@
                             <li>Final plan may vary based on case assessment</li>
                         </ul>
                         <a href="https://tally.so/r/xXP829" target="_blank" rel="noopener noreferrer"
-                            class="btn btn-outline-blue btn-block">Choose Plan</a>
+                            class="btn btn-primary btn-block">Choose Plan</a>
                     </div>
                 </div>
 
