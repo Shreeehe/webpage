@@ -1109,6 +1109,31 @@ ul {
     box-shadow: 0 8px 25px rgba(43, 182, 115, 0.25) !important;
 }
 
+.btn-visit-office-hero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
+    border: 2px solid #16a34a;
+    background: transparent;
+    color: #16a34a;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.btn-visit-office-hero:hover {
+    background: #16a34a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22, 163, 74, 0.15);
+}
+
 .cta-secondary-row {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Forces two equal columns */
@@ -3736,7 +3761,7 @@ footer {
 
     /* Left (content) panel */
     .hero-split-left {
-        padding: 40px 20px 36px;
+        padding: 24px 20px 24px;
         align-items: flex-start;
     }
 
@@ -3749,9 +3774,17 @@ footer {
         max-width: 100%;
     }
 
+    .hero-tagline {
+        margin-bottom: 12px;
+    }
+
     .hero-split-h1 {
         font-size: clamp(28px, 7vw, 40px) !important;
-        margin-bottom: 14px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hero p.subtitle {
+        margin-bottom: 16px !important;
     }
 
     .btn-primary-hero {
@@ -3799,7 +3832,8 @@ footer {
     }
 
     .cta-group {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        gap: 12px;
     }
 
     /* Trust Bar Mobile */
@@ -4240,25 +4274,37 @@ footer {
 
     /* Hero small mobile */
     .hero {
-        padding: 90px 0 48px;
+        padding: 80px 0 32px;
     }
 
-    .hero h1 {
-        font-size: clamp(26px, 8vw, 36px);
+    .hero-split-left {
+        padding: 20px 14px 20px;
+    }
+
+    .hero-split-h1 {
+        font-size: clamp(24px, 9vw, 32px) !important;
+        margin-bottom: 8px !important;
     }
 
     .hero p.subtitle {
-        font-size: 15px;
+        font-size: 14px;
+        margin-bottom: 12px !important;
     }
 
     .hero-tagline {
         font-size: 11px;
-        padding: 6px 12px;
+        padding: 4px 10px;
+        margin-bottom: 10px;
     }
 
     .btn-primary-hero {
-        padding: 14px 24px;
+        padding: 12px 20px;
         font-size: 15px;
+    }
+
+    .cta-group {
+        margin-bottom: 16px;
+        gap: 10px;
     }
 
     .cta-secondary-row {
@@ -5817,10 +5863,11 @@ Replaces old split-image desktop hero
     position: relative;
     overflow: hidden;
     padding-top: 83px;
-    min-height: auto;
+    min-height: 85vh;
     background:
         radial-gradient(circle at top left, rgba(22, 163, 74, 0.08), transparent 32%),
         linear-gradient(180deg, #f0f7ff 0%, #ffffff 74%);
+    align-items: center;
 }
 
 .hero::before {
@@ -5831,17 +5878,19 @@ Replaces old split-image desktop hero
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;
-    min-height: auto;
+    min-height: 100%;
 }
 
 .hero-split-left {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 76px 24px 64px;
+    padding: 60px 24px;
     background: transparent;
     position: relative;
     z-index: 2;
+    text-align: center;
 }
 
 .hero-split-left::after {
@@ -5849,12 +5898,15 @@ Replaces old split-image desktop hero
 }
 
 .hero-content {
-    text-align: left;
+    text-align: center;
     width: 100%;
-    max-width: 760px;
+    max-width: 800px;
     margin: 0 auto;
     position: relative;
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-split-h1 {
@@ -5864,9 +5916,10 @@ Replaces old split-image desktop hero
     -webkit-text-fill-color: transparent !important;
     text-shadow: none !important;
     /* Reduced size: smaller min and max for tighter layout */
-    font-size: clamp(28px, 4.5vw, 48px) !important;
-    line-height: 1.06 !important;
-    margin-bottom: 18px !important;
+    font-size: clamp(32px, 5vw, 56px) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 24px !important;
+    text-align: center;
 }
 
 .hero-typewriter-wrap {
@@ -5911,13 +5964,14 @@ Replaces old split-image desktop hero
 .hero-tagline {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     font-weight: 700;
-    padding: 8px 16px;
+    padding: 8px 18px;
     border-radius: 100px;
 }
 
@@ -5948,24 +6002,26 @@ Replaces old split-image desktop hero
 
 .subtitle-dark {
     color: #475569 !important;
-    font-size: 17px !important;
-    line-height: 1.7 !important;
-    margin-bottom: 28px !important;
-    max-width: 640px;
+    font-size: 19px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 36px !important;
+    max-width: 680px;
+    text-align: center;
 }
 
 .cta-group {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    gap: 20px;
     width: 100%;
     max-width: 520px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .btn-primary-hero {
     width: 100%;
-    max-width: 100%;
+    max-width: 320px;
     justify-content: center;
 }
 
@@ -5974,10 +6030,11 @@ Replaces old split-image desktop hero
 }
 
 .cta-secondary-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: center;
     gap: 16px;
     width: 100%;
+    max-width: 440px;
 }
 
 .btn-secondary-hero-light {
@@ -5986,8 +6043,8 @@ Replaces old split-image desktop hero
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 10px;
-    font-size: 14px;
+    padding: 12px 24px;
+    font-size: 15px;
     font-weight: 600;
     border-radius: 50px;
     border: 1.5px solid #e2e8f0;
@@ -6003,6 +6060,34 @@ Replaces old split-image desktop hero
     border-color: #93c5fd;
     color: #052044;
     transform: translateY(-2px);
+}
+
+.cta-links-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.cta-sub-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.cta-sub-link:hover {
+    color: #16a34a;
+}
+
+.cta-link-sep {
+    color: #cbd5e1;
+    font-size: 12px;
 }
 
 .btn-overview-light {
@@ -6146,8 +6231,9 @@ Replaces old split-image desktop hero
 @media (max-width: 768px) {
     .hero {
         padding-top: 70px;
-        min-height: auto !important;
-        height: auto !important;
+        min-height: 75vh !important;
+        display: flex !important;
+        align-items: center !important;
         background:
             radial-gradient(circle at top left, rgba(22, 163, 74, 0.08), transparent 42%),
             linear-gradient(180deg, #f6fbff 0%, #ffffff 78%);
@@ -6163,46 +6249,66 @@ Replaces old split-image desktop hero
     .hero-split-left {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding: 16px 16px 0 !important;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px !important;
         min-height: auto !important;
         height: auto !important;
+        text-align: center;
     }
 
     .hero-content {
         max-width: 100%;
         padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .hero-split-h1 {
         /* Mobile: compact sizing to avoid wrapping awkwardly */
-        font-size: clamp(20px, 7vw, 34px) !important;
-        line-height: 1.05 !important;
-        margin-bottom: 10px !important;
+        font-size: clamp(20px, 7vw, 32px) !important;
+        line-height: 1.15 !important;
+        margin-bottom: 16px !important;
+        text-align: center;
+        /* Reserved height for 3 lines to prevent 'jumping' when long phrases wrap */
+        min-height: 3.6em !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .subtitle-dark {
         font-size: 15px !important;
         line-height: 1.5 !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 24px !important;
+        text-align: center;
     }
 
     .cta-group {
         max-width: 100%;
-        gap: 8px !important;
-        margin-bottom: 10px !important;
+        gap: 16px !important;
+        margin-bottom: 24px !important;
+        align-items: center;
     }
 
     .btn-primary-hero {
+        padding: 12px 24px !important;
+        font-size: 15px !important;
+        max-width: 100% !important;
+    }
+
+    .btn-visit-office-hero {
         padding: 11px 20px !important;
         font-size: 14px !important;
+        max-width: 100% !important;
     }
 
     .btn-secondary-hero-light,
     .cta-secondary-row > .btn-secondary-hero-light {
-        padding: 10px 16px !important;
-        font-size: 13px !important;
+        padding: 11px 16px !important;
+        font-size: 14px !important;
     }
 
     .btn-overview-light {
@@ -6211,8 +6317,15 @@ Replaces old split-image desktop hero
     }
 
     .cta-secondary-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px !important;
+        display: flex;
+        gap: 10px !important;
+        width: 100%;
+    }
+
+    .cta-links-row {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
     }
 
     .cta-text-link {
@@ -6234,6 +6347,258 @@ Replaces old split-image desktop hero
     }
 }
 
+/* Floating Trust Pill Bar */
+.trust-bar-section {
+    position: relative;
+    z-index: 50;
+    margin-top: -32px; /* Overlaps Hero slightly */
+    padding: 0 15px;
+}
+
+.trust-bar-pill {
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 100px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+}
+
+.trust-pill-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 10px;
+    transition: transform 0.2s ease;
+}
+
+.trust-pill-item:hover {
+    transform: translateY(-1px);
+}
+
+.pill-icon {
+    width: 40px;
+    height: 40px;
+    background: #f0fdf4;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.pill-icon.star-color {
+    background: #fffbeb;
+    color: #f59e0b;
+}
+
+.pill-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.pill-text strong {
+    font-size: 18px;
+    font-weight: 800;
+    color: #052044;
+    font-family: 'Outfit', sans-serif;
+}
+
+.pill-text span {
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pill-sep {
+    width: 1px;
+    height: 32px;
+    background: #f1f5f9;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .trust-bar-pill {
+        padding: 10px 20px;
+        border-radius: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .trust-bar-section {
+        margin-top: -24px;
+    }
+    
+    .trust-bar-pill {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 15px;
+        border-radius: 24px;
+        gap: 0;
+    }
+
+    .pill-sep {
+        display: none;
+    }
+
+    .trust-pill-item {
+        padding: 12px 5px;
+        border-bottom: 1px solid #f8fafc;
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+
+    .trust-pill-item:nth-child(n+4) {
+        border-bottom: none;
+    }
+
+    .trust-pill-item:nth-child(1),
+    .trust-pill-item:nth-child(3) {
+        border-right: 1px solid #f8fafc;
+    }
+
+    .pill-text strong {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .trust-bar-pill {
+        padding: 10px;
+    }
+    .pill-icon {
+        width: 32px;
+        height: 32px;
+    }
+    .pill-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Latest Insights Section */
+.insights-section {
+    background: #f8fafc;
+}
+
+.insights-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    overflow: hidden;
+    position: relative;
+}
+
+.insights-content h2 {
+    font-size: 32px;
+    color: #052044;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.insights-content p {
+    font-size: 17px;
+    color: #475569;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.insights-image {
+    position: relative;
+    height: 300px;
+    background: linear-gradient(135deg, #052044 0%, #0a4080 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.medium-placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.medium-logo {
+    font-size: 80px;
+    font-weight: 800;
+    font-family: serif;
+    opacity: 0.9;
+    z-index: 2;
+}
+
+.placeholder-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.p-shape-1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(22, 163, 74, 0.2);
+    border-radius: 50%;
+    top: -50px;
+    right: -50px;
+}
+
+.p-shape-2 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(14, 165, 233, 0.2);
+    border-radius: 50%;
+    bottom: -30px;
+    left: -30px;
+}
+
+@media (max-width: 992px) {
+    .insights-card {
+        grid-template-columns: 1fr;
+        padding: 40px;
+        gap: 40px;
+    }
+    
+    .insights-image {
+        order: -1;
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .insights-card {
+        padding: 30px 20px;
+    }
+    
+    .insights-content h2 {
+        font-size: 24px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .hero-tagline,
     .hero-split-h1,
@@ -6246,3 +6611,199 @@ Replaces old split-image desktop hero
         transition: none !important;
     }
 }
+
+    gap: 16px;
+}
+
+.conditions-list-modern li {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.areas-tag-modern {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    
+    .philosophy-main h2 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+    .philosophy-section {
+        padding: 60px 0;
+    }
+    
+    .philosophy-main h2 {
+        font-size: 26px;
+    }
+    
+    .conditions-card-modern {
+        padding: 30px 20px;
+    }
+}
+
+/* =============================================
+   SERVICES REDESIGN V4 — BALANCED & PREMIUM
+   ============================================= */
+
+.services-section {
+    background: #f8fafc;
+    padding: 100px 0;
+}
+
+.services-section h2 {
+    color: #052044 !important;
+    font-size: 36px !important;
+    margin-bottom: 12px !important;
+    font-weight: 800 !important;
+}
+
+.services-section .section-subtitle {
+    font-size: 14px !important;
+    color: #16a34a !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px !important;
+}
+
+.section-header {
+    margin-bottom: 60px !important;
+    text-align: center;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.service-card {
+    background: #ffffff !important;
+    border: 1px solid #eef2f6 !important;
+    border-radius: 24px !important;
+    padding: 40px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: left;
+}
+
+.service-card:hover {
+    border-color: #16a34a !important;
+    box-shadow: 0 20px 40px rgba(22, 163, 74, 0.06) !important;
+    background: #ffffff !important;
+}
+
+.service-card-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px !important;
+}
+
+.service-card .card-icon {
+    width: 54px;
+    height: 54px;
+    background: #f0fdf4 !important;
+    color: #16a34a !important;
+    border-radius: 16px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease !important;
+}
+
+.service-card:hover .card-icon {
+    background: #16a34a !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.2) !important;
+}
+
+.service-card h3 {
+    font-size: 20px !important;
+    color: #052044 !important;
+    margin-bottom: 12px !important;
+    font-weight: 800 !important;
+}
+
+.service-card p {
+    font-size: 15px !important;
+    color: #64748b !important;
+    line-height: 1.6 !important;
+    margin-bottom: 0 !important;
+}
+
+.service-tag {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    font-size: 10px !important;
+    padding: 5px 12px !important;
+    border-radius: 100px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+}
+
+.service-card:hover .service-tag {
+    background: #dcfce7 !important;
+    color: #16a34a !important;
+}
+
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-section {
+        padding: 80px 0;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr; /* BACK TO 1 COLUMN FOR BETTER READABILITY */
+        gap: 24px;
+    }
+
+    .service-card {
+        padding: 32px !important;
+        text-align: center;
+        align-items: center;
+    }
+
+    .service-card-top-row {
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 20px !important;
+    }
+
+    .service-card h3 {
+        font-size: 18px !important;
+    }
+
+    .service-card p {
+        font-size: 14px !important;
+    }
+}
+
+

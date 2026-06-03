@@ -355,7 +355,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'Elderly Parents',
             'Recovery Patients',
             'Bedridden Care',
-            'Peace of Mind'
+            'Post-Surgery Care',
+            'Stroke Survivors',
+            'Who Raised You',     // emotional
+            'Amma & Appa',        // cultural hook
+            'Your Second Home',   // brand positioning
+            'Peace of Mind',      // always last
         ];
         let phraseIdx = 0;
         let charIdx = 0;
