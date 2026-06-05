@@ -415,3 +415,174 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// =============================================
+// =============================================
+// =============================================
+// =============================================
+// Premium Consultative Drawer Logic (4-STEP)
+// =============================================
+(function() {
+    const SB_URL = 'https://blpypcuicxugpqwqskbq.supabase.co';
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJscHlwY3VpY3h1Z3Bxd3Fza2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2NDkyMjksImV4cCI6MjA5NjIyNTIyOX0.4OiKJE0aOHG3blLCI9Suv2Iy3RP0ETe3jopmhoCH7oc';
+    let sb = null;
+    function initSB() { if (typeof supabase !== 'undefined') sb = supabase.createClient(SB_URL, SB_KEY); else setTimeout(initSB, 1000); }
+    initSB();
+
+    const overlay = document.getElementById('enquiryDrawerOverlay');
+    const drawer = document.getElementById('enquiryDrawer');
+    const steps = document.querySelectorAll('.drawer-step');
+    const segments = document.querySelectorAll('.progress-segment');
+    const title = document.getElementById('drawerStepTitle');
+    const backBtn = document.getElementById('drawerBackBtn');
+    const nextBtn = document.getElementById('drawerNextBtn');
+    const submitBtn = document.getElementById('submitDrawer');
+    const closeBtn = document.getElementById('closeDrawer');
+
+    let currentStep = 1;
+    let leadId = null;
+    let data = { condition: '', careType: '', urgency: '', name: '', phone: '' };
+
+    const titles = {
+        1: "Who are you caring for?",
+        2: "What type of care is needed?",
+        3: "Finalize Your Care Plan",
+        4: "Consultation Confirmed"
+    };
+
+    function updateUI() {
+        title.textContent = titles[currentStep];
+        segments.forEach((s, i) => {
+            s.classList.toggle('completed', i + 1 < currentStep);
+            s.classList.toggle('active', i + 1 === currentStep);
+        });
+        steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === currentStep));
+        
+        if (backBtn) backBtn.style.visibility = (currentStep > 1 && currentStep < 4) ? 'visible' : 'hidden';
+        if (nextBtn) nextBtn.style.display = (currentStep >= 3) ? 'none' : 'block';
+        
+        validate();
+    }
+
+    function validate() {
+        let ok = false;
+        if (currentStep === 1) ok = !!data.condition;
+        else if (currentStep === 2) ok = !!data.careType;
+        else if (currentStep === 3) {
+            const p = document.getElementById('drawerPhone').value.trim();
+            const u = document.getElementById('drawerUrgency').value;
+            ok = p.length >= 10 && !!u;
+        }
+        if (nextBtn) {
+            nextBtn.disabled = !ok;
+            nextBtn.style.opacity = ok ? '1' : '0.5';
+        }
+    }
+
+    function goTo(s) {
+        currentStep = s;
+        updateUI();
+        document.querySelector('.drawer-content').scrollTop = 0;
+    }
+
+    document.querySelectorAll('.option-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const step = parseInt(card.closest('.drawer-step').dataset.step);
+            card.parentElement.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            if (step === 1) data.condition = card.dataset.value;
+            if (step === 2) data.careType = card.dataset.value;
+            validate();
+        });
+    });
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { if (currentStep < 3) goTo(currentStep + 1); });
+    if (backBtn) backBtn.addEventListener('click', () => { if (currentStep > 1) goTo(currentStep - 1); });
+    
+    closeBtn.addEventListener('click', () => {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    document.getElementById('finishDrawer').addEventListener('click', () => {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Unified Submit
+    if (submitBtn) {
+        submitBtn.addEventListener('click', async () => {
+            const n = document.getElementById('drawerName').value.trim();
+            const p = document.getElementById('drawerPhone').value.trim();
+            const u = document.getElementById('drawerUrgency').value;
+            
+            if (p.length < 10 || !u) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Securing lead...';
+
+            try {
+                if (sb) {
+                    await sb.from('enquiries').insert([{
+                        condition: data.condition,
+                        care_type: data.careType,
+                        urgency: u,
+                        name: n,
+                        phone: p
+                    }]);
+                }
+                goTo(4);
+            } catch (e) { console.error(e); goTo(4); }
+            finally { submitBtn.disabled = false; submitBtn.innerHTML = 'Confirm & Schedule Call'; }
+        });
+    }
+
+    // Dynamic Logic for existing page buttons
+    document.body.addEventListener('click', (e) => {
+        const target = e.target.closest('a[href*="tally.so/r/xXP829"]');
+        if (!target) return;
+        e.preventDefault();
+
+        // Reset
+        data = { condition: '', careType: '', urgency: '', name: '', phone: '' };
+        document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+        document.getElementById('drawerName').value = '';
+        document.getElementById('drawerPhone').value = '';
+        document.getElementById('drawerUrgency').value = '';
+
+        const pricingCard = target.closest('.pricing-v2-card');
+        if (pricingCard) {
+            const planName = pricingCard.querySelector('.pricing-v2-name').textContent.trim();
+            let type = "";
+            if (planName.includes('Care Assistant')) type = 'Caretaker';
+            else if (planName.includes('Nursing Assistant')) type = 'Nursing Assistant';
+            else if (planName.includes('Nursing Service')) type = 'Nursing Staff';
+            
+            if (type) {
+                data.careType = type;
+                document.querySelectorAll('[data-step="2"] .option-card').forEach(c => {
+                    c.classList.toggle('selected', c.dataset.value === type);
+                });
+            }
+        }
+        
+        goTo(1);
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Real-time validation for inputs
+    ['drawerName', 'drawerPhone', 'drawerUrgency'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', validate);
+        if (el && el.tagName === 'SELECT') el.addEventListener('change', validate);
+    });
+
+})();
