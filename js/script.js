@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pricingCard) {
             const planName = pricingCard.querySelector('.pricing-v2-name').textContent.trim();
             let type = "";
-            if (planName.includes('Care Assistant')) type = 'Caretaker';
+            if (planName.includes('Home Trained') || planName.includes('Care Assistant')) type = 'Caretaker';
             else if (planName.includes('Nursing Assistant')) type = 'Nursing Assistant';
             else if (planName.includes('Nursing Service')) type = 'Nursing Staff';
             
