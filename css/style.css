@@ -6806,8 +6806,6 @@ Replaces old split-image desktop hero
     }
 }
 
-
-
 /* =============================================
    PREMIUM ENQUIRY DRAWER (V5 - CONSULTATIVE)
    ============================================= */
@@ -6816,22 +6814,23 @@ Replaces old split-image desktop hero
     --d-green: #16a34a;
     --d-cyan: #22d3ee;
     --d-border: #e2e8f0;
-    --d-bg: #ffffff;
+    --d-bg: rgba(255, 255, 255, 0.96);
     --d-soft: #f8fafc;
     --d-text: #1e293b;
     --d-muted: #64748b;
-    --d-shadow: -10px 0 50px rgba(5, 32, 68, 0.1);
+    --d-shadow: -15px 0 60px rgba(5, 32, 68, 0.15);
 }
 
 .enquiry-drawer-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(5, 32, 68, 0.3);
-    backdrop-filter: blur(4px);
+    background: rgba(5, 32, 68, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 99999;
     display: none;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .enquiry-drawer-overlay.active {
@@ -6844,9 +6843,12 @@ Replaces old split-image desktop hero
     top: 0;
     right: -100%;
     width: 100%;
-    max-width: 500px;
+    max-width: 520px;
     height: 100%;
     background: var(--d-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: var(--d-shadow);
     z-index: 100000;
     display: flex;
@@ -6860,190 +6862,152 @@ Replaces old split-image desktop hero
 
 .drawer-close-btn {
     position: absolute;
-    top: 20px;
-    left: -60px;
-    width: 44px;
-    height: 44px;
-    background: #fff;
-    border: none;
-    border-radius: 12px;
-    font-size: 28px;
+    top: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    font-size: 22px;
+    font-weight: 300;
     color: var(--d-navy);
     cursor: pointer;
-    box-shadow: -4px 0 15px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    line-height: 1;
+}
+
+.drawer-close-btn:hover {
+    background: #ef4444;
+    color: #fff;
+    border-color: #ef4444;
+    transform: rotate(90deg) scale(1.05);
 }
 
 @media (max-width: 600px) {
     .drawer-close-btn {
-        left: auto;
-        right: 20px;
+        right: 16px;
         top: 20px;
-        box-shadow: none;
-        background: var(--d-soft);
     }
 }
 
 .drawer-header {
-    padding: 60px 40px 30px;
-    background: #fff;
-}
-
-.drawer-trust-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: #f0fdf4;
-    color: #166534;
-    font-size: 11px;
-    font-weight: 800;
-    border-radius: 50px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    letter-spacing: 0.5px;
+    padding: 50px 40px 24px;
+    background: transparent;
 }
 
 .drawer-top-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    padding-right: 48px; /* Leave space for close button */
+}
+
+.drawer-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(22, 163, 74, 0.08);
+    color: var(--d-green);
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(22, 163, 74, 0.15);
 }
 
 .direct-call-link {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 800;
     color: var(--d-green);
     text-decoration: none;
-    background: #f0fdf4;
-    padding: 6px 12px;
-    border-radius: 10px;
-    transition: all 0.2s ease;
+    background: rgba(22, 163, 74, 0.08);
+    padding: 6px 14px;
+    border-radius: 50px;
+    transition: all 0.25s ease;
+    border: 1px solid rgba(22, 163, 74, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .direct-call-link:hover {
     background: var(--d-green);
     color: #fff;
-}
-
-/* Dual Approach V2 */
-.dual-approach-container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.approach-box {
-    background: #fff;
-    border-radius: 20px;
-    padding: 0;
-}
-
-.approach-title {
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--d-navy);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.approach-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--d-muted);
-    font-weight: 800;
-    font-size: 12px;
-    position: relative;
-}
-
-.approach-divider::before, .approach-divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--d-border);
-}
-
-.approach-divider span {
-    padding: 0 15px;
-}
-
-.btn-direct-call {
-    height: 56px !important;
-    border-color: var(--d-green) !important;
-    color: var(--d-green) !important;
-    background: #fff !important;
-    font-weight: 800 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    transition: all 0.2s ease;
-}
-
-.btn-direct-call:hover {
-    background: var(--d-green) !important;
-    color: #fff !important;
-    transform: scale(1.02);
+    border-color: var(--d-green);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.2);
 }
 
 .drawer-header h3 {
     font-size: 26px;
     color: var(--d-navy);
     font-weight: 800;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     letter-spacing: -0.5px;
+    font-family: 'Outfit', sans-serif;
 }
 
 .drawer-progress {
     display: flex;
-    gap: 6px;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .progress-segment {
     flex: 1;
-    height: 4px;
+    height: 6px;
     background: #f1f5f9;
     border-radius: 10px;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.progress-segment.active { background: var(--d-cyan); width: 40%; }
-.progress-segment.completed { background: var(--d-green); }
+.progress-segment.active { 
+    background: linear-gradient(90deg, var(--d-cyan) 0%, #3b82f6 100%); 
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+.progress-segment.completed { 
+    background: var(--d-green); 
+}
 
 .drawer-content {
     flex: 1;
-    padding: 0 40px 40px;
+    padding: 10px 40px 30px;
     overflow-y: auto;
 }
 
 .drawer-step {
     display: none;
-    animation: drawer-fade-in 0.4s ease-out;
+    animation: drawer-fade-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.drawer-step.active { display: block; }
+.drawer-step.active { 
+    display: block; 
+}
 
 @keyframes drawer-fade-in {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .step-desc {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--d-muted);
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     line-height: 1.5;
 }
 
-/* Option Cards - Premium List Style */
+/* Option Cards - Premium Interactive Tile Style */
 .options-stack {
     display: flex;
     flex-direction: column;
@@ -7051,42 +7015,50 @@ Replaces old split-image desktop hero
 }
 
 .option-card {
-    background: #fff;
-    border: 1.5px solid var(--d-border);
-    border-radius: 18px;
-    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 18px 20px;
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 16px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
 }
 
 .option-card:hover {
     border-color: var(--d-cyan);
-    background: var(--d-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(5, 32, 68, 0.08);
 }
 
 .option-card.selected {
     border-color: var(--d-green);
-    background: #f0fdf4;
+    background: rgba(22, 163, 74, 0.03);
+    box-shadow: 0 8px 24px -5px rgba(22, 163, 74, 0.12), inset 0 0 0 1px rgba(22, 163, 74, 0.1);
 }
 
 .option-card-icon {
-    font-size: 28px;
+    font-size: 26px;
     background: #f8fafc;
-    width: 54px;
-    height: 54px;
+    width: 52px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.option-card:hover .option-card-icon {
+    transform: scale(1.05);
 }
 
 .option-card.selected .option-card-icon {
-    background: #fff;
-    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.1);
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.12);
 }
 
 .option-card-info {
@@ -7095,7 +7067,7 @@ Replaces old split-image desktop hero
 }
 
 .option-card-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--d-navy);
 }
@@ -7103,45 +7075,116 @@ Replaces old split-image desktop hero
 .option-card-subtitle {
     font-size: 13px;
     color: var(--d-muted);
-    margin-top: 2px;
+    margin-top: 1px;
+}
+
+/* Dual Approach & Split Form layout (Step 3) */
+.dual-approach-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.approach-box {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+}
+
+.approach-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--d-navy);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.approach-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-weight: 800;
+    font-size: 11px;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.approach-divider::before, .approach-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #f1f5f9;
+}
+
+.approach-divider span {
+    padding: 0 16px;
+}
+
+.btn-direct-call {
+    height: 52px !important;
+    border-color: var(--d-green) !important;
+    color: var(--d-green) !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    font-weight: 800 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.05);
+}
+
+.btn-direct-call:hover {
+    background: var(--d-green) !important;
+    color: #ffffff !important;
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.2) !important;
 }
 
 /* Unified Form */
 .consultation-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .form-group label {
     display: block;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--d-navy);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .drawer-input {
     width: 100%;
-    height: 56px;
-    padding: 0 20px;
+    height: 52px;
+    padding: 0 16px;
     background: #f8fafc;
-    border: 1.5px solid var(--d-border);
-    border-radius: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
     font-family: 'Outfit', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     color: var(--d-navy);
     outline: none;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .drawer-input:focus {
-    background: #fff;
+    background: #ffffff;
     border-color: var(--d-cyan);
-    box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.1);
+    box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
 }
 
 .secure-info {
@@ -7153,82 +7196,118 @@ Replaces old split-image desktop hero
     background: #f8fafc;
     padding: 12px;
     border-radius: 10px;
+    border: 1px solid #f1f5f9;
 }
 
 .btn-finalize {
-    height: 60px !important;
-    font-size: 17px !important;
+    height: 54px !important;
+    font-size: 16px !important;
+    border-radius: 12px !important;
     margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
+    font-weight: 800;
+    box-shadow: 0 4px 14px rgba(5, 32, 68, 0.15);
 }
 
-/* Success Workspace */
+/* Success Step (Step 4) */
 .success-workspace {
     text-align: center;
     padding: 20px 0;
 }
 
 .success-anim-icon {
-    font-size: 60px;
-    margin-bottom: 20px;
+    font-size: 54px;
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    background: rgba(22, 163, 74, 0.08);
+    border-radius: 50%;
+    color: var(--d-green);
+    border: 2px solid rgba(22, 163, 74, 0.12);
+    animation: success-pulse 2s infinite;
+}
+
+@keyframes success-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.2); }
+    70% { box-shadow: 0 0 0 20px rgba(22, 163, 74, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
 }
 
 .success-workspace h4 {
     font-size: 24px;
     color: var(--d-navy);
     margin-bottom: 12px;
+    font-weight: 800;
 }
 
 .success-next-steps {
     text-align: left;
     background: #f8fafc;
-    padding: 24px;
-    border-radius: 20px;
-    margin: 30px 0;
+    padding: 20px 24px;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
+    margin: 24px 0;
 }
 
 .success-next-steps h5 {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--d-navy);
     margin-bottom: 12px;
     font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .success-next-steps ul {
     list-style: none;
     font-size: 14px;
-    color: var(--d-muted);
+    color: var(--d-text);
+    padding: 0;
 }
 
 .success-next-steps li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .success-next-steps li::before {
-    content: "→";
+    content: "✓";
     color: var(--d-green);
     font-weight: 900;
+    font-size: 14px;
+    background: rgba(22, 163, 74, 0.08);
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
-/* Footer Nav */
+/* Footer Navigation Controls */
 .drawer-footer {
-    padding: 30px 40px 60px;
+    padding: 24px 40px 40px;
     border-top: 1px solid #f1f5f9;
     display: flex;
     gap: 12px;
+    background: transparent;
 }
 
 .btn-drawer-back {
     flex: 1;
-    height: 54px;
+    height: 52px;
     background: #f1f5f9;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     color: var(--d-navy);
     font-weight: 700;
     cursor: pointer;
@@ -7237,24 +7316,138 @@ Replaces old split-image desktop hero
     justify-content: center;
     gap: 8px;
     transition: all 0.2s ease;
+    font-size: 14px;
 }
 
-.btn-drawer-back:hover { background: #e2e8f0; }
+.btn-drawer-back:hover { 
+    background: #e2e8f0; 
+}
 
 .btn-drawer-next {
     flex: 2;
-    height: 54px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    border-radius: 14px !important;
+    gap: 8px;
+    border-radius: 12px !important;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
 }
 
+.btn-drawer-next:hover {
+    box-shadow: 0 6px 16px rgba(22, 163, 74, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Mobile optimizations for the enquiry drawer */
 @media (max-width: 600px) {
-    .drawer-header, .drawer-content, .drawer-footer {
-        padding-left: 24px;
-        padding-right: 24px;
+    .enquiry-drawer {
+        max-width: 100%;
+        border-left: none;
     }
-    .drawer-header { padding-top: 80px; }
+    .drawer-close-btn {
+        right: 16px;
+        top: 16px;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+    .drawer-header {
+        padding: 56px 20px 16px;
+    }
+    .drawer-top-actions {
+        margin-bottom: 16px;
+        padding-right: 40px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .drawer-trust-badge, .direct-call-link {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+    .drawer-header h3 {
+        font-size: 21px;
+        margin-bottom: 16px;
+    }
+    .drawer-content {
+        padding: 10px 20px 20px;
+    }
+    .step-desc {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+    .options-stack {
+        gap: 10px;
+    }
+    .option-card {
+        padding: 12px 14px;
+        gap: 12px;
+        border-radius: 12px;
+    }
+    .option-card-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+        border-radius: 10px;
+    }
+    .option-card-title {
+        font-size: 14px;
+    }
+    .option-card-subtitle {
+        font-size: 12px;
+    }
+    .drawer-job-cta {
+        margin-top: 16px !important;
+        padding: 12px !important;
+    }
+    .dual-approach-container {
+        gap: 16px;
+    }
+    .approach-box {
+        padding: 0;
+    }
+    .approach-title {
+        font-size: 11px;
+        margin-bottom: 8px;
+    }
+    .drawer-input {
+        height: 48px;
+        font-size: 14px;
+        padding: 0 14px;
+        border-radius: 10px;
+    }
+    .btn-finalize, .btn-direct-call {
+        height: 48px !important;
+        font-size: 14px !important;
+        border-radius: 10px !important;
+    }
+    .success-anim-icon {
+        width: 76px;
+        height: 76px;
+        font-size: 44px;
+    }
+    .success-workspace h4 {
+        font-size: 20px;
+    }
+    .success-next-steps {
+        padding: 16px 20px;
+        margin: 16px 0;
+    }
+    .success-next-steps h5 {
+        font-size: 12px;
+    }
+    .success-next-steps li {
+        font-size: 13px;
+    }
+    .drawer-footer {
+        padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+        gap: 10px;
+    }
+    .btn-drawer-back, .btn-drawer-next {
+        height: 48px;
+        font-size: 13px;
+        border-radius: 10px !important;
+    }
 }
