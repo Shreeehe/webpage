@@ -225,6 +225,7 @@ def generate_location_pages():
         content = content.replace('href="careers.html"', 'href="../careers.html"')
         content = content.replace('href="privacy-policy.html"', 'href="../privacy-policy.html"')
         content = content.replace('href="terms.html"', 'href="../terms.html"')
+        content = content.replace('href="blog/', 'href="../blog/')
 
         # 8. Write the file
         output_file = os.path.join(LOCATIONS_DIR, f"{slug}.html")

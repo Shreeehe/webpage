@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dynamic Logic for existing page buttons
     document.body.addEventListener('click', (e) => {
-        const target = e.target.closest('a[href*="tally.so/r/xXP829"]');
+        const target = e.target.closest('a[href="#enquiry"]');
         if (!target) return;
         e.preventDefault();
 

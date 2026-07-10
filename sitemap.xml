@@ -25,6 +25,14 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Blog Page - Why Home Healthcare Matters -->
+    <url>
+        <loc>https://aksrayahealthcare.com/blog/why-home-healthcare-matters-more-than-ever.html</loc>
+        <lastmod>2026-07-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- About Section - Redirect handler -->
     <url>
         <loc>https://aksrayahealthcare.com/about/</loc>
