@@ -145,10 +145,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const parent = btn.closest('.nav-dropdown');
+            if (parent) {
+                const isOpen = parent.classList.contains('active');
+                document.querySelectorAll('.nav-dropdown.active').forEach(d => d.classList.remove('active'));
+                if (!isOpen) {
+                    parent.classList.add('active');
+                    btn.setAttribute('aria-expanded', 'true');
+                } else {
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+    });
+
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             if (menuToggle) menuToggle.classList.remove('active');
+            document.querySelectorAll('.nav-dropdown.active').forEach(d => d.classList.remove('active'));
         });
     });
 
@@ -586,3 +604,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 })();
+
+// ─── Pricing Overview Strip Toggle (Homepage) ────────────────
+const overviewBtns = document.querySelectorAll('.overview-toggle-btn');
+if (overviewBtns.length) {
+    overviewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            overviewBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const tab = btn.dataset.overview;
+            const grid12 = document.getElementById('overview-12hr-grid');
+            const grid24 = document.getElementById('overview-24hr-grid');
+            if (grid12 && grid24) {
+                if (tab === '12hr') {
+                    grid12.style.display = 'grid';
+                    grid24.style.display = 'none';
+                } else {
+                    grid12.style.display = 'none';
+                    grid24.style.display = 'grid';
+                }
+            }
+        });
+    });
+}
+
+// ─── Service Page FAQ Accordion ──────────────────────────────
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isOpen = item.classList.contains('active');
+        // Close all
+        document.querySelectorAll('.faq-item.active').forEach(openItem => {
+            openItem.classList.remove('active');
+            openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        // Open clicked if it was closed
+        if (!isOpen) {
+            item.classList.add('active');
+            question.setAttribute('aria-expanded', 'true');
+        }
+    });
+    question.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            question.click();
+        }
+    });
+});
