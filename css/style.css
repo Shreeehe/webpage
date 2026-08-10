@@ -218,6 +218,166 @@ ul {
     width: 100%;
 }
 
+/* Custom Hero Manager Contacts Card Widget */
+.hero-manager-cards {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 480px;
+    flex-wrap: wrap;
+}
+
+.hero-manager-card {
+    flex: 1;
+    min-width: 220px;
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+/* Light theme variants (used in index.html) */
+.hero-manager-card.theme-light {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+.hero-manager-card.theme-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e1;
+}
+
+/* Dark theme variants (used in service pages) */
+.hero-manager-card.theme-dark {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.hero-manager-card.theme-dark:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.manager-card-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.manager-card-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+.manager-card-status-dot.dot-green {
+    background-color: #16a34a;
+    box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
+}
+.manager-card-status-dot.dot-blue {
+    background-color: #0284c7;
+    box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
+}
+
+.manager-card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.manager-card-role {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    line-height: 1;
+}
+.hero-manager-card.theme-light .manager-card-role {
+    color: #64748b;
+}
+.hero-manager-card.theme-dark .manager-card-role {
+    color: #94a3b8;
+}
+
+.manager-card-name {
+    font-size: 14.5px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+.hero-manager-card.theme-light .manager-card-name {
+    color: #052044;
+}
+.hero-manager-card.theme-dark .manager-card-name {
+    color: #ffffff;
+}
+
+.manager-card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.btn-manager-action {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Call actions style */
+.btn-manager-action.action-call {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+.btn-manager-action.action-call:hover {
+    background: #bae6fd;
+    transform: translateY(-1px);
+}
+
+/* WhatsApp actions style */
+.btn-manager-action.action-whatsapp {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+.btn-manager-action.action-whatsapp:hover {
+    background: #bbf7d0;
+    transform: translateY(-1px);
+}
+
+/* Dark theme specific overrides for actions to keep high premium contrast */
+.hero-manager-card.theme-dark .btn-manager-action.action-call {
+    background: rgba(2, 132, 199, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(2, 132, 199, 0.3);
+}
+.hero-manager-card.theme-dark .btn-manager-action.action-call:hover {
+    background: rgba(2, 132, 199, 0.25);
+    border-color: rgba(2, 132, 199, 0.5);
+}
+
+.hero-manager-card.theme-dark .btn-manager-action.action-whatsapp {
+    background: rgba(22, 163, 74, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(22, 163, 74, 0.3);
+}
+.hero-manager-card.theme-dark .btn-manager-action.action-whatsapp:hover {
+    background: rgba(22, 163, 74, 0.25);
+    border-color: rgba(22, 163, 74, 0.5);
+}
+
 /* Navbar */
 .navbar {
     position: fixed;
