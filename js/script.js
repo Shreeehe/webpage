@@ -432,6 +432,109 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ─── Pricing Calculator ───────────────────────────────────────────
+    const calcServiceCards = document.querySelectorAll('.service-option-card');
+    const calcShiftBtns = document.querySelectorAll('.shift-btn');
+    const daysSlider = document.getElementById('days-slider');
+    const daysDisplay = document.getElementById('days-display');
+    
+    let calcState = {
+        service: 'care-assistant',
+        shift: 12,
+        days: 15
+    };
+    
+    const calcPricingData = {
+        'care-assistant': { 12: 999, 24: 1299, name: 'Care Assistant' },
+        'nursing-assistant': { 12: 1299, 24: 1499, name: 'Nursing Assistant' },
+        'nursing-service': { 12: 1799, 24: 2499, name: 'Nursing Service' },
+        'baby-care': { 12: 1800, 24: 2600, name: 'Baby Care' }
+    };
+    
+    function updateCalculator() {
+        if (!daysSlider) return;
+        
+        const baseRate = calcPricingData[calcState.service][calcState.shift];
+        const days = calcState.days;
+        const total = baseRate * days;
+        
+        // Update DOM
+        const serviceBadge = document.getElementById('calc-service-badge');
+        const baseRateEl = document.getElementById('calc-base-rate');
+        const durationEl = document.getElementById('calc-duration');
+        const totalEl = document.getElementById('calc-total');
+        const disclaimerEl = document.getElementById('calc-disclaimer');
+        const waBtn = document.getElementById('calc-wa-btn');
+        
+        if (serviceBadge) serviceBadge.textContent = `${calcPricingData[calcState.service].name} (${calcState.shift}hrs)`;
+        if (baseRateEl) baseRateEl.textContent = `₹${baseRate.toLocaleString('en-IN')} / shift`;
+        if (durationEl) durationEl.textContent = `${days} Day${days > 1 ? 's' : ''}`;
+        
+        if (totalEl) {
+            const valRow = totalEl.closest('.total-value-row');
+            if (valRow) {
+                valRow.classList.remove('pop');
+                void valRow.offsetWidth; // trigger reflow
+                valRow.classList.add('pop');
+                setTimeout(() => valRow.classList.remove('pop'), 200);
+            }
+            totalEl.textContent = total.toLocaleString('en-IN');
+        }
+
+        // Dynamic disclaimer text based on shift duration
+        if (disclaimerEl) {
+            if (calcState.shift === 24) {
+                disclaimerEl.innerHTML = `<strong>*Note:</strong> Food for the caregiver/nurse to be provided by the client. Final pricing depends on clinical case assessment.`;
+            } else {
+                disclaimerEl.innerHTML = `<strong>*Note:</strong> Food &amp; transport allowances to be discussed with manager (depends on timings/location).`;
+            }
+        }
+        
+        // Update WhatsApp href
+        if (waBtn) {
+            const msg = `Hello Aksraya Health Care, I'd like to enquire about the care plan estimated on your website:\n\n` +
+                        `- Service: ${calcPricingData[calcState.service].name}\n` +
+                        `- Shift: ${calcState.shift}-Hour Shift\n` +
+                        `- Duration: ${days} Day${days > 1 ? 's' : ''}\n` +
+                        `- Estimated Package Cost: ₹${total.toLocaleString('en-IN')}\n\n` +
+                        `Please contact me to arrange a consultation. Thank you!`;
+            waBtn.href = `https://wa.me/918310962174?text=${encodeURIComponent(msg)}`;
+        }
+    }
+    
+    if (calcServiceCards.length) {
+        calcServiceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                calcServiceCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                calcState.service = card.getAttribute('data-service');
+                updateCalculator();
+            });
+        });
+    }
+    
+    if (calcShiftBtns.length) {
+        calcShiftBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                calcShiftBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                calcState.shift = parseInt(btn.getAttribute('data-shift'));
+                updateCalculator();
+            });
+        });
+    }
+    
+    if (daysSlider) {
+        daysSlider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            calcState.days = val;
+            if (daysDisplay) daysDisplay.textContent = `${val} Day${val > 1 ? 's' : ''}`;
+            updateCalculator();
+        });
+    }
+    
+    updateCalculator();
 });
 
 // =============================================
@@ -459,7 +562,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentStep = 1;
     let leadId = null;
-    let data = { condition: '', careType: '', urgency: '', name: '', phone: '' };
+    let data = { condition: '', careType: '', urgency: '', name: '', phone: '', calculatorEstimate: null };
+
+    const pricingDataMap = {
+        'care-assistant': { 12: 999, 24: 1299, name: 'Care Assistant' },
+        'nursing-assistant': { 12: 1299, 24: 1499, name: 'Nursing Assistant' },
+        'nursing-service': { 12: 1799, 24: 2499, name: 'Nursing Service' },
+        'baby-care': { 12: 1800, 24: 2600, name: 'Baby Care' }
+    };
 
     const titles = {
         1: "Who are you caring for?",
@@ -478,6 +588,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (backBtn) backBtn.style.visibility = (currentStep > 1 && currentStep < 4) ? 'visible' : 'hidden';
         if (nextBtn) nextBtn.style.display = (currentStep >= 3) ? 'none' : 'block';
+        
+        // Show/hide calculator summary in Step 3
+        const summaryDiv = document.getElementById('drawer-calculator-summary');
+        if (summaryDiv) {
+            if (currentStep === 3 && data.calculatorEstimate) {
+                document.getElementById('drawer-summary-plan').textContent = data.calculatorEstimate.planName;
+                document.getElementById('drawer-summary-days').textContent = `${data.calculatorEstimate.days} Day${data.calculatorEstimate.days > 1 ? 's' : ''}`;
+                document.getElementById('drawer-summary-cost').textContent = data.calculatorEstimate.cost;
+                summaryDiv.style.display = 'block';
+            } else {
+                summaryDiv.style.display = 'none';
+            }
+        }
         
         validate();
     }
@@ -546,13 +669,18 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Securing lead...';
 
+            let submissionName = n;
+            if (data.calculatorEstimate) {
+                submissionName += ` [Estimate: ${data.calculatorEstimate.planName} for ${data.calculatorEstimate.days} days - ${data.calculatorEstimate.cost}]`;
+            }
+
             try {
                 if (sb) {
                     await sb.from('enquiries').insert([{
                         condition: data.condition,
                         care_type: data.careType,
                         urgency: u,
-                        name: n,
+                        name: submissionName,
                         phone: p
                     }]);
                 }
@@ -562,32 +690,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Dynamic Logic for existing page buttons
+    // Dynamic Logic for existing page buttons and calculator enquire button
     document.body.addEventListener('click', (e) => {
         const target = e.target.closest('a[href="#enquiry"]');
         if (!target) return;
         e.preventDefault();
 
         // Reset
-        data = { condition: '', careType: '', urgency: '', name: '', phone: '' };
+        data = { condition: '', careType: '', urgency: '', name: '', phone: '', calculatorEstimate: null };
         document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
         document.getElementById('drawerName').value = '';
         document.getElementById('drawerPhone').value = '';
         document.getElementById('drawerUrgency').value = '';
 
         const pricingCard = target.closest('.pricing-v2-card');
+        const isCalculator = target.closest('#price-calculator') || target.id === 'calc-enquire-btn';
+
         if (pricingCard) {
             const planName = pricingCard.querySelector('.pricing-v2-name').textContent.trim();
             let type = "";
             if (planName.includes('Home Trained') || planName.includes('Care Assistant')) type = 'Caretaker';
             else if (planName.includes('Nursing Assistant')) type = 'Nursing Assistant';
             else if (planName.includes('Nursing Service')) type = 'Nursing Staff';
+            else if (planName.includes('Baby Care')) type = 'Baby Care';
             
             if (type) {
                 data.careType = type;
                 document.querySelectorAll('[data-step="2"] .option-card').forEach(c => {
                     c.classList.toggle('selected', c.dataset.value === type);
                 });
+            }
+        } else if (isCalculator) {
+            // Read current calculator UI state
+            const activeService = document.querySelector('.service-option-card.active');
+            const activeShift = document.querySelector('.shift-btn.active');
+            const slider = document.getElementById('days-slider');
+
+            if (activeService && activeShift && slider) {
+                const serviceVal = activeService.getAttribute('data-service');
+                const shiftVal = parseInt(activeShift.getAttribute('data-shift'));
+                const daysVal = parseInt(slider.value);
+
+                let type = "";
+                if (serviceVal === 'care-assistant') type = 'Caretaker';
+                else if (serviceVal === 'nursing-assistant') type = 'Nursing Assistant';
+                else if (serviceVal === 'nursing-service') type = 'Nursing Staff';
+                else if (serviceVal === 'baby-care') type = 'Baby Care';
+
+                if (type) {
+                    data.careType = type;
+                    document.querySelectorAll('[data-step="2"] .option-card').forEach(c => {
+                        c.classList.toggle('selected', c.dataset.value === type);
+                    });
+                }
+
+                // Cost math (no discount)
+                const baseRate = pricingDataMap[serviceVal][shiftVal];
+                const totalCost = baseRate * daysVal;
+
+                data.calculatorEstimate = {
+                    planName: `${pricingDataMap[serviceVal].name} (${shiftVal}hrs)`,
+                    days: daysVal,
+                    cost: `₹${totalCost.toLocaleString('en-IN')}`
+                };
             }
         }
         
@@ -651,3 +816,87 @@ document.querySelectorAll('.faq-question').forEach(question => {
         }
     });
 });
+
+// ─── Mobile Bottom Sheet Action Controller ───────────────────
+(function() {
+    const callTrigger = document.getElementById('toolbar-call-trigger');
+    const msgTrigger = document.getElementById('toolbar-msg-trigger');
+    const overlay = document.getElementById('bottomSheetOverlay');
+    const closeBtn = document.getElementById('closeBottomSheet');
+    
+    // Dynamic text selectors
+    const titleEl = document.getElementById('bottomSheetTitle');
+    const subtitleEl = document.getElementById('bottomSheetSubtitle');
+    const opt1 = document.getElementById('sheet-opt-1');
+    const opt2 = document.getElementById('sheet-opt-2');
+    const icon1 = document.getElementById('sheet-icon-1');
+    const icon2 = document.getElementById('sheet-icon-2');
+    const title1 = document.getElementById('sheet-title-1');
+    const title2 = document.getElementById('sheet-title-2');
+    const desc1 = document.getElementById('sheet-desc-1');
+    const desc2 = document.getElementById('sheet-desc-2');
+
+    if (!callTrigger || !msgTrigger || !overlay) return;
+
+    function openSheet() {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSheet() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    callTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        titleEl.textContent = 'Call Our Managers';
+        subtitleEl.textContent = "Direct telephonic assessment for urgent care needs";
+        
+        opt1.href = 'tel:+918310962174';
+        icon1.textContent = '📞';
+        title1.textContent = 'Call Care Manager (Hobinath)';
+        desc1.textContent = 'For scheduling callbacks, pricing, and general assistance';
+
+        opt2.href = 'tel:+917483579231';
+        icon2.textContent = '📞';
+        title2.textContent = 'Call Nursing Manager (RamKumar)';
+        desc2.textContent = 'For clinical case assessment and nurse assignments';
+
+        openSheet();
+    });
+
+    msgTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        titleEl.textContent = 'WhatsApp Our Managers';
+        subtitleEl.textContent = "Send text enquiries for rapid match updates";
+        
+        opt1.href = 'https://wa.me/918310962174';
+        icon1.textContent = '💬';
+        title1.textContent = 'WhatsApp Care Manager';
+        desc1.textContent = 'Chat for details on rates, pricing sheets, and timing';
+
+        opt2.href = 'https://wa.me/917483579231';
+        icon2.textContent = '💬';
+        title2.textContent = 'WhatsApp Nursing Manager';
+        desc2.textContent = 'Chat for details on clinical staff credentials and scheduling';
+
+        openSheet();
+    });
+
+    closeBtn.addEventListener('click', closeSheet);
+    
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            closeSheet();
+        }
+    });
+
+    // Handle clicks inside sheet content to prevent closure
+    const sheet = document.getElementById('bottomSheet');
+    if (sheet) {
+        sheet.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+})();

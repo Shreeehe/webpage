@@ -996,6 +996,114 @@
                     </div>
                 </div>
 
+                <!-- Interactive Pricing Calculator Component -->
+                <div class="pricing-calculator-container fade-in" id="price-calculator" style="margin-top: 50px;">
+                    <div class="calculator-card">
+                        <div class="calculator-header">
+                            <span class="calc-badge">Cost Estimator</span>
+                            <h3>Estimate Your Care Package</h3>
+                            <p>Select your required service level, shift duration, and number of days to view the estimated pricing details and custom package savings.</p>
+                        </div>
+                        
+                        <div class="calculator-body-grid">
+                            <!-- Left: Controls -->
+                            <div class="calculator-controls">
+                                <div class="calc-control-group">
+                                    <label class="calc-label">1. Choose Service Level</label>
+                                    <div class="service-select-grid">
+                                        <div class="service-option-card active" data-service="care-assistant">
+                                            <span class="option-icon">👵</span>
+                                            <span class="option-title">Care Assistant</span>
+                                            <span class="option-desc">Daily routine help</span>
+                                        </div>
+                                        <div class="service-option-card" data-service="nursing-assistant">
+                                            <span class="option-icon">🧑‍⚕️</span>
+                                            <span class="option-title">Nursing Assistant</span>
+                                            <span class="option-desc">Bedside & medical support</span>
+                                        </div>
+                                        <div class="service-option-card" data-service="nursing-service">
+                                            <span class="option-icon">💉</span>
+                                            <span class="option-title">Nursing Service</span>
+                                            <span class="option-desc">Professional clinical care</span>
+                                        </div>
+                                        <div class="service-option-card" data-service="baby-care">
+                                            <span class="option-icon">👶</span>
+                                            <span class="option-title">Baby Care</span>
+                                            <span class="option-desc">Newborn & mother support</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="calc-control-group">
+                                    <label class="calc-label">2. Select Shift Duration</label>
+                                    <div class="shift-select-row">
+                                        <button class="shift-btn active" data-shift="12">
+                                            <strong>12-Hour Shift</strong>
+                                            <span>Day or Night support</span>
+                                        </button>
+                                        <button class="shift-btn" data-shift="24">
+                                            <strong>24-Hour Shift</strong>
+                                            <span>Full-day continuous support</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="calc-control-group">
+                                    <div class="calc-label-row">
+                                        <label class="calc-label">3. Select Duration (Days)</label>
+                                        <span class="days-value-bubble" id="days-display">15 Days</span>
+                                    </div>
+                                    <div class="slider-container">
+                                        <input type="range" min="10" max="30" value="15" class="days-slider" id="days-slider">
+                                        <div class="slider-ticks">
+                                            <span>10 days (Min)</span>
+                                            <span>20 days</span>
+                                            <span>30 days (Monthly)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right: Result Display Card -->
+                            <div class="calculator-results">
+                                <div class="result-summary-card">
+                                    <div class="result-top-badge" id="calc-service-badge">Care Assistant (12hrs)</div>
+                                    
+                                    <div class="pricing-breakdown">
+                                        <div class="breakdown-row">
+                                            <span>Base Rate</span>
+                                            <span id="calc-base-rate">₹999 / day</span>
+                                        </div>
+                                        <div class="breakdown-row">
+                                            <span>Duration</span>
+                                            <span id="calc-duration">15 Days</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="result-divider"></div>
+                                    
+                                    <div class="total-cost-box">
+                                        <span class="total-label">Estimated Cost</span>
+                                        <div class="total-value-row">
+                                            <span class="total-currency">₹</span>
+                                            <span class="total-price" id="calc-total">14,985</span>
+                                        </div>
+                                        <span class="total-pricing-disclaimer" id="calc-disclaimer">*Food &amp; transport allowances to be discussed with manager. Final pricing depends on clinical case assessment.</span>
+                                    </div>
+                                    
+                                    <div class="result-cta-group">
+                                        <a href="#enquiry" class="btn btn-primary btn-block" id="calc-enquire-btn" style="text-align: center;">Enquire for this Estimate →</a>
+                                        <a href="https://wa.me/918310962174" target="_blank" rel="noopener noreferrer" class="btn btn-outline-whatsapp btn-block" id="calc-wa-btn" style="display: flex; align-items: center; justify-content: center; text-decoration: none; gap: 8px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3.5Z"></path></svg>
+                                            Get Estimate on WhatsApp
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="pricing-v2-note fade-in">
                     <p>All home trained (HTD), nursing assistant, and nursing service plans are available in 12hrs and 24hrs
                         shifts based on client wishes and requirements.</p>
@@ -1544,11 +1652,25 @@
                                 <span class="option-card-subtitle">Advanced clinical nursing • ₹2,499/day</span>
                             </div>
                         </div>
+                        <div class="option-card" data-value="Baby Care">
+                            <div class="option-card-icon">👶</div>
+                            <div class="option-card-info">
+                                <span class="option-card-title">Baby Care</span>
+                                <span class="option-card-subtitle">Newborn & postnatal support • ₹2,600/day</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Step 3: Unified Action Form -->
                 <div class="drawer-step" data-step="3">
+                    <!-- Calculator Summary Display (dynamically populated if coming from calculator) -->
+                    <div id="drawer-calculator-summary" style="display:none; margin-bottom:20px; padding:14px; border-radius:12px; background:rgba(22, 163, 74, 0.05); border:1px solid rgba(22, 163, 74, 0.2); color:var(--primary-color); font-size:14px;">
+                        <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #16a34a; letter-spacing: 1px; display: block; margin-bottom: 4px;">Selected Care Estimate</span>
+                        Selected: <strong id="drawer-summary-plan" style="color:var(--primary-color);">Care Assistant (12hrs)</strong> for <strong id="drawer-summary-days">15 Days</strong>.<br>
+                        Estimated Package Cost: <strong id="drawer-summary-cost" style="color:#16a34a; font-size:16px;">₹13,786</strong>
+                    </div>
+
                     <div class="dual-approach-container">
                         <div class="approach-box">
                             <h4 class="approach-title">Option 1: We call you</h4>
@@ -1637,8 +1759,7 @@
     <div id="mobile-toolbar" class="mobile-toolbar">
         <div class="toolbar-container">
 
-            <a href="#enquiry"
-                class="toolbar-btn toolbar-action-appointment">
+            <a href="#enquiry" class="toolbar-btn toolbar-action-appointment">
                 <span class="toolbar-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
                         stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1653,52 +1774,66 @@
 
             <div class="toolbar-divider"></div>
 
-            <a href="tel:+918310962174" class="toolbar-btn toolbar-action-call" title="Call Care Manager Hobinath">
+            <!-- Call Trigger Button -->
+            <button type="button" class="toolbar-btn toolbar-trigger" id="toolbar-call-trigger">
                 <span class="toolbar-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                         stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
                 </span>
-                <span style="font-size: 8px; margin-top: 2px;">Care Mgr</span>
-            </a>
+                <span>Call Us</span>
+            </button>
 
-            <a href="tel:+917483579231" class="toolbar-btn toolbar-action-call" title="Call Nursing Manager RamKumar" style="background-color: #0284c7;">
+            <div class="toolbar-divider"></div>
+
+            <!-- Message Trigger Button -->
+            <button type="button" class="toolbar-btn toolbar-trigger" id="toolbar-msg-trigger">
                 <span class="toolbar-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3.5Z" />
                     </svg>
                 </span>
-                <span style="font-size: 8px; margin-top: 2px;">Nursing Mgr</span>
-            </a>
+                <span>Message</span>
+            </button>
 
-            <a href="https://wa.me/918310962174" target="_blank" rel="noopener noreferrer"
-                class="toolbar-btn toolbar-action-whatsapp" title="WhatsApp Care Manager Hobinath">
-                <span class="toolbar-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3.5Z">
-                        </path>
-                    </svg>
-                </span>
-                <span style="font-size: 8px; margin-top: 2px;">WA Care</span>
-            </a>
+        </div>
+    </div>
 
-            <a href="https://wa.me/917483579231" target="_blank" rel="noopener noreferrer"
-                class="toolbar-btn toolbar-action-whatsapp" title="WhatsApp Nursing Manager RamKumar" style="background-color: #128c7e;">
-                <span class="toolbar-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3.5Z">
-                        </path>
-                    </svg>
-                </span>
-                <span style="font-size: 8px; margin-top: 2px;">WA Nurse</span>
-            </a>
-
+    <!-- Native-style Bottom Sheet for Call/Message -->
+    <div class="bottom-sheet-overlay" id="bottomSheetOverlay">
+        <div class="bottom-sheet" id="bottomSheet">
+            <div class="bottom-sheet-drag-handle"></div>
+            <div class="bottom-sheet-header">
+                <h4 id="bottomSheetTitle">Contact Our Managers</h4>
+                <p id="bottomSheetSubtitle">Choose who you want to speak with</p>
+            </div>
+            <div class="bottom-sheet-body">
+                <!-- Option 1 -->
+                <a href="#" class="sheet-option-card" id="sheet-opt-1">
+                    <div class="sheet-option-icon" id="sheet-icon-1">📞</div>
+                    <div class="sheet-option-details">
+                        <span class="sheet-option-title" id="sheet-title-1">Care Manager (Hobinath)</span>
+                        <span class="sheet-option-desc" id="sheet-desc-1">For pricing, bookings & general care management</span>
+                    </div>
+                    <div class="sheet-option-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </div>
+                </a>
+                <!-- Option 2 -->
+                <a href="#" class="sheet-option-card" id="sheet-opt-2">
+                    <div class="sheet-option-icon" id="sheet-icon-2">📞</div>
+                    <div class="sheet-option-details">
+                        <span class="sheet-option-title" id="sheet-title-2">Nursing Manager (RamKumar)</span>
+                        <span class="sheet-option-desc" id="sheet-desc-2">For clinical questions, nursing allocations & case monitoring</span>
+                    </div>
+                    <div class="sheet-option-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </div>
+                </a>
+            </div>
+            <button type="button" class="bottom-sheet-close-btn" id="closeBottomSheet">Cancel</button>
         </div>
     </div>
 </body>
