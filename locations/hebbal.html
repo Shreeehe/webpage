@@ -842,6 +842,129 @@
             </div>
         </section>
 
+        <!-- Care Wizard Section -->
+        <section id="care-wizard" class="section care-wizard-section" role="region" aria-label="Care Finder Wizard">
+            <div class="container">
+                <div class="section-header fade-in" style="text-align: center; max-width: 650px; margin: 0 auto 50px auto;">
+                    <span class="section-subtitle">Care Finder</span>
+                    <h2>Help Me Choose the Right Plan</h2>
+                    <p>Not sure which service fits your family's needs? Answer 3 quick questions to find the ideal match and pricing estimate instantly.</p>
+                </div>
+
+                <div class="wizard-card fade-in">
+                    <!-- Progress Tracker -->
+                    <div class="wizard-progress">
+                        <div class="wizard-progress-bar" id="wizard-progress-bar" style="width: 0%;"></div>
+                        <div class="wizard-progress-step active" data-step="1">1</div>
+                        <div class="wizard-progress-step" data-step="2">2</div>
+                        <div class="wizard-progress-step" data-step="3">3</div>
+                        <div class="wizard-progress-step" data-step="4">🏁</div>
+                    </div>
+
+                    <!-- Step 1: Profile Selection -->
+                    <div class="wizard-step-panel active" data-step="1">
+                        <h3 class="wizard-step-title">1. Who requires care support?</h3>
+                        <div class="wizard-grid wizard-grid-4">
+                            <div class="wizard-card-option" data-value="elderly">
+                                <span class="option-icon">👵</span>
+                                <h4>Elderly Parent / Senior</h4>
+                                <p>General aging support & care</p>
+                            </div>
+                            <div class="wizard-card-option" data-value="surgery">
+                                <span class="option-icon">🩹</span>
+                                <h4>Surgery / Post-Op</h4>
+                                <p>Recovering from illness or injury</p>
+                            </div>
+                            <div class="wizard-card-option" data-value="bedridden">
+                                <span class="option-icon">🛌</span>
+                                <h4>Bedridden / Stroke</h4>
+                                <p>High mobility and vitals assistance</p>
+                            </div>
+                            <div class="wizard-card-option" data-value="baby">
+                                <span class="option-icon">👶</span>
+                                <h4>Newborn / Mother</h4>
+                                <p>Postnatal baby & infant care</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Need Selection -->
+                    <div class="wizard-step-panel" data-step="2">
+                        <h3 class="wizard-step-title">2. What level of care is required?</h3>
+                        <div class="wizard-grid wizard-grid-3">
+                            <div class="wizard-card-option" data-value="personal">
+                                <span class="option-icon">🤝</span>
+                                <h4>Personal Care & Routine</h4>
+                                <p>Feeding, bathing, companion support</p>
+                            </div>
+                            <div class="wizard-card-option" data-value="basic">
+                                <span class="option-icon">🩺</span>
+                                <h4>Vitals & Medication</h4>
+                                <p>Routine health checks & guidance</p>
+                            </div>
+                            <div class="wizard-card-option" data-value="medical">
+                                <span class="option-icon">💉</span>
+                                <h4>Clinical Support</h4>
+                                <p>Injections, wounds, or special therapy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Shift Selection -->
+                    <div class="wizard-step-panel" data-step="3">
+                        <h3 class="wizard-step-title">3. What is the daily shift duration?</h3>
+                        <div class="wizard-grid wizard-grid-2">
+                            <div class="wizard-card-option" data-value="12">
+                                <span class="option-icon">⏱️</span>
+                                <h4>12 Hours Shift</h4>
+                                <p>Day or night focused assistance</p>
+                            </div>
+                            <div class="wizard-card-option" data-value="24">
+                                <span class="option-icon">☀️</span>
+                                <h4>24 Hours Round-the-Clock</h4>
+                                <p>Continuous coverage & backup assurance</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Recommendation Screen -->
+                    <div class="wizard-step-panel" data-step="4">
+                        <div class="wizard-rec-card">
+                            <span class="wizard-rec-badge" id="wizard-rec-badge">Recommended Service</span>
+                            <h3 class="wizard-rec-title" id="wizard-rec-title">Nursing Assistant</h3>
+                            <p class="wizard-rec-subtitle" id="wizard-rec-subtitle">12 Hours Care plan aligned with your selection</p>
+                            
+                            <div class="wizard-rec-price-box">
+                                <div class="wizard-rec-price" id="wizard-rec-price">₹1,299 <span>/ shift</span></div>
+                            </div>
+                            
+                            <ul class="wizard-rec-features" id="wizard-rec-features">
+                                <li>Bedside vital monitoring & daily tracking</li>
+                                <li>Medication updates under guidance</li>
+                                <li>Personal hygiene & mobility support</li>
+                            </ul>
+
+                            <div class="wizard-rec-actions">
+                                <a href="#enquiry" class="btn btn-primary" id="wizard-book-btn">Book this Plan</a>
+                                <a href="https://wa.me/918310962174" target="_blank" rel="noopener noreferrer" class="btn btn-outline-whatsapp" id="wizard-wa-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9L21 3.5Z"></path></svg>
+                                    WhatsApp Enquiry
+                                </a>
+                            </div>
+                            
+                            <button class="btn-restart" id="wizard-restart-btn">← Start Over</button>
+                        </div>
+                    </div>
+
+                    <!-- Footer Controls -->
+                    <div class="wizard-footer" id="wizard-footer">
+                        <button class="btn btn-outline-blue" id="wizard-back-btn" style="visibility: hidden;">Back</button>
+                        <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;" id="wizard-step-indicator">Step 1 of 3</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Pricing -->
         <section id="pricing" class="section pricing-section pricing-section-v2" role="region"
             aria-label="Service pricing">
@@ -993,6 +1116,91 @@
                             <li>Postnatal mother guidance</li>
                         </ul>
                         <a href="baby-care.html" class="btn btn-outline-blue btn-block">View Plan</a>
+                    </div>
+                </div>
+
+                <!-- Detailed Service Comparison Matrix -->
+                <div class="comparison-section fade-in" id="service-comparison" style="margin-top: 60px;">
+                    <div class="comparison-header">
+                        <span class="section-subtitle">Side-by-Side Comparison</span>
+                        <h3>Which service level is right?</h3>
+                        <p>Compare the training qualifications, medical permissions, and scopes of service for each caregiver level.</p>
+                    </div>
+
+                    <div class="comparison-table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature / Capability</th>
+                                    <th>Care Assistant</th>
+                                    <th>Nursing Assistant</th>
+                                    <th>Professional Nurse</th>
+                                    <th>Baby Care</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="comparison-feature-title">Primary Focus</span>
+                                        <span class="comparison-feature-desc">The core nature of support offered.</span>
+                                    </td>
+                                    <td>Personal support & hygiene</td>
+                                    <td>Bedside monitoring & care</td>
+                                    <td>Advanced clinical nursing</td>
+                                    <td>Newborn & postnatal care</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="comparison-feature-title">Vitals Tracking</span>
+                                        <span class="comparison-feature-desc">BP, blood sugar, temp, oxygen levels.</span>
+                                    </td>
+                                    <td class="comparison-cell-checked">✓ (Basic observation)</td>
+                                    <td class="comparison-cell-checked">✓ (Regular tracking)</td>
+                                    <td class="comparison-cell-checked">✓ (ICU-level charting)</td>
+                                    <td class="comparison-cell-checked">✓ (Baby monitoring)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="comparison-feature-title">Medication Support</span>
+                                        <span class="comparison-feature-desc">Timely alerts and dosing help.</span>
+                                    </td>
+                                    <td class="comparison-cell-checked">✓ (Oral reminders)</td>
+                                    <td class="comparison-cell-checked">✓ (Oral & basic support)</td>
+                                    <td class="comparison-cell-checked">✓ (Injections, IV, infusions)</td>
+                                    <td class="comparison-cell-checked">✓ (Baby medicine checks)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="comparison-feature-title">Bathing & Personal Hygiene</span>
+                                        <span class="comparison-feature-desc">Bathing, diapering, sponge bath support.</span>
+                                    </td>
+                                    <td class="comparison-cell-checked">✓ Full Support</td>
+                                    <td class="comparison-cell-checked">✓ Full Support</td>
+                                    <td>Under medical needs only</td>
+                                    <td class="comparison-cell-checked">✓ Full Baby Care</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="comparison-feature-title">Clinical Procedures</span>
+                                        <span class="comparison-feature-desc">Ryles tube, catheterization, wound dressing.</span>
+                                    </td>
+                                    <td class="comparison-cell-cross">✗ Not Permitted</td>
+                                    <td class="comparison-cell-checked">✓ Basic (Dressing/Medication)</td>
+                                    <td class="comparison-cell-checked">✓ Advanced (Catheter, IV, RT)</td>
+                                    <td class="comparison-cell-cross">✗ Not Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="comparison-feature-title">Starting Prices</span>
+                                        <span class="comparison-feature-desc">Rates vary based on hours.</span>
+                                    </td>
+                                    <td><span class="comparison-cell-tag">₹1,299 / shift</span></td>
+                                    <td><span class="comparison-cell-tag primary">₹1,299 / shift</span></td>
+                                    <td><span class="comparison-cell-tag">₹1,799 / shift</span></td>
+                                    <td><span class="comparison-cell-tag">₹1,800 / shift</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

@@ -705,6 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pricingCard = target.closest('.pricing-v2-card');
         const isCalculator = target.closest('#price-calculator') || target.id === 'calc-enquire-btn';
+        const isWizard = target.hasAttribute('data-care-type');
 
         if (pricingCard) {
             const planName = pricingCard.querySelector('.pricing-v2-name').textContent.trim();
@@ -752,6 +753,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     planName: `${pricingDataMap[serviceVal].name} (${shiftVal}hrs)`,
                     days: daysVal,
                     cost: `₹${totalCost.toLocaleString('en-IN')}`
+                };
+            }
+        } else if (isWizard) {
+            const type = target.getAttribute('data-care-type');
+            const planName = target.getAttribute('data-plan-name');
+            const days = target.getAttribute('data-days');
+            const cost = target.getAttribute('data-cost');
+
+            if (type) {
+                data.careType = type;
+                document.querySelectorAll('[data-step="2"] .option-card').forEach(c => {
+                    c.classList.toggle('selected', c.dataset.value === type);
+                });
+            }
+            if (planName && days && cost) {
+                data.calculatorEstimate = {
+                    planName: planName,
+                    days: parseInt(days),
+                    cost: cost
                 };
             }
         }
@@ -897,6 +917,205 @@ document.querySelectorAll('.faq-question').forEach(question => {
     if (sheet) {
         sheet.addEventListener('click', function(e) {
             e.stopPropagation();
+        });
+    }
+})();
+
+// ─── Interactive Care Finder Wizard Controller ───────────────────
+(function() {
+    let wizardState = {
+        profile: '',
+        need: '',
+        duration: ''
+    };
+    let currentStep = 1;
+
+    const panels = document.querySelectorAll('.wizard-step-panel');
+    const steps = document.querySelectorAll('.wizard-progress-step');
+    const progressBar = document.getElementById('wizard-progress-bar');
+    const backBtn = document.getElementById('wizard-back-btn');
+    const stepIndicator = document.getElementById('wizard-step-indicator');
+    const restartBtn = document.getElementById('wizard-restart-btn');
+    const bookBtn = document.getElementById('wizard-book-btn');
+    const waBtn = document.getElementById('wizard-wa-btn');
+
+    if (panels.length === 0) return;
+
+    function goToStep(step) {
+        currentStep = step;
+        
+        // Show/hide panels
+        panels.forEach((p, idx) => {
+            p.classList.toggle('active', (idx + 1) === step);
+        });
+
+        // Progress bar width
+        const progressPercentage = ((step - 1) / (panels.length - 1)) * 100;
+        if (progressBar) progressBar.style.width = `${progressPercentage}%`;
+
+        // Update progress step indicators
+        steps.forEach((s, idx) => {
+            s.classList.toggle('active', (idx + 1) === step);
+            s.classList.toggle('completed', (idx + 1) < step);
+        });
+
+        // Footer buttons visibility
+        if (backBtn) {
+            backBtn.style.visibility = (step > 1 && step < 4) ? 'visible' : 'hidden';
+        }
+        if (stepIndicator) {
+            if (step < 4) {
+                stepIndicator.style.display = 'block';
+                stepIndicator.textContent = `Step ${step} of 3`;
+            } else {
+                stepIndicator.style.display = 'none';
+            }
+        }
+        
+        // If final step, show recommendation
+        if (step === 4) {
+            showRecommendation();
+        }
+    }
+
+    function showRecommendation() {
+        const profile = wizardState.profile;
+        const need = wizardState.need;
+        const duration = wizardState.duration;
+
+        let rec = {
+            name: 'Care Assistant',
+            duration: duration === '12' ? '12 Hours Care' : '24 Hours Care',
+            price: duration === '12' ? '₹1,299 / shift' : '₹1,499 / day',
+            value: 'Caretaker',
+            badge: duration === '12' ? 'Ideal for Routine Assistance' : 'Best for the Bucks',
+            icon: '👵',
+            points: [
+                'Daily personal care & hygiene support',
+                'Meal preparation & feeding assistance',
+                'Companionship & engagement',
+                'Safe transfer & mobility help'
+            ],
+            days: 15,
+            totalCost: duration === '12' ? '₹19,485' : '₹22,485'
+        };
+
+        if (profile === 'baby') {
+            rec = {
+                name: 'Baby Care',
+                duration: duration === '12' ? '12 Hours Care' : '24 Hours Care',
+                price: duration === '12' ? '₹1,800 / shift' : '₹2,600 / day',
+                value: 'Baby Care',
+                badge: 'Specialised Infant Care',
+                icon: '👶',
+                points: [
+                    'Trained baby care attendant',
+                    'Newborn feeding & hygiene support',
+                    'Sleep routine & colic management',
+                    'Postnatal support for mother'
+                ],
+                days: 15,
+                totalCost: duration === '12' ? '₹27,000' : '₹39,000'
+            };
+        } else if (need === 'medical' || profile === 'bedridden') {
+            rec = {
+                name: 'Nursing Assistant',
+                duration: duration === '12' ? '12 Hours Care' : '24 Hours Care',
+                price: duration === '12' ? '₹1,299 / shift' : '₹1,499 / day',
+                value: 'Nursing Assistant',
+                badge: duration === '12' ? 'Regular Care Under Guidance' : 'Most Booked',
+                icon: '🧑‍⚕️',
+                points: [
+                    'Bedside vital monitoring & vital tracking',
+                    'Medication support & wound care',
+                    'Mobility & hygiene assistance',
+                    'Background-verified clinical helper'
+                ],
+                days: 15,
+                totalCost: duration === '12' ? '₹19,485' : '₹22,485'
+            };
+        }
+
+        // Populate Recommendation UI
+        const badgeEl = document.getElementById('wizard-rec-badge');
+        const titleEl = document.getElementById('wizard-rec-title');
+        const subtitleEl = document.getElementById('wizard-rec-subtitle');
+        const priceEl = document.getElementById('wizard-rec-price');
+        const featuresEl = document.getElementById('wizard-rec-features');
+
+        if (badgeEl) badgeEl.textContent = rec.badge;
+        if (titleEl) titleEl.textContent = `${rec.icon} ${rec.name} (${rec.duration})`;
+        if (subtitleEl) subtitleEl.textContent = `Personalised recommendation based on your selections`;
+        if (priceEl) {
+            const shiftText = duration === '12' ? 'shift' : 'day';
+            priceEl.innerHTML = `${rec.price.split(' ')[0]} <span>/ ${shiftText}</span>`;
+        }
+
+        if (featuresEl) {
+            featuresEl.innerHTML = '';
+            rec.points.forEach(pt => {
+                const li = document.createElement('li');
+                li.textContent = pt;
+                featuresEl.appendChild(li);
+            });
+        }
+
+        // Bind attributes to the booking button
+        if (bookBtn) {
+            bookBtn.setAttribute('data-care-type', rec.value);
+            bookBtn.setAttribute('data-plan-name', `${rec.name} (${duration}hrs)`);
+            bookBtn.setAttribute('data-days', rec.days);
+            bookBtn.setAttribute('data-cost', rec.totalCost);
+        }
+
+        // WhatsApp link templates
+        if (waBtn) {
+            const waNumber = rec.name.includes('Nurse') || rec.name.includes('Nursing') ? '917483579231' : '918310962174';
+            const waMessage = `Hi, I did the Care Quiz and was recommended: ${rec.name} (${rec.duration}) at ${rec.price}. I'd like to book a consultation.`;
+            waBtn.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
+        }
+    }
+
+    // Set click handlers on cards
+    document.querySelectorAll('.care-wizard-section .wizard-card-option').forEach(card => {
+        card.addEventListener('click', function() {
+            const panel = this.closest('.wizard-step-panel');
+            const stepNum = parseInt(panel.dataset.step);
+            const value = this.dataset.value;
+
+            // Highlight card
+            panel.querySelectorAll('.wizard-card-option').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+
+            // Record selection
+            if (stepNum === 1) {
+                wizardState.profile = value;
+            } else if (stepNum === 2) {
+                wizardState.need = value;
+            } else if (stepNum === 3) {
+                wizardState.duration = value;
+            }
+
+            // Auto-advance
+            setTimeout(() => {
+                goToStep(stepNum + 1);
+            }, 350);
+        });
+    });
+
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                goToStep(currentStep - 1);
+            }
+        });
+    }
+
+    if (restartBtn) {
+        restartBtn.addEventListener('click', () => {
+            wizardState = { profile: '', need: '', duration: '' };
+            document.querySelectorAll('.care-wizard-section .wizard-card-option').forEach(c => c.classList.remove('selected'));
+            goToStep(1);
         });
     }
 })();
