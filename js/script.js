@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     const calcPricingData = {
-        'care-assistant': { 12: 999, 24: 1299, name: 'Care Assistant' },
+        'care-assistant': { 12: 1299, 24: 1499, name: 'Care Assistant' },
         'nursing-assistant': { 12: 1299, 24: 1499, name: 'Nursing Assistant' },
         'nursing-service': { 12: 1799, 24: 2499, name: 'Nursing Service' },
         'baby-care': { 12: 1800, 24: 2600, name: 'Baby Care' }
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let data = { condition: '', careType: '', urgency: '', name: '', phone: '', calculatorEstimate: null };
 
     const pricingDataMap = {
-        'care-assistant': { 12: 999, 24: 1299, name: 'Care Assistant' },
+        'care-assistant': { 12: 1299, 24: 1499, name: 'Care Assistant' },
         'nursing-assistant': { 12: 1299, 24: 1499, name: 'Nursing Assistant' },
         'nursing-service': { 12: 1799, 24: 2499, name: 'Nursing Service' },
         'baby-care': { 12: 1800, 24: 2600, name: 'Baby Care' }
